@@ -1,4 +1,4 @@
-# Verificação — 2026-11-10 02:17 UTC
+# Verificação — 2026-11-10 20:07 UTC
 Alvo: file:///C:/Users/PICHAU/OneDrive/Desktop/oficina-202/ravena-solar/index.html
 
 ## Layout
@@ -18,7 +18,15 @@ OK     Cartão de prova tem fundo #FFFFFF
 OK     Número do cartão de prova é #123A55 (âmbar não é texto sobre branco)
 OK     Valor de depois, no caso, em #F2A03D sobre azul
 OK     Cartão com canto de 12px  ->  12px
-OK     Barras do caso na proporção de R$ 118 para R$ 780  ->  46px de 302px
+OK     Barras do caso na proporção de R$ 118 para R$ 780  ->  53px de 350px
+OK     Barras das garantias na proporção de 25, 10 e 5 anos sobre 25  ->  1.00 / 0.40 / 0.20
+OK     Número de destaque do telhado ("5 anos") em #123A55
+OK     O número de destaque do telhado é a garantia de 5 anos da instalação
+OK     Etapa da CPFL com ponto vazado; as outras com ponto cheio
+OK     Etapa da instalação com anel #F2A03D
+OK     Textura do painel em .hero: #FFFFFF com opacidade 0,06, sem imagem de fundo
+OK     Textura do painel em .secao-azul: #FFFFFF com opacidade 0,06, sem imagem de fundo
+OK     Caso de Sorocaba em faixa de ponta a ponta (390px no celular)
 OK     Nenhum texto âmbar fora de fundo azul
 OK     h1 tem 34px no celular  ->  34px
 OK     h1 tem 56px no computador  ->  56px

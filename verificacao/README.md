@@ -28,7 +28,7 @@ Os arquivos com `-no-ar` no nome são as mesmas capturas, tiradas da página pub
 ## O que o script confere
 
 1. **Layout:** em 390px não há rolagem horizontal nem elemento passando da borda; o botão aparece na primeira tela.
-2. **Design:** as cores, os tamanhos e os cantos que o navegador renderiza são os do `DESIGN.md`; há uma família de fonte só; o laranja só aparece nos botões; nenhum texto âmbar fora de fundo azul; as barras do caso estão na proporção de R$ 118 para R$ 780; todo hex do CSS existe na `logo.svg`; não há gradiente nem cor ou fonte do site de 2021.
+2. **Design:** as cores, os tamanhos e os cantos que o navegador renderiza são os do `DESIGN.md`; há uma família de fonte só; o laranja só aparece nos botões; nenhum texto âmbar fora de fundo azul; as barras do caso estão na proporção de R$ 118 para R$ 780; as barras das garantias estão na proporção de 25, 10 e 5 anos sobre 25; o "5 anos" do telhado é azul; a etapa da CPFL tem ponto vazado e a da instalação, anel âmbar; a textura do painel é branca, com opacidade 0,06 e sem imagem de fundo; o caso ocupa a largura toda da tela; todo hex do CSS existe na `logo.svg`; não há gradiente nem cor ou fonte do site de 2021.
 3. **Mecânica:** o topo fica preso ao rolar; no celular a barra de ação aparece no meio da página e some na primeira tela e no formulário; com movimento ligado toda seção termina visível; sem JavaScript o conteúdo nasce visível e nada é enviado.
 4. **Texto:** nenhuma das palavras proibidas pelo cliente (inclusive nos avisos escondidos); todo número da página está na tabela de origem no brief, impressa no resultado.
 5. **Ação única:** todo link leva ao formulário; não existe link de WhatsApp ou telefone no HTML; o formulário não tem `action`.

@@ -96,6 +96,27 @@ conferir(await estilo(celular, '.prova-lista', 'borderTopLeftRadius') === '12px'
 const trilho = await celular.locator('.barra-antes').boundingBox();
 const depois = await celular.locator('.barra-depois').boundingBox();
 conferir(Math.abs(depois.width / trilho.width - 118 / 780) < 0.01, 'Barras do caso na proporção de R$ 118 para R$ 780', `${Math.round(depois.width)}px de ${Math.round(trilho.width)}px`);
+const larguraBarra = (s) => celular.evaluate((sel) => {
+  const b = document.querySelector(sel);
+  return b.getBoundingClientRect().width / b.parentElement.getBoundingClientRect().width;
+}, s);
+const g25 = await larguraBarra('.garantia-25'), g10 = await larguraBarra('.garantia-10'), g5 = await larguraBarra('.garantia-5');
+conferir(Math.abs(g25 - 1) < 0.01 && Math.abs(g10 - 10 / 25) < 0.01 && Math.abs(g5 - 5 / 25) < 0.01,
+  'Barras das garantias na proporção de 25, 10 e 5 anos sobre 25', `${g25.toFixed(2)} / ${g10.toFixed(2)} / ${g5.toFixed(2)}`);
+conferir(await estilo(celular, '.ancora .numero', 'color') === rgb('#123A55'), 'Número de destaque do telhado ("5 anos") em #123A55');
+conferir((await celular.locator('.ancora .numero').innerText()) === '5 anos', 'O número de destaque do telhado é a garantia de 5 anos da instalação');
+const pseudo = (s, p, prop) => celular.evaluate(([a, b, c]) => getComputedStyle(document.querySelector(a), b)[c], [s, p, prop]);
+conferir(await pseudo('.etapa-cpfl', '::before', 'backgroundColor') === rgb('#FFFFFF')
+  && await pseudo('.etapas li:first-child', '::before', 'backgroundColor') === rgb('#123A55'),
+  'Etapa da CPFL com ponto vazado; as outras com ponto cheio');
+conferir((await pseudo('.etapa-obra', '::before', 'boxShadow')).includes(rgb('#F2A03D')), 'Etapa da instalação com anel #F2A03D');
+for (const s of ['.hero', '.secao-azul']) {
+  const ok = await pseudo(s, '::before', 'backgroundColor') === rgb('#FFFFFF')
+    && await pseudo(s, '::before', 'opacity') === '0.06'
+    && await pseudo(s, '::before', 'backgroundImage') === 'none';
+  conferir(ok, `Textura do painel em ${s}: #FFFFFF com opacidade 0,06, sem imagem de fundo`);
+}
+conferir(Math.round((await celular.locator('section.caso').boundingBox()).width) === 390, 'Caso de Sorocaba em faixa de ponta a ponta (390px no celular)');
 const ambarEmBranco = await celular.evaluate((cor) => [...document.querySelectorAll('body *')]
   .filter(e => getComputedStyle(e).color === cor && e.textContent.trim() && !e.closest('.hero, .secao-azul, .caso'))
   .map(e => e.tagName.toLowerCase() + '.' + e.className), rgb('#F2A03D'));

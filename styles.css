@@ -243,7 +243,7 @@ p { max-width: var(--medida); }
 .secao-azul { background: var(--azul); color: var(--branco); }
 
 /* Textura do painel: a grade das células do painel da logo, só sobre azul.
-   Máscara SVG (não gradiente); a cor é sempre --branco. */
+   Desenhada por máscara SVG; a cor é sempre --branco. */
 .hero, .secao-azul { position: relative; isolation: isolate; }
 .hero::before, .secao-azul::before {
   content: "";
