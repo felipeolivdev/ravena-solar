@@ -1,4 +1,4 @@
-# Verificação — 2026-11-10 21:00 UTC
+# Verificação — 2026-11-10 21:10 UTC
 Alvo: https://ravena-solar-lp.vercel.app/
 
 ## Layout
@@ -134,26 +134,16 @@ OK     Valor de 780 trazido da primeira tela chega à mensagem do WhatsApp
 OK     Blocos de anos: 25 blocos, 3 âmbar, o quarto âmbar claro, o resto azul
 OK     O caso de Sorocaba termina com o botão que leva ao formulário
 OK     Objeção 1 tem "11 pessoas" como número de destaque
-OK     celular: os quatro modelos 3D (telhado, crédito de dia e de noite, mapa) carregam e aparecem, com legenda e texto alternativo  ->  208 / 216 / 216 / 250
-OK     computador: os quatro modelos 3D (telhado, crédito de dia e de noite, mapa) carregam e aparecem, com legenda e texto alternativo  ->  250 / 162 / 162 / 205
-OK     Camada de texto dos diagramas só com cores da logo (e sem laranja, que é só da ação)  ->  rgba(18, 58, 85, 0.76) | rgb(18, 58, 85) | rgb(255, 255, 255) | rgba(255, 255, 255, 0.8) | rgb(242, 160, 61)
+OK     celular: os três modelos 3D (telhado, crédito de dia e de noite) carregam e aparecem, com legenda e texto alternativo  ->  208 / 216 / 216
+OK     computador: os três modelos 3D (telhado, crédito de dia e de noite) carregam e aparecem, com legenda e texto alternativo  ->  250 / 162 / 162
+OK     Camada de texto dos diagramas só com cores da logo (e sem laranja, que é só da ação)  ->  rgba(18, 58, 85, 0.76) | rgb(18, 58, 85)
 OK     Sem JavaScript, os modelos 3D aparecem
 
 ## Modelos 3D (assets/3d)
 
-## Mapa do raio
-OK     Quadro ampliado mantém as posições da visão geral (escala 5 para 1,5)  ->  Votorantim 3.26/3.33, Itu 3.33/3.33, Salto 3.33/3.33
-OK     O mapa do celular e o do computador têm as mesmas posições
-OK     Celular: o mapa fica no fim do formulário, só com o quadro ampliado
-OK     Computador: o mapa fica na coluna da esquerda, com as duas escalas
-OK     Celular: o mapa fica depois do botão do formulário
-OK     Celular: nada de grande entre o campo "Cidade" e o da conta  ->  58px
-OK     Escolher Sorocaba no formulário marca só Sorocaba no mapa (celular e computador)
-OK     Escolher Votorantim no formulário marca só Votorantim no mapa (celular e computador)
-OK     Escolher Itu no formulário marca só Itu no mapa (celular e computador)
-OK     Escolher Salto no formulário marca só Salto no mapa (celular e computador)
-OK     "Outra cidade" acende o raio e não marca nenhuma das quatro
-OK     Sem cidade escolhida, o mapa fica sem destaque
-OK     Nome da cidade escolhida em âmbar, sobre o azul do mapa
+## Sem mapa (sexta versão)
+OK     celular: o mapa do raio saiu da página
+OK     computador: o mapa do raio saiu da página
+OK     O campo "Cidade" continua dizendo o raio de 80 km
 
 RESULTADO: tudo conferido, nenhuma falha.
