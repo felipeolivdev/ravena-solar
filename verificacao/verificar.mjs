@@ -180,6 +180,7 @@ for (const palavra of PROIBIDAS) {
 const numeros = [...new Set(texto.match(/\d+(?:[.,]\d+)*/g))];
 const semOrigem = numeros.filter(n => !(n in NUMEROS_DO_BRIEF));
 conferir(semOrigem.length === 0, 'Todo número da página tem origem no brief', semOrigem.join(', '));
+conferir(!/usamos esses dados/i.test(texto), 'Sem promessa sobre uso dos dados que o cliente ainda não confirmou');
 linhas.push('', 'Número na página -> trecho do brief');
 for (const n of numeros) linhas.push(`  ${n.padEnd(7)} ${NUMEROS_DO_BRIEF[n] || '(SEM ORIGEM)'}`);
 
@@ -365,11 +366,12 @@ const iguais = await celular.evaluate(() => {
   return pos('.mapa-compacto') === pos('.diagrama-mapa');
 });
 conferir(iguais, 'O mapa do celular e o do computador têm as mesmas posições');
-conferir(await celular.locator('.mapa-compacto').isVisible() && !(await celular.locator('.diagrama-mapa').isVisible()), 'Celular: o mapa fica dentro do formulário, só com o quadro ampliado');
+conferir(await celular.locator('.mapa-compacto').isVisible() && !(await celular.locator('.diagrama-mapa').isVisible()), 'Celular: o mapa fica no fim do formulário, só com o quadro ampliado');
 conferir(await computador.locator('.diagrama-mapa').isVisible() && !(await computador.locator('.mapa-compacto').isVisible()), 'Computador: o mapa fica na coluna da esquerda, com as duas escalas');
-const campoCidade = await celular.locator('#cidade').boundingBox();
-const mapaCel = await celular.locator('.mapa-compacto').boundingBox();
-conferir(mapaCel.y > campoCidade.y && mapaCel.y - (campoCidade.y + campoCidade.height) < 80, 'Celular: o mapa aparece logo abaixo do campo "Cidade"');
+const caixa = (sel) => celular.locator(sel).boundingBox();
+const [campoCidade, campoConta, botaoForm, mapaCel] = await Promise.all(['#cidade', '#conta', '#form-simulacao .botao', '.mapa-compacto'].map(caixa));
+conferir(mapaCel.y > botaoForm.y + botaoForm.height, 'Celular: o mapa fica depois do botão do formulário');
+conferir(campoConta.y - (campoCidade.y + campoCidade.height) < 120, 'Celular: nada de grande entre o campo "Cidade" e o da conta', `${Math.round(campoConta.y - (campoCidade.y + campoCidade.height))}px`);
 
 for (const pagina of [celular, computador]) await pagina.reload();
 const estadoMapa = (pagina, sel) => pagina.evaluate((s) => ({

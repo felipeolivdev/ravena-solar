@@ -380,19 +380,6 @@
             <p class="erro" id="erro-cidade" hidden></p>
           </div>
 
-          <!-- No celular, o quadro ampliado fica junto do campo, para o destaque da cidade aparecer onde a pessoa escolhe. -->
-          <figure class="diagrama mapa-compacto so-celular">
-            <svg class="mapa" viewBox="330 25 270 250" role="img" aria-labelledby="mapa-compacto-legenda" xmlns="http://www.w3.org/2000/svg">
-              <rect class="m-moldura" x="340" y="35" width="250" height="230" rx="6"/>
-              <text class="m-norte" x="578" y="62" text-anchor="end">N ↑</text>
-              <g class="m-local" data-cidade="Salto"><circle class="m-anel" cx="454.5" cy="58" r="11"/><circle class="m-ponto" cx="454.5" cy="58" r="5"/><text x="471" y="64">Salto</text></g>
-              <g class="m-local" data-cidade="Itu"><circle class="m-anel" cx="448" cy="93" r="11"/><circle class="m-ponto" cx="448" cy="93" r="5"/><text x="465" y="99">Itu</text></g>
-              <g class="m-local" data-cidade="Votorantim"><circle class="m-anel" cx="377.5" cy="249" r="11"/><circle class="m-ponto" cx="377.5" cy="249" r="5"/><text x="394" y="255">Votorantim</text></g>
-              <g class="m-local m-sede" data-cidade="Sorocaba"><circle class="m-anel" cx="370" cy="225" r="15"/><path class="m-raios" d="M370 208 V203 M358 213 L354 209 M382 213 L386 209 M353 225 H348"/><circle class="m-sol" cx="370" cy="225" r="8"/><text x="391" y="231">Sorocaba · sede</text></g>
-            </svg>
-            <figcaption id="mapa-compacto-legenda">Atendemos num raio de 80 km de Sorocaba. Posições aproximadas.</figcaption>
-          </figure>
-
           <div class="campo" id="campo-outra-cidade" hidden>
             <label for="outra-cidade">Qual cidade?</label>
             <input id="outra-cidade" name="outra-cidade" type="text" aria-describedby="erro-outra-cidade">
@@ -425,7 +412,19 @@
           <noscript><p class="ajuda">Para pedir a simulação, ative o JavaScript do navegador.</p></noscript>
 
           <p class="garantia-envio">Nota 4,8 no Google, com 137 avaliações. Visita técnica sem custo e sem compromisso.</p>
-          <p class="garantia-envio">Usamos esses dados só para fazer a sua simulação e responder pelo WhatsApp.</p>
+
+          <!-- No celular, o quadro ampliado fica depois do botão: não alonga o formulário entre os campos. -->
+          <figure class="diagrama mapa-compacto so-celular">
+            <svg class="mapa" viewBox="330 25 270 250" role="img" aria-labelledby="mapa-compacto-legenda" xmlns="http://www.w3.org/2000/svg">
+              <rect class="m-moldura" x="340" y="35" width="250" height="230" rx="6"/>
+              <text class="m-norte" x="578" y="62" text-anchor="end">N ↑</text>
+              <g class="m-local" data-cidade="Salto"><circle class="m-anel" cx="454.5" cy="58" r="11"/><circle class="m-ponto" cx="454.5" cy="58" r="5"/><text x="471" y="64">Salto</text></g>
+              <g class="m-local" data-cidade="Itu"><circle class="m-anel" cx="448" cy="93" r="11"/><circle class="m-ponto" cx="448" cy="93" r="5"/><text x="465" y="99">Itu</text></g>
+              <g class="m-local" data-cidade="Votorantim"><circle class="m-anel" cx="377.5" cy="249" r="11"/><circle class="m-ponto" cx="377.5" cy="249" r="5"/><text x="394" y="255">Votorantim</text></g>
+              <g class="m-local m-sede" data-cidade="Sorocaba"><circle class="m-anel" cx="370" cy="225" r="15"/><path class="m-raios" d="M370 208 V203 M358 213 L354 209 M382 213 L386 209 M353 225 H348"/><circle class="m-sol" cx="370" cy="225" r="8"/><text x="391" y="231">Sorocaba · sede</text></g>
+            </svg>
+            <figcaption id="mapa-compacto-legenda">Atendemos num raio de 80 km de Sorocaba. Posições aproximadas.</figcaption>
+          </figure>
         </form>
       </div>
     </section>

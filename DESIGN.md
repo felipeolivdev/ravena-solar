@@ -89,7 +89,7 @@ Hierarquia: o maior texto da tela é sempre o número ou a promessa. Título de 
     - *Quadro ampliado* (5px por km): moldura em `--ambar`, as cidades na mesma posição relativa, nomes à direita do ponto e "N ↑" no canto. A sede é o sol da logo (círculo e raios em `--ambar`); as outras cidades são pontos `--branco` de 5px.
     - *Cidade escolhida:* anel de 3px em `--ambar` em volta do ponto e nome em `--ambar` (texto âmbar só sobre azul). "Outra cidade" acende a borda do raio em `--ambar`.
     - Texto do mapa em 18 unidades do desenho no computador (o mapa é reduzido para caber na coluna) e `--t-pequeno` no celular.
-    - *No celular:* só o quadro ampliado, dentro do formulário, logo abaixo do campo "Cidade", num bloco `--azul` com `--raio-cartao`. A visão geral aparece só a partir de 760px.
+    - *No celular:* só o quadro ampliado, no fim do formulário, depois do botão e da nota do Google, num bloco `--azul` com `--raio-cartao`. A visão geral aparece só a partir de 760px.
 
 ## Movimento
 

@@ -1,4 +1,4 @@
-# Verificação — 2026-11-10 20:34 UTC
+# Verificação — 2026-11-10 20:41 UTC
 Alvo: file:///C:/Users/PICHAU/OneDrive/Desktop/oficina-202/ravena-solar/index.html
 
 ## Layout
@@ -61,6 +61,7 @@ OK     Não contém "manutenção"
 OK     Não contém "missão"
 OK     Não contém "99000-0000"
 OK     Todo número da página tem origem no brief
+OK     Sem promessa sobre uso dos dados que o cliente ainda não confirmou
 
 Número na página -> trecho do brief
   75      conta cai entre 75% e 90%
@@ -146,9 +147,10 @@ OK     Sem JavaScript, os diagramas aparecem
 ## Mapa do raio
 OK     Quadro ampliado mantém as posições da visão geral (escala 5 para 1,5)  ->  Votorantim 3.26/3.33, Itu 3.33/3.33, Salto 3.33/3.33
 OK     O mapa do celular e o do computador têm as mesmas posições
-OK     Celular: o mapa fica dentro do formulário, só com o quadro ampliado
+OK     Celular: o mapa fica no fim do formulário, só com o quadro ampliado
 OK     Computador: o mapa fica na coluna da esquerda, com as duas escalas
-OK     Celular: o mapa aparece logo abaixo do campo "Cidade"
+OK     Celular: o mapa fica depois do botão do formulário
+OK     Celular: nada de grande entre o campo "Cidade" e o da conta  ->  58px
 OK     Escolher Sorocaba no formulário marca só Sorocaba no mapa (celular e computador)
 OK     Escolher Votorantim no formulário marca só Votorantim no mapa (celular e computador)
 OK     Escolher Itu no formulário marca só Itu no mapa (celular e computador)
