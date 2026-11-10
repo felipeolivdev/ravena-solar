@@ -175,6 +175,40 @@
     avisoEnviado.hidden = false;
   });
 
+  /* ---------- Primeira tela: a conta como primeiro passo ---------- */
+
+  // Não monta link nem envia nada. Abaixo de R$ 450 avisa ali mesmo; a partir disso,
+  // leva o valor ao formulário, que valida tudo de novo antes do WhatsApp.
+  var formHero = document.getElementById('form-conta-hero');
+  var contaHero = document.getElementById('conta-hero');
+  var avisoHero = document.getElementById('aviso-hero');
+  var menosMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  contaHero.addEventListener('input', function () {
+    contaHero.value = contaHero.value.replace(/[^\d.,]/g, '');
+    var v = lerValor(contaHero.value);
+    if (isNaN(v) || v >= CONTA_MINIMA) avisoHero.hidden = true;
+  });
+
+  formHero.addEventListener('submit', function (evento) {
+    evento.preventDefault();
+    var v = lerValor(contaHero.value);
+
+    if (!isNaN(v) && v > 0 && v < CONTA_MINIMA) {
+      avisoHero.hidden = false;
+      return;
+    }
+    avisoHero.hidden = true;
+
+    if (!isNaN(v) && v > 0) {
+      campos.conta.value = contaHero.value;
+      mostrarErro(campos.conta, '');
+      atualizarFaixaDaConta(false);
+    }
+    document.getElementById('simulacao').scrollIntoView({ behavior: menosMovimento ? 'auto' : 'smooth' });
+    campos.nome.focus({ preventScroll: true });
+  });
+
   /* ---------- Página: topo, barra do celular e entrada das seções ---------- */
 
   var topo = document.getElementById('topo');

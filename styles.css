@@ -664,3 +664,111 @@ p { max-width: var(--medida); }
   .formulario { padding: var(--e-5); }
   .rodape-linha { grid-template-columns: auto 1fr; gap: var(--e-6); align-items: center; }
 }
+
+/* ---------- Quarta versão ---------- */
+
+/* Primeira tela: o campo da conta como primeiro passo do formulário */
+.hero-conta { display: grid; gap: var(--e-2); margin-top: var(--e-5); max-width: 560px; }
+.hero-conta label { font-weight: 700; color: var(--branco); }
+.hero-conta-linha { display: grid; gap: var(--e-3); }
+.hero-conta input {
+  width: 100%;
+  min-height: 56px;
+  padding: var(--e-2) var(--e-3) var(--e-2) 52px;
+  border: 0;
+  border-radius: var(--raio);
+  background: var(--branco);
+  color: var(--azul);
+  font: inherit;
+  font-size: 20px;
+  font-weight: 700;
+}
+.hero-conta input:focus { outline: 3px solid var(--laranja); outline-offset: 2px; }
+.hero-conta .aviso { margin-top: var(--e-2); }
+/* Sobre azul a borda azul sumiria: o aviso vira cartão branco com traço âmbar (forma) */
+.aviso-claro { background: var(--branco); color: var(--azul); border-left-color: var(--ambar); }
+
+/* Objeção 1: número de destaque */
+.ancora-objecao { margin-bottom: var(--e-5); }
+
+/* Caso: ação no fim da faixa */
+.caso-acao {
+  display: grid;
+  gap: var(--e-3);
+  margin-top: var(--e-5);
+  padding-top: var(--e-5);
+  border-top: 1px solid var(--linha-clara);
+}
+.caso-acao p { color: var(--branco); }
+
+/* Retorno contra vida útil: um bloco por ano */
+.retorno { margin-top: var(--e-4); }
+.anos { display: grid; grid-template-columns: repeat(25, 1fr); gap: 3px; }
+.ano { display: block; height: 28px; border-radius: 2px; background: var(--azul); }
+.ano-paga { background: var(--ambar); }
+.ano-talvez { background: var(--ambar); opacity: 0.45; }
+.anos-legenda { display: grid; gap: var(--e-2); margin-top: var(--e-3); color: var(--texto-suave); }
+.anos-legenda li { position: relative; padding-left: 28px; }
+.anos-legenda strong { color: var(--azul); }
+.amostra {
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  background: var(--azul);
+}
+.amostra-paga { background: var(--ambar); }
+.retorno .ajuda { margin-top: var(--e-2); }
+
+/* Diagramas: SVG nas cores da logo, legenda em HTML */
+.diagrama { margin: var(--e-5) 0 0; }
+.diagrama svg { display: block; width: 100%; height: auto; overflow: visible; fill: none; }
+.diagrama figcaption { margin-top: var(--e-3); font-size: var(--t-pequeno); line-height: 1.45; color: var(--texto-suave); max-width: var(--medida); }
+.diagrama figcaption strong { color: var(--azul); }
+.d-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.diagrama svg * { stroke-linecap: round; stroke-linejoin: round; }
+.d-texto, .d-texto text { fill: var(--azul); font-size: 15px; font-weight: 700; }
+.d-madeira { fill: var(--fundo-suave); stroke: var(--azul); stroke-width: 2; }
+.d-telha { fill: var(--branco); stroke: var(--azul); stroke-width: 2; }
+.d-estrutura { fill: none; stroke: var(--azul); stroke-width: 5; }
+.d-trilho { stroke: var(--azul); stroke-width: 6; }
+.d-painel { fill: var(--azul); stroke: var(--azul); stroke-width: 2; }
+.d-painel-linhas { fill: none; stroke: var(--branco); stroke-width: 2; }
+.d-guia { fill: none; stroke: var(--texto-suave); stroke-width: 1.5; }
+
+.credito { display: grid; gap: var(--e-5); }
+.credito .diagrama { margin-top: 0; }
+.texto .credito { margin-top: var(--e-5); }
+.d-casa-corpo, .d-casa-telhado, .d-casa-porta { fill: none; stroke: var(--azul); stroke-width: 2; }
+.d-rede { fill: none; stroke: var(--azul); stroke-width: 3; }
+.d-chao { stroke: var(--linha); stroke-width: 2; }
+.d-sol { fill: var(--ambar); }
+.d-luz { stroke: var(--ambar); stroke-width: 2; stroke-dasharray: 4 5; }
+.d-lua { fill: var(--azul); }
+.d-seta-ambar { stroke: var(--ambar); stroke-width: 4; }
+.d-seta-azul { stroke: var(--azul); stroke-width: 4; }
+.d-ponta-ambar { fill: var(--ambar); }
+.d-ponta-azul { fill: var(--azul); }
+
+/* Mapa do raio, sobre azul */
+.diagrama-mapa { max-width: 340px; }
+.diagrama-mapa figcaption { color: var(--branco-suave); }
+.d-raio { fill: none; stroke: var(--linha-clara); stroke-width: 2; stroke-dasharray: 6 6; }
+.d-cidade { fill: var(--branco); }
+.d-sede { fill: var(--ambar); }
+.d-guia-clara { stroke: var(--branco-suave); stroke-width: 1.5; }
+.d-texto-claro text { fill: var(--branco); font-size: 15px; font-weight: 700; }
+.d-texto-claro .d-texto-suave { fill: var(--branco-suave); font-weight: 400; }
+
+@media (min-width: 760px) {
+  .hero-conta-linha { grid-template-columns: 1fr auto; }
+  .caso-acao { grid-template-columns: 1fr auto; align-items: center; gap: var(--e-6); }
+  .caso-acao p { max-width: none; }
+  .anos { gap: 4px; }
+  .ano { height: 36px; }
+  .credito { grid-template-columns: 1fr 1fr; gap: var(--e-4); }
+  .diagrama-telhado { max-width: 420px; }
+}

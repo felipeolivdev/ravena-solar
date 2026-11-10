@@ -65,7 +65,7 @@ Hierarquia: o maior texto da tela é sempre o número ou a promessa. Título de 
 - **Botão de ação:** fundo `--laranja`, texto `--azul` em negrito. É o único elemento laranja preenchido da página. O rótulo é sempre "Pedir simulação" (no formulário, "Pedir simulação pelo WhatsApp"). Ao passar o mouse sobe 1px e ganha `--sombra`.
 - **Topo fixo:** fundo `--branco`, logo à esquerda. No computador traz o botão à direita. Ganha `--sombra` quando a página rola.
 - **Barra de ação do celular:** fundo `--branco`, presa ao pé da tela, com o botão. Aparece depois que o botão da primeira tela sai de vista e some quando o formulário ou o rodapé aparecem.
-- **Primeira tela:** fundo `--azul`, promessa em `--branco` com o intervalo "75% a 90%" em `--ambar`. No computador, a marca da logo (sol e painel) ampliada à direita. Ao fundo, a textura do painel.
+- **Primeira tela:** fundo `--azul`, promessa em `--branco` com o intervalo "75% a 90%" em `--ambar`. No computador, a marca da logo (sol e painel) ampliada à direita. Ao fundo, a textura do painel. No lugar do botão sozinho, o campo da conta (abaixo).
 - **Textura do painel:** a grade das células do painel da logo (células de 72x48px, linha de 1px), em `--branco` com opacidade `--textura` (0,06). Só sobre `--azul`: primeira tela e seção do formulário. É desenhada por máscara SVG, não por gradiente, e fica atrás do conteúdo.
 - **Cartão de prova:** `--branco`, `--raio-cartao`, `--sombra`, traço de 4px em `--ambar` no topo; avança 56px sobre a primeira tela. Números em `--azul`.
 - **Título de seção:** traço de 40x4px em `--ambar` acima do texto. No computador a pergunta fica presa à esquerda enquanto a resposta rola à direita.
@@ -77,6 +77,14 @@ Hierarquia: o maior texto da tela é sempre o número ou a promessa. Título de 
 - **Cartão de conteúdo** (preço, prazo e financiamento): `--branco`, borda `--linha`, `--raio-cartao`.
 - **Perguntas curtas:** lista sem cartão, cada pergunta separada por uma divisória `--linha` em cima. Três colunas no computador.
 - **Aviso** (erro e bloqueio): fundo `--fundo-suave`, borda esquerda de 4px em `--azul`, texto em `--azul`.
+- **Aviso sobre azul** (bloqueio na primeira tela): fundo `--branco`, texto `--azul` e borda esquerda de 4px em `--ambar`. A borda azul sumiria contra o fundo azul; o âmbar aqui é forma, não texto.
+- **Campo da conta na primeira tela:** rótulo em `--branco` negrito; campo `--branco` de 56px, sem borda, com "R$" fixo em `--texto-suave` e foco em `--laranja`. O botão "Pedir simulação" fica embaixo no celular e ao lado no computador.
+- **Ação do caso:** no fim da faixa azul do caso, uma frase em `--branco` e o botão de ação, separados dos valores por uma divisória `--linha-clara`.
+- **Blocos de anos** (retorno contra vida útil): 25 blocos iguais de 28px de altura e 3px de vão, um por ano, em grade. Os 3 primeiros em `--ambar`, o quarto em `--ambar` com 45% de opacidade (o "a 4"), o resto em `--azul`. Legenda com amostras do mesmo tamanho. É forma, então o âmbar sobre branco vale.
+- **Diagramas** (crédito, corte do telhado, raio de atendimento): SVG desenhado no próprio HTML, só com as cores da logo. Traço de 2px em `--azul` sobre branco ou `--branco` sobre azul, cantos e pontas arredondados. Sol e setas da sobra em `--ambar`, sede no mapa em `--ambar`. Painel como na logo: `--azul` com linhas `--branco`. Texto dentro do desenho só para nomes curtos, em `--t-pequeno`. A explicação fica na legenda (`figcaption`), em HTML. Sem animação e sem gente.
+  - **Crédito:** dois quadros lado a lado no computador (empilhados no celular), "De dia" e "À noite", com a mesma casa e o poste da rede.
+  - **Telhado:** corte com painel, trilho, ganchos, telhas onduladas e a madeira, com os nomes à direita.
+  - **Raio:** círculo tracejado em `--linha-clara` (80 km), Sorocaba no centro em `--ambar`, as outras cidades em `--branco`. Posições aproximadas, na proporção real das distâncias.
 
 ## Movimento
 

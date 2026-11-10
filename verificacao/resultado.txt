@@ -1,10 +1,10 @@
-# Verificação — 2026-11-10 20:07 UTC
+# Verificação — 2026-11-10 20:26 UTC
 Alvo: file:///C:/Users/PICHAU/OneDrive/Desktop/oficina-202/ravena-solar/index.html
 
 ## Layout
 OK     Em 390px não há rolagem horizontal  ->  largura do documento: 390px
 OK     Em 390px nenhum elemento passa da borda direita
-OK     Em 390x844 o botão aparece sem rolar  ->  base do botão em 530px
+OK     Em 390x844 o botão aparece sem rolar  ->  base do botão em 663px
 OK     Em 1440px não há rolagem horizontal  ->  largura do documento: 1440px
 
 ## Design (valores renderizados x DESIGN.md)
@@ -31,7 +31,7 @@ OK     Nenhum texto âmbar fora de fundo azul
 OK     h1 tem 34px no celular  ->  34px
 OK     h1 tem 56px no computador  ->  56px
 OK     Uma família de fonte só, a da logo  ->  "Helvetica Neue", Helvetica, Arial, sans-serif
-OK     O laranja só aparece nos botões  ->  a.botao botao-topo, a.botao, button.botao, a.botao
+OK     O laranja só aparece nos botões  ->  a.botao botao-topo, button.botao, a.botao, button.botao, a.botao
 OK     Todo hex do styles.css existe na logo.svg  ->  css: #123A55 #E8721C #F2A03D #FFFFFF  |  logo: #F2A03D #123A55 #FFFFFF #E8721C
 OK     Nenhum gradiente no styles.css
 OK     Nenhuma cor ou fonte do site de 2021
@@ -72,6 +72,7 @@ Número na página -> trecho do brief
   4,8     nota 4,8 no Google
   137     137 avaliações
   6       seis anos de empresa
+  11      onze pessoas
   25      25 anos de performance / dura mais de 25
   10      10 anos do inversor
   5       5 anos da instalação / 5 a 8 kWp
@@ -91,6 +92,7 @@ Número na página -> trecho do brief
 OK     Todo link da página leva ao formulário  ->  #simulacao, #simulacao, #simulacao
 OK     Nenhum link de WhatsApp ou telefone no HTML
 OK     O formulário não tem action (sem JavaScript, nada é enviado)
+OK     O campo da primeira tela, sem JavaScript, só leva ao formulário
 OK     script.js monta o link do WhatsApp em um lugar só
 OK     Número do WhatsApp em uma constante, vazia e marcada TODO cliente
 
@@ -122,5 +124,22 @@ OK     Conta de 780: mostra "dá para simular" ao digitar
 OK     Conta de 200: o aviso dos R$ 450 aparece ao sair do campo, antes de enviar
 OK     Corrigindo para 600, o aviso some
 OK     Enter no campo com conta de R$ 200: também bloqueia
+
+## Primeira tela: campo da conta
+OK     Primeira tela, conta "200": avisa ali mesmo, não leva ao formulário e não abre o WhatsApp
+OK     Primeira tela, conta "449,99": avisa ali mesmo, não leva ao formulário e não abre o WhatsApp
+OK     Primeira tela, conta "450": leva ao formulário com a conta preenchida e o cursor no nome, sem abrir o WhatsApp  ->  conta=450 foco=nome
+OK     Primeira tela, conta "780": leva ao formulário com a conta preenchida e o cursor no nome, sem abrir o WhatsApp  ->  conta=780 foco=nome
+OK     Primeira tela em branco: o botão só leva ao formulário
+OK     Valor trazido da primeira tela e trocado para 300 no formulário: bloqueia
+OK     Valor de 780 trazido da primeira tela chega à mensagem do WhatsApp
+
+## Quarta versão: diagramas, blocos de anos e ação do caso
+OK     Blocos de anos: 25 blocos, 3 âmbar, o quarto âmbar claro, o resto azul
+OK     O caso de Sorocaba termina com o botão que leva ao formulário
+OK     Objeção 1 tem "11 pessoas" como número de destaque
+OK     Os quatro diagramas (telhado, crédito de dia e de noite, raio) aparecem, com legenda e nome acessível  ->  196 / 213 / 213 / 340
+OK     Diagramas só com cores da logo (e sem laranja, que é só da ação)  ->  rgba(18, 58, 85, 0.05) | rgb(18, 58, 85) | rgb(255, 255, 255) | rgba(18, 58, 85, 0.76) | rgb(242, 160, 61) | rgba(255, 255, 255, 0.24) | rgba(255, 255, 255, 0.8)
+OK     Sem JavaScript, os diagramas aparecem
 
 RESULTADO: tudo conferido, nenhuma falha.

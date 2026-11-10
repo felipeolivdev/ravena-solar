@@ -34,7 +34,7 @@ const NUMEROS_DO_BRIEF = {
   '2025': 'instalado em março de 2025', '780': 'conta de R$ 780',
   '118': 'conta média de R$ 118', '14': 'R$ 14 mil a R$ 19 mil',
   '19': 'R$ 14 mil a R$ 19 mil', '45': 'de 45 a 60 dias', '60': 'de 45 a 60 dias',
-  '80': 'raio de 80 km',
+  '80': 'raio de 80 km', '11': 'onze pessoas',
 };
 const PROIBIDAS = ['futuro', 'sustentab', 'revoluç', 'grátis', 'gratuito', '95%', 'zera',
   '+300', 'indústria', 'manutenção', 'missão', '99000-0000'];
@@ -103,8 +103,8 @@ const larguraBarra = (s) => celular.evaluate((sel) => {
 const g25 = await larguraBarra('.garantia-25'), g10 = await larguraBarra('.garantia-10'), g5 = await larguraBarra('.garantia-5');
 conferir(Math.abs(g25 - 1) < 0.01 && Math.abs(g10 - 10 / 25) < 0.01 && Math.abs(g5 - 5 / 25) < 0.01,
   'Barras das garantias na proporção de 25, 10 e 5 anos sobre 25', `${g25.toFixed(2)} / ${g10.toFixed(2)} / ${g5.toFixed(2)}`);
-conferir(await estilo(celular, '.ancora .numero', 'color') === rgb('#123A55'), 'Número de destaque do telhado ("5 anos") em #123A55');
-conferir((await celular.locator('.ancora .numero').innerText()) === '5 anos', 'O número de destaque do telhado é a garantia de 5 anos da instalação');
+conferir(await estilo(celular, '.texto .ancora .numero', 'color') === rgb('#123A55'), 'Número de destaque do telhado ("5 anos") em #123A55');
+conferir((await celular.locator('.texto .ancora .numero').innerText()) === '5 anos', 'O número de destaque do telhado é a garantia de 5 anos da instalação');
 const pseudo = (s, p, prop) => celular.evaluate(([a, b, c]) => getComputedStyle(document.querySelector(a), b)[c], [s, p, prop]);
 conferir(await pseudo('.etapa-cpfl', '::before', 'backgroundColor') === rgb('#FFFFFF')
   && await pseudo('.etapas li:first-child', '::before', 'backgroundColor') === rgb('#123A55'),
@@ -190,7 +190,8 @@ const links = await celular.evaluate(() => [...document.querySelectorAll('a')].m
 conferir(links.every(h => h === '#simulacao'), 'Todo link da página leva ao formulário', links.join(', '));
 const html = await celular.content();
 conferir(!/wa\.me|whatsapp\.com|tel:/i.test(html), 'Nenhum link de WhatsApp ou telefone no HTML');
-conferir(await celular.locator('form').getAttribute('action') === null, 'O formulário não tem action (sem JavaScript, nada é enviado)');
+conferir(await celular.locator('#form-simulacao').getAttribute('action') === null, 'O formulário não tem action (sem JavaScript, nada é enviado)');
+conferir(await celular.locator('#form-conta-hero').getAttribute('action') === '#simulacao', 'O campo da primeira tela, sem JavaScript, só leva ao formulário');
 if (!noAr) {
   const js = readFileSync(path.join(raiz, 'script.js'), 'utf8');
   conferir((js.match(/wa\.me/g) || []).length === 1, 'script.js monta o link do WhatsApp em um lugar só');
@@ -204,7 +205,7 @@ async function enviar(pagina, { nome = 'Marta Teste', whatsapp = '(15) 91234-567
   await pagina.fill('#whatsapp', whatsapp);
   if (cidade) await pagina.selectOption('#cidade', { label: cidade });
   await pagina.fill('#conta', conta);
-  await pagina.click('form .botao');
+  await pagina.click('#form-simulacao .botao');
   return {
     abertos: await pagina.evaluate(() => window.__abertos),
     bloqueio: await pagina.locator('#aviso-bloqueio').isVisible(),
@@ -268,6 +269,82 @@ await celular.selectOption('#cidade', { label: 'Itu' });
 await celular.fill('#conta', '200');
 await celular.press('#conta', 'Enter');
 conferir((await celular.evaluate(() => window.__abertos)).length === 0, 'Enter no campo com conta de R$ 200: também bloqueia');
+
+// Primeira tela: a conta como primeiro passo. Nunca abre o WhatsApp.
+titulo('Primeira tela: campo da conta');
+async function hero(pagina, valor) {
+  await pagina.reload();
+  await pagina.evaluate(() => window.scrollTo(0, 0));
+  if (valor !== null) await pagina.locator('#conta-hero').pressSequentially(valor);
+  await pagina.click('#botao-hero');
+  await pagina.waitForTimeout(300);
+  return {
+    abertos: await pagina.evaluate(() => window.__abertos),
+    aviso: await pagina.locator('#aviso-hero').isVisible(),
+    conta: await pagina.inputValue('#conta'),
+    foco: await pagina.evaluate(() => document.activeElement && document.activeElement.id),
+    formNaTela: await pagina.evaluate(() => { const r = document.getElementById('simulacao').getBoundingClientRect(); return r.top < innerHeight && r.bottom > 0; }),
+  };
+}
+for (const v of ['200', '449,99']) {
+  const r = await hero(celular, v);
+  conferir(r.aviso && r.abertos.length === 0 && r.conta === '' && !r.formNaTela, `Primeira tela, conta "${v}": avisa ali mesmo, não leva ao formulário e não abre o WhatsApp`);
+  if (v === '200') {
+    await celular.locator('#aviso-hero').scrollIntoViewIfNeeded();
+    await celular.screenshot({ path: path.join(aqui, `celular-390-primeira-tela-bloqueio-200${sufixo}.png`) });
+  }
+}
+for (const v of ['450', '780']) {
+  const r = await hero(celular, v);
+  conferir(!r.aviso && r.abertos.length === 0 && r.conta === v && r.foco === 'nome' && r.formNaTela,
+    `Primeira tela, conta "${v}": leva ao formulário com a conta preenchida e o cursor no nome, sem abrir o WhatsApp`, `conta=${r.conta} foco=${r.foco}`);
+}
+const heroVazio = await hero(celular, null);
+conferir(!heroVazio.aviso && heroVazio.abertos.length === 0 && heroVazio.formNaTela, 'Primeira tela em branco: o botão só leva ao formulário');
+// O valor trazido da primeira tela ainda passa pelo filtro do formulário.
+await celular.reload();
+await celular.locator('#conta-hero').pressSequentially('780');
+await celular.click('#botao-hero');
+await celular.fill('#nome', 'Marta Teste');
+await celular.fill('#whatsapp', '15912345678');
+await celular.selectOption('#cidade', { label: 'Salto' });
+await celular.fill('#conta', '300');
+await celular.click('#form-simulacao .botao');
+conferir((await celular.evaluate(() => window.__abertos)).length === 0, 'Valor trazido da primeira tela e trocado para 300 no formulário: bloqueia');
+await celular.reload();
+await celular.locator('#conta-hero').pressSequentially('780');
+await celular.click('#botao-hero');
+await celular.fill('#nome', 'Marta Teste');
+await celular.fill('#whatsapp', '15912345678');
+await celular.selectOption('#cidade', { label: 'Salto' });
+await celular.click('#form-simulacao .botao');
+const heroEnvio = await celular.evaluate(() => window.__abertos);
+conferir(heroEnvio.length === 1 && decodeURIComponent(heroEnvio[0]).includes('Conta média de luz: R$ 780'), 'Valor de 780 trazido da primeira tela chega à mensagem do WhatsApp');
+
+titulo('Quarta versão: diagramas, blocos de anos e ação do caso');
+const blocos = await celular.evaluate(() => [...document.querySelectorAll('.anos .ano')].map(e => getComputedStyle(e).backgroundColor + '|' + getComputedStyle(e).opacity));
+conferir(blocos.length === 25 && blocos.slice(0, 3).every(b => b === `${rgb('#F2A03D')}|1`) && blocos[3] === `${rgb('#F2A03D')}|0.45`
+  && blocos.slice(4).every(b => b === `${rgb('#123A55')}|1`), 'Blocos de anos: 25 blocos, 3 âmbar, o quarto âmbar claro, o resto azul');
+conferir(await celular.locator('.caso .botao').getAttribute('href') === '#simulacao', 'O caso de Sorocaba termina com o botão que leva ao formulário');
+conferir(await celular.locator('.ancora-objecao .numero').innerText() === '11 pessoas', 'Objeção 1 tem "11 pessoas" como número de destaque');
+const diagramas = await celular.evaluate(() => [...document.querySelectorAll('figure.diagrama')].map(f => {
+  const svg = f.querySelector('svg'); const r = svg.getBoundingClientRect();
+  return { legenda: !!f.querySelector('figcaption').textContent.trim(), rotulo: svg.getAttribute('role') === 'img' && !!svg.getAttribute('aria-labelledby'), altura: r.height };
+}));
+conferir(diagramas.length === 4 && diagramas.every(d => d.legenda && d.rotulo && d.altura > 50), 'Os quatro diagramas (telhado, crédito de dia e de noite, raio) aparecem, com legenda e nome acessível', diagramas.map(d => Math.round(d.altura)).join(' / '));
+const coresSvg = await celular.evaluate(() => {
+  const s = new Set();
+  document.querySelectorAll('.diagrama svg *').forEach(e => { const c = getComputedStyle(e); [c.fill, c.stroke].forEach(v => { if (v && v !== 'none') s.add(v); }); });
+  return [...s];
+});
+const permitidas = ['#123A55', '#F2A03D', '#FFFFFF'].map(rgb).concat(['rgba(18, 58, 85, 0.76)', 'rgba(18, 58, 85, 0.18)', 'rgba(18, 58, 85, 0.05)', 'rgba(255, 255, 255, 0.8)', 'rgba(255, 255, 255, 0.24)']);
+conferir(coresSvg.every(c => permitidas.includes(c)), 'Diagramas só com cores da logo (e sem laranja, que é só da ação)', coresSvg.join(' | '));
+conferir(await semJs.locator('figure.diagrama svg').evaluateAll(els => els.every(e => e.getBoundingClientRect().height > 50)), 'Sem JavaScript, os diagramas aparecem');
+await computador.evaluate(() => document.querySelectorAll('[data-revelar]').forEach(e => e.classList.add('visivel')));
+for (const [seletor, nome] of [['.diagrama-telhado', 'telhado'], ['.credito', 'credito'], ['.caso-acao', 'caso-acao'], ['.retorno', 'retorno'], ['.diagrama-mapa', 'formulario-raio']]) {
+  await computador.evaluate((s) => document.querySelector(s).scrollIntoView({ block: 'center' }), seletor);
+  await computador.screenshot({ path: path.join(aqui, `computador-1440-${nome}${sufixo}.png`) });
+}
 
 await navegador.close();
 

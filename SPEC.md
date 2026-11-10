@@ -11,7 +11,7 @@
    *Por quê:* com esses números, a frase só serve para a Ravena. E quem paga R$ 200 já percebe na primeira tela que não é o público.
    *Por que "na média" e "tem levado":* é como o brief diz. Sem essas palavras, a média vira promessa individual, e o brief avisa que o Procon da região é ativo.
 
-2. **Tem uma ação só.** Todos os botões levam ao formulário de simulação. A página não tem menu nem chamada concorrente.
+2. **Tem uma ação só.** Todos os botões levam ao formulário de simulação. A página não tem menu nem chamada concorrente. Desde a quarta versão, a primeira tela pede o valor da conta como primeiro passo desse mesmo formulário (ver item 8); não é uma segunda ação.
    *Por quê:* duas chamadas com o mesmo peso dividem a atenção.
 
 3. **As objeções seguem a ordem do brief, e cada uma traz a prova ao lado.**
@@ -61,6 +61,22 @@
    - **Na linha do tempo, a etapa da CPFL tem o ponto vazado e a instalação tem um anel âmbar**, cada uma com uma nota curta. *Por quê:* mostra onde os 45 a 60 dias são gastos e que a obra em si é a parte curta, sem dar prazo por etapa, que o brief não deu.
    - **As perguntas curtas perderam o cartão** e viraram lista com divisórias. *Por quê:* os cartões ficam só para preço, prazo e financiamento, que são o que a pessoa compara entre três orçamentos.
 
+8. **Quarta versão: o que aprendemos comparando com outras três páginas para o mesmo brief.** As outras explicavam melhor com imagem e deixavam a pessoa começar na primeira tela, mas calculavam percentuais, inventavam contato ou não bloqueavam a conta baixa. Trouxemos só o que cabe nas regras:
+   - **A primeira tela pergunta a conta.** "Quanto você paga de luz por mês, em média?", com "R$" fixo e o botão ao lado. Abaixo de R$ 450, o aviso franco aparece ali mesmo e nada segue. A partir disso, a página desce até o formulário com o valor já preenchido e o cursor no nome. Em branco, o botão só leva ao formulário, como antes. O campo não calcula economia, não abre o WhatsApp e, sem JavaScript, é só um link para o formulário. *Por quê:* um primeiro passo pequeno (digitar um número) aumenta a chance de a pessoa terminar o pedido, e quem paga R$ 200 descobre isso na primeira tela, sem preencher nada. É a metade da meta que fala de menos pedidos de conta baixa.
+   - **O caso de Sorocaba termina com o botão.** "E a sua conta?" e "Pedir simulação", levando ao formulário. *Por quê:* é o ponto de maior convicção da página, e antes dele a pessoa só podia continuar rolando.
+   - **Retorno contra vida útil, em blocos de um ano.** No bloco de preço, 25 blocos: os 3 primeiros em âmbar, o quarto em âmbar claro (o "3 a 4 anos"), o resto em azul, com "mais de 25 anos" no fim. *Por quê:* mostra de relance que o sistema se paga numa fração da vida dele, só com números do brief, e sem escrever quanto se economiza no total.
+   - **Diagrama do crédito na Lei 14.300.** Dois quadros, de dia e de noite: a sobra vai para a rede da CPFL e vira crédito; à noite a casa usa a rede e o crédito compensa. *Por quê:* a cobrança da lei é sobre essa sobra, e quase ninguém entende como funciona. Imagem com texto se entende mais rápido que parágrafo.
+   - **Corte do telhado.** Painel, estrutura de fixação e telhado, ao lado do "5 anos". *Por quê:* o medo é do que acontece com a telha. O corte mostra onde a obra toca o telhado, e a garantia aparece logo ao lado.
+   - **Raio de 80 km desenhado no formulário**, com Sorocaba no centro e as outras três cidades em posição aproximada. *Por quê:* responde "vocês atendem aqui?" no momento de escolher a cidade.
+   - **Jargão explicado em linha:** kWp, inversor, homologação e custo do fio. *Por quê:* quem compra tem de 35 a 60 anos e não é técnico. A página usa as palavras do setor, então precisa dizer o que elas querem dizer.
+   - **"11 pessoas" é o número de destaque da objeção 1.** *Por quê:* "equipe própria, com carteira assinada" é a prova mais direta contra "vão sumir", e as outras duas objeções já tinham número de destaque.
+   - **Uma linha sobre os dados no formulário:** para que eles servem. *Por quê:* a pessoa hesita ao entregar o telefone, e a resposta cabe numa linha.
+   - **Os diagramas também preenchem a coluna vazia.** No computador, as seções do telhado e da Lei 14.300 tinham uma coluna quase vazia. O corte do telhado fica sob a pergunta, e o diagrama do crédito fica sob a resposta.
+
+   Os diagramas são desenhos técnicos nas cores da logo, sem gente, sem foto e sem efeito. Ficam visíveis sem JavaScript e sem animação.
+
+   **Ficou de fora das outras páginas:** percentual de queda e economia calculada ("−85%", "R$ 662 a menos", "R$ 7.020 por ano"), calculadora, estrelas, endereço, telefone e CNPJ inventados, foto de banco de imagens, menu, formulário em janela por cima da página, contadores animados, "até 90%", irradiação solar "ao vivo" e conteúdo escondido até a animação rodar.
+
 **Sobre o repositório:** o `brief.md` e a pasta `material/` ficam só na máquina, fora do GitHub. *Por quê:* são material do cliente, não da página. A logo que a página usa é uma cópia idêntica em `assets/logo.svg`.
 
 ## Parte 2 — O que fica de fora
@@ -72,7 +88,7 @@
 | Quem somos, missão, visão, valores | É o que a página não pode continuar sendo. Os fatos que importam foram para a objeção 1. |
 | Parceiros, blog, mapa, redes, banner de cookies | Não ajudam a pedir a simulação. |
 | Menu e botão flutuante de WhatsApp | São saídas, e o botão flutuante pularia o filtro dos R$ 450. |
-| Calculadora de economia | Depois da Lei 14.300 o cálculo é individual. A simulação é o produto. |
+| Calculadora de economia | Depois da Lei 14.300 o cálculo é individual. A simulação é o produto. O campo da conta na primeira tela não calcula nada: só aplica o filtro e leva o valor ao formulário. |
 | Percentual de economia do caso de Sorocaba | O brief dá R$ 780 e R$ 118, não o percentual. Número calculado por nós não é número do brief. |
 | E-mail, assunto e mensagem no formulário | O cliente pediu só quatro dados. Cada campo a mais perde pedido. |
 | **Anexo da conta** (pedido no brief) | O WhatsApp com mensagem preenchida não leva arquivo. A foto é pedida na própria conversa. |
@@ -80,7 +96,7 @@
 | Endereço completo e CNPJ | Não estão no brief. A página diz "sede em Sorocaba". |
 | Link para as avaliações do Google | O endereço não veio. A nota aparece como texto. |
 | Números que "contam" até o valor, carrossel, vídeo de fundo | Movimento que atrasa a leitura do número. O público quer o dado, não o efeito. |
-| Foto de banco de imagens e ilustração de família feliz | Não é obra da Ravena. A única imagem é a marca da própria logo. |
+| Foto de banco de imagens e ilustração de família feliz | Não é obra da Ravena. As imagens são a marca da própria logo e três diagramas técnicos nas cores dela (crédito, telhado e raio de atendimento). |
 | "Leva menos de um minuto" e frases parecidas no formulário | Seria um número que o brief não deu. |
 | Estrelas desenhadas para a nota 4,8 | Cinco estrelas cheias diriam 5,0. A nota aparece como número. |
 | Cortes diagonais entre as seções | A única inclinação da logo é a lateral do painel, com cerca de 56°, íngreme demais para cortar uma seção. Um ângulo mais suave seria forma inventada, não da marca. |

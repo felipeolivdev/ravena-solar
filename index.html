@@ -28,7 +28,22 @@
           <p class="sobretitulo">Energia solar para casas em Sorocaba, Votorantim, Itu e Salto</p>
           <h1>Na média dos nossos clientes, a conta de luz cai de <span class="destaque-ambar">75% a 90%</span>.</h1>
           <p class="hero-texto">O retorno do investimento tem levado de 3 a 4 anos. Fazemos a simulação para casas com conta de luz acima de R$ 450 por mês: abaixo disso a conta não fecha, e nós mesmos desaconselhamos.</p>
-          <a class="botao" id="botao-hero" href="#simulacao">Pedir simulação</a>
+          <!-- Primeiro passo do formulário de simulação. Não envia nada: aplica o filtro
+               dos R$ 450 e leva o valor ao formulário. Sem JavaScript, só vai ao formulário. -->
+          <form class="hero-conta" id="form-conta-hero" action="#simulacao" novalidate>
+            <label for="conta-hero">Quanto você paga de luz por mês, em média?</label>
+            <div class="hero-conta-linha">
+              <div class="com-prefixo">
+                <span class="prefixo" aria-hidden="true">R$</span>
+                <input id="conta-hero" name="conta-hero" type="text" inputmode="decimal" autocomplete="off" aria-describedby="aviso-hero">
+              </div>
+              <button class="botao" id="botao-hero" type="submit">Pedir simulação</button>
+            </div>
+            <div class="aviso aviso-claro" id="aviso-hero" role="alert" hidden>
+              <p><strong>Com conta abaixo de R$ 450 por mês, o investimento não fecha.</strong></p>
+              <p>Nós mesmos desaconselhamos, e por isso não fazemos a simulação. Se a média da sua conta passar desse valor, é só voltar aqui.</p>
+            </div>
+          </form>
           <p class="nota-botao">Resposta no mesmo dia útil, por WhatsApp.</p>
         </div>
 
@@ -76,18 +91,19 @@
           <p class="apoio">Com razão: a região teve pelo menos três empresas que fecharam deixando obra pela metade.</p>
         </div>
         <div data-revelar>
+          <p class="ancora ancora-objecao"><strong class="numero numero-azul">11 pessoas</strong> <span>com carteira assinada. A equipe que sobe no telhado é nossa.</span></p>
           <ul class="fatos">
             <li>
-              <h3>A equipe que sobe no telhado é nossa</h3>
-              <p>Não somos revenda e não terceirizamos a instalação. Somos onze pessoas, com carteira assinada.</p>
+              <h3>Não somos revenda</h3>
+              <p>E não terceirizamos a instalação: do projeto à ligação, a obra é feita por nós.</p>
             </li>
             <li>
               <h3>412 sistemas residenciais em 6 anos</h3>
-              <p>Fazemos o projeto, a homologação junto à distribuidora, a instalação e o acompanhamento depois de ligado.</p>
+              <p>Fazemos o projeto, a homologação (a aprovação da distribuidora, a CPFL), a instalação e o acompanhamento depois de ligado.</p>
             </li>
             <li>
               <h3>Assistência técnica autorizada</h3>
-              <p>Somos assistência autorizada da marca de inversor que instalamos.</p>
+              <p>Somos assistência autorizada da marca de inversor que instalamos. O inversor é o aparelho que transforma a energia dos painéis na energia da tomada.</p>
             </li>
             <li>
               <h3>Continuamos depois de ligar</h3>
@@ -119,6 +135,29 @@
         <div class="coluna-fixa">
           <p class="rotulo">Sobre o telhado</p>
           <h2>“Isso não vai estragar meu telhado?”</h2>
+          <figure class="diagrama diagrama-telhado">
+            <svg viewBox="0 0 340 190" role="img" aria-labelledby="telhado-legenda" xmlns="http://www.w3.org/2000/svg">
+              <rect class="d-madeira" x="10" y="152" width="230" height="14" rx="2"/>
+              <path class="d-telha" d="M10 150 q14.4 -22 28.75 0 q14.4 -22 28.75 0 q14.4 -22 28.75 0 q14.4 -22 28.75 0 q14.4 -22 28.75 0 q14.4 -22 28.75 0 q14.4 -22 28.75 0 q14.4 -22 28.75 0"/>
+              <g class="d-estrutura">
+                <path d="M70 150 V90 M180 150 V90"/>
+                <path d="M62 150 H84 M172 150 H194"/>
+              </g>
+              <line class="d-trilho" x1="30" y1="88" x2="220" y2="88"/>
+              <rect class="d-painel" x="20" y="60" width="210" height="22" rx="2"/>
+              <path class="d-painel-linhas" d="M62 60 V82 M104 60 V82 M146 60 V82 M188 60 V82"/>
+              <g class="d-guia">
+                <path d="M234 71 H254 M224 88 Q240 88 248 104 L254 104 M244 140 H254"/>
+              </g>
+              <g class="d-texto">
+                <text x="260" y="76">Painel</text>
+                <text x="260" y="102">Estrutura</text>
+                <text x="260" y="120">de fixação</text>
+                <text x="260" y="145">Seu telhado</text>
+              </g>
+            </svg>
+            <figcaption id="telhado-legenda">Corte do telhado: o painel fica sobre uma estrutura fixada no telhado. Quem faz essa fixação é a nossa equipe.</figcaption>
+          </figure>
         </div>
         <div class="texto" data-revelar>
           <p class="ancora"><strong class="numero numero-azul">5 anos</strong> <span>de garantia da nossa instalação, incluindo qualquer infiltração causada pela obra.</span></p>
@@ -137,7 +176,44 @@
         <div class="texto" data-revelar>
           <p class="frase-forte">Continua valendo, mas o cálculo mudou.</p>
           <p>Desde a Lei 14.300 existe uma cobrança sobre a energia que o sistema injeta na rede, e ela aumenta ano a ano. É por isso que a simulação é feita com a sua conta, e não com uma tabela.</p>
-          <p>A conta de luz não chega a zero: sempre restam a taxa mínima da distribuidora e o custo do fio.</p>
+          <p>A conta de luz não chega a zero: sempre restam a taxa mínima da distribuidora e o custo do fio, que é o que se paga pelo uso da rede da CPFL.</p>
+
+          <!-- Como o crédito funciona: dia e noite -->
+          <svg class="d-defs" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <g id="d-casa">
+                <path class="d-casa-corpo" d="M90 92 V150 H180 V92"/>
+                <path class="d-casa-telhado" d="M80 94 L135 52 L190 94"/>
+                <polygon class="d-painel" points="91,79 122,57 117,50 87,72"/>
+                <path class="d-casa-porta" d="M126 150 V124 H144 V150"/>
+                <path class="d-rede" d="M250 58 V150 M236 70 H264 M240 82 H260"/>
+                <line class="d-chao" x1="20" y1="150" x2="270" y2="150"/>
+              </g>
+              <marker id="d-ponta-ambar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="d-ponta-ambar" d="M0 0 L10 5 L0 10 z"/></marker>
+              <marker id="d-ponta-azul" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="d-ponta-azul" d="M0 0 L10 5 L0 10 z"/></marker>
+            </defs>
+          </svg>
+          <div class="credito">
+            <figure class="diagrama">
+              <svg viewBox="0 0 280 170" role="img" aria-labelledby="credito-dia" xmlns="http://www.w3.org/2000/svg">
+                <circle class="d-sol" cx="42" cy="36" r="15"/>
+                <line class="d-luz" x1="55" y1="46" x2="86" y2="66"/>
+                <use href="#d-casa"/>
+                <line class="d-seta-ambar" x1="186" y1="112" x2="236" y2="112" marker-end="url(#d-ponta-ambar)"/>
+                <text class="d-texto" x="250" y="166" text-anchor="middle">rede</text>
+              </svg>
+              <figcaption id="credito-dia"><strong>De dia</strong> a casa usa primeiro a energia do telhado. A sobra vai para a rede da CPFL e vira crédito. É sobre essa sobra que vale a cobrança da Lei 14.300.</figcaption>
+            </figure>
+            <figure class="diagrama">
+              <svg viewBox="0 0 280 170" role="img" aria-labelledby="credito-noite" xmlns="http://www.w3.org/2000/svg">
+                <path class="d-lua" d="M50 20 A17 17 0 1 0 62 50 A13 13 0 1 1 50 20 Z"/>
+                <use href="#d-casa"/>
+                <line class="d-seta-azul" x1="236" y1="112" x2="186" y2="112" marker-end="url(#d-ponta-azul)"/>
+                <text class="d-texto" x="250" y="166" text-anchor="middle">rede</text>
+              </svg>
+              <figcaption id="credito-noite"><strong>À noite</strong> o sistema não produz, e em dia nublado produz menos. A casa usa a energia da rede, e o crédito acumulado no mês compensa.</figcaption>
+            </figure>
+          </div>
         </div>
       </div>
     </section>
@@ -160,6 +236,10 @@
             </div>
           </div>
           <p class="caso-detalhe">Casa em Sorocaba, sistema de 6,4 kWp instalado em março de 2025.</p>
+          <div class="caso-acao">
+            <p><strong>E a sua conta?</strong> A simulação é feita com ela, não com uma tabela.</p>
+            <a class="botao" href="#simulacao">Pedir simulação</a>
+          </div>
         </div>
       </div>
     </section>
@@ -173,7 +253,7 @@
           <div class="cartao">
             <h3 class="cartao-rotulo">Investimento</h3>
             <p class="destaque">R$&nbsp;14 mil a R$&nbsp;19&nbsp;mil</p>
-            <p>É o sistema típico de uma casa: de 5 a 8 kWp, de doze a vinte painéis no telhado. O sistema dura mais de 25 anos.</p>
+            <p>É o sistema típico de uma casa: de 5 a 8 kWp (o kWp mede o tamanho do sistema), de doze a vinte painéis no telhado. O sistema dura mais de 25 anos.</p>
           </div>
           <div class="cartao">
             <h3 class="cartao-rotulo">Prazo</h3>
@@ -185,6 +265,18 @@
             <p class="destaque">Entrada zero é possível</p>
             <p>Trabalhamos com dois bancos. Na maioria dos casos, a parcela fica próxima do valor que você já paga de luz hoje.</p>
           </div>
+        </div>
+
+        <h3 class="etapas-titulo">Quando o sistema se paga</h3>
+        <div class="retorno" data-revelar>
+          <div class="anos" role="img" aria-label="Linha de mais de 25 anos, um bloco por ano: os 3 a 4 primeiros anos pagam o sistema; o resto é o tempo que ele continua funcionando.">
+            <span class="ano ano-paga"></span><span class="ano ano-paga"></span><span class="ano ano-paga"></span><span class="ano ano-talvez"></span><span class="ano"></span><span class="ano"></span><span class="ano"></span><span class="ano"></span><span class="ano"></span><span class="ano"></span><span class="ano"></span><span class="ano"></span><span class="ano"></span><span class="ano"></span><span class="ano"></span><span class="ano"></span><span class="ano"></span><span class="ano"></span><span class="ano"></span><span class="ano"></span><span class="ano"></span><span class="ano"></span><span class="ano"></span><span class="ano"></span><span class="ano"></span>
+          </div>
+          <ul class="anos-legenda">
+            <li><span class="amostra amostra-paga" aria-hidden="true"></span><strong>3 a 4 anos</strong> é o tempo que o retorno do investimento tem levado.</li>
+            <li><span class="amostra" aria-hidden="true"></span><strong>Mais de 25 anos</strong> é quanto o sistema dura. Depois de pago, a economia na conta fica com você.</li>
+          </ul>
+          <p class="ajuda">Cada bloco é um ano.</p>
         </div>
 
         <h3 class="etapas-titulo">O que acontece depois que você pede a simulação</h3>
@@ -234,6 +326,26 @@
             <li><p>Visita técnica ao telhado sem custo e sem compromisso.</p></li>
             <li><p>Se puder, deixe a conta de luz à mão: a foto ou o PDF dela ajuda muito, e você envia na própria conversa.</p></li>
           </ul>
+
+          <!-- Raio de atendimento. Posições aproximadas, na proporção real das distâncias (1,5px por km). -->
+          <figure class="diagrama diagrama-mapa">
+            <svg viewBox="0 0 300 300" role="img" aria-labelledby="mapa-legenda" xmlns="http://www.w3.org/2000/svg">
+              <circle class="d-raio" cx="150" cy="150" r="120"/>
+              <circle class="d-sede" cx="150" cy="150" r="6"/>
+              <circle class="d-cidade" cx="152" cy="158" r="4"/>
+              <circle class="d-cidade" cx="173" cy="110" r="4.5"/>
+              <circle class="d-cidade" cx="174" cy="100" r="4.5"/>
+              <path class="d-guia-clara" d="M149 162 L136 180"/>
+              <g class="d-texto-claro">
+                <text x="162" y="146">Sorocaba, sede</text>
+                <text x="132" y="194" text-anchor="end">Votorantim</text>
+                <text x="184" y="118">Itu</text>
+                <text x="184" y="100">Salto</text>
+                <text x="150" y="258" text-anchor="middle" class="d-texto-suave">raio de 80 km</text>
+              </g>
+            </svg>
+            <figcaption id="mapa-legenda">Atendemos num raio de 80 km de Sorocaba. Posições aproximadas.</figcaption>
+          </figure>
         </div>
 
         <form class="formulario" id="form-simulacao" novalidate>
@@ -294,6 +406,7 @@
           <noscript><p class="ajuda">Para pedir a simulação, ative o JavaScript do navegador.</p></noscript>
 
           <p class="garantia-envio">Nota 4,8 no Google, com 137 avaliações. Visita técnica sem custo e sem compromisso.</p>
+          <p class="garantia-envio">Usamos esses dados só para fazer a sua simulação e responder pelo WhatsApp.</p>
         </form>
       </div>
     </section>
