@@ -23,6 +23,7 @@ Neutros: não são cores novas, são o azul e o branco da logo com transparênci
 | `--branco-suave` | `rgb(255 255 255 / 0.80)` | Texto de apoio sobre azul |
 | `--linha-clara` | `rgb(255 255 255 / 0.24)` | Divisórias e trilhos sobre azul |
 | `--sombra` | `0 10px 30px rgb(18 58 85 / 0.14)` | Cartão elevado e topo fixo |
+| `--textura` | `0.06` | Opacidade da textura do painel sobre azul |
 
 Regras:
 
@@ -64,19 +65,23 @@ Hierarquia: o maior texto da tela é sempre o número ou a promessa. Título de 
 - **Botão de ação:** fundo `--laranja`, texto `--azul` em negrito. É o único elemento laranja preenchido da página. O rótulo é sempre "Pedir simulação" (no formulário, "Pedir simulação pelo WhatsApp"). Ao passar o mouse sobe 1px e ganha `--sombra`.
 - **Topo fixo:** fundo `--branco`, logo à esquerda. No computador traz o botão à direita. Ganha `--sombra` quando a página rola.
 - **Barra de ação do celular:** fundo `--branco`, presa ao pé da tela, com o botão. Aparece depois que o botão da primeira tela sai de vista e some quando o formulário ou o rodapé aparecem.
-- **Primeira tela:** fundo `--azul`, promessa em `--branco` com o intervalo "75% a 90%" em `--ambar`. No computador, a marca da logo (sol e painel) ampliada à direita.
+- **Primeira tela:** fundo `--azul`, promessa em `--branco` com o intervalo "75% a 90%" em `--ambar`. No computador, a marca da logo (sol e painel) ampliada à direita. Ao fundo, a textura do painel.
+- **Textura do painel:** a grade das células do painel da logo (células de 72x48px, linha de 1px), em `--branco` com opacidade `--textura` (0,06). Só sobre `--azul`: primeira tela e seção do formulário. É desenhada por máscara SVG, não por gradiente, e fica atrás do conteúdo.
 - **Cartão de prova:** `--branco`, `--raio-cartao`, `--sombra`, traço de 4px em `--ambar` no topo; avança 56px sobre a primeira tela. Números em `--azul`.
 - **Título de seção:** traço de 40x4px em `--ambar` acima do texto. No computador a pergunta fica presa à esquerda enquanto a resposta rola à direita.
 - **Lista de fatos:** marca de conferido em `--azul` à esquerda de cada item (em `--ambar` sobre fundo azul).
-- **Caso:** bloco `--azul` com os dois valores lado a lado, cada um com uma barra. A barra de antes ocupa o trilho inteiro, em `--branco`; a de depois é `--ambar` e tem largura `118 / 780` do trilho. A proporção é calculada no CSS a partir dos dois valores do brief.
-- **Etapas:** linha do tempo com oito pontos numerados (`--azul`, número `--branco`) ligados por uma linha `--linha`. Vertical no celular; quatro por linha no computador.
-- **Cartão de conteúdo** (preço, prazo, financiamento, perguntas): `--branco`, borda `--linha`, `--raio-cartao`.
+- **Número de destaque da objeção:** o número que responde à pergunta, em `--t-numero` e `--azul` (nunca âmbar, que seria texto sobre branco), com a frase que o completa logo abaixo, em `--t-h3` negrito.
+- **Garantias:** uma linha por garantia, com o número à esquerda e, à direita, o que ela cobre e uma barra. A barra é `--azul` sobre trilho `--linha`, com largura proporcional aos anos sobre os 25 da maior (`25/25`, `10/25`, `5/25`), calculada no CSS.
+- **Caso:** faixa `--azul` de ponta a ponta da tela, entre a objeção da Lei 14.300 e o preço, com os dois valores lado a lado, cada um com uma barra. A barra de antes ocupa o trilho inteiro, em `--branco`; a de depois é `--ambar` e tem largura `118 / 780` do trilho. A proporção é calculada no CSS a partir dos dois valores do brief.
+- **Etapas:** linha do tempo com oito pontos numerados (`--azul`, número `--branco`) ligados por uma linha `--linha`. Vertical no celular; quatro por linha no computador. A etapa da CPFL tem o ponto vazado (`--branco` com contorno `--azul`) e a da instalação tem um anel de 3px em `--ambar` (forma, não texto); cada uma traz uma nota curta em `--t-pequeno`.
+- **Cartão de conteúdo** (preço, prazo e financiamento): `--branco`, borda `--linha`, `--raio-cartao`.
+- **Perguntas curtas:** lista sem cartão, cada pergunta separada por uma divisória `--linha` em cima. Três colunas no computador.
 - **Aviso** (erro e bloqueio): fundo `--fundo-suave`, borda esquerda de 4px em `--azul`, texto em `--azul`.
 
 ## Movimento
 
 - Seções entram com opacidade e 20px de deslocamento, em 0,6s, uma vez só.
-- As barras do caso crescem da esquerda em 0,9s quando o bloco aparece.
+- As barras do caso e das garantias crescem da esquerda em 0,9s quando o bloco aparece.
 - Com `prefers-reduced-motion`, nada disso acontece e a rolagem deixa de ser suave.
 - Sem JavaScript, todo o conteúdo já nasce visível.
 

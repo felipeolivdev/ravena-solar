@@ -53,6 +53,14 @@
    - **O formulário responde enquanto a pessoa preenche:** máscara no WhatsApp, "R$" fixo no campo da conta, erro ao sair do campo e o aviso dos R$ 450 já ao sair do campo da conta. *Por quê:* quem tem conta de R$ 200 descobre antes de terminar de preencher, e quem pode comprar não tropeça em formato.
    - **Entrada suave das seções ao rolar**, desligada para quem pede menos movimento no sistema, e sem esconder nada se o JavaScript falhar.
 
+   Na terceira versão, o meio da página ganhou ritmo. As três objeções tinham o mesmo desenho e o mesmo peso, e a leitura cansava justamente onde a pessoa decide se confia na empresa:
+   - **Cada objeção tem um número de destaque.** No telhado, "5 anos" de garantia da instalação aparece grande, no lugar de uma frase. *Por quê:* a regra do design já é "o maior texto da tela é o número"; antes ela só valia na primeira tela e no caso. São 5 anos, e não os 6 de empresa, porque é a garantia que responde ao medo de infiltração; os 6 anos respondem à objeção 1.
+   - **As três garantias viraram barras proporcionais aos anos** (25, 10 e 5, sobre 25). *Por quê:* é a mesma linguagem das barras do caso — barra é número conferido — e mostra de relance qual garantia é mais longa, sem cifra nova.
+   - **A primeira tela e o formulário têm, ao fundo, a grade das células do painel da logo**, em branco quase transparente. *Por quê:* o azul chapado fica com profundidade sem foto, sem gradiente e sem desenho que não seja da marca.
+   - **O caso de Sorocaba virou uma faixa azul de ponta a ponta.** *Por quê:* é a prova mais forte da página e estava num cartão do mesmo tamanho dos outros blocos; a faixa quebra a sequência de fundos claros bem no meio das objeções.
+   - **Na linha do tempo, a etapa da CPFL tem o ponto vazado e a instalação tem um anel âmbar**, cada uma com uma nota curta. *Por quê:* mostra onde os 45 a 60 dias são gastos e que a obra em si é a parte curta, sem dar prazo por etapa, que o brief não deu.
+   - **As perguntas curtas perderam o cartão** e viraram lista com divisórias. *Por quê:* os cartões ficam só para preço, prazo e financiamento, que são o que a pessoa compara entre três orçamentos.
+
 **Sobre o repositório:** o `brief.md` e a pasta `material/` ficam só na máquina, fora do GitHub. *Por quê:* são material do cliente, não da página. A logo que a página usa é uma cópia idêntica em `assets/logo.svg`.
 
 ## Parte 2 — O que fica de fora
@@ -75,6 +83,7 @@
 | Foto de banco de imagens e ilustração de família feliz | Não é obra da Ravena. A única imagem é a marca da própria logo. |
 | "Leva menos de um minuto" e frases parecidas no formulário | Seria um número que o brief não deu. |
 | Estrelas desenhadas para a nota 4,8 | Cinco estrelas cheias diriam 5,0. A nota aparece como número. |
+| Cortes diagonais entre as seções | A única inclinação da logo é a lateral do painel, com cerca de 56°, íngreme demais para cortar uma seção. Um ângulo mais suave seria forma inventada, não da marca. |
 | Fonte Poppins, gradientes e cards com ícone do site de 2021 | O visual antigo é o da página que "quase não traz cliente". A fonte passa a ser a da própria logo. |
 
 **Pendente com o cliente:** WhatsApp real, fotos e vídeos, link do Google, endereço e CNPJ.
