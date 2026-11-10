@@ -1,2 +1,6 @@
 node_modules/
 .vercel/
+
+# Material do cliente: fica só na máquina, não vai para o GitHub.
+brief.md
+material/

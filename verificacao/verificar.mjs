@@ -39,7 +39,7 @@ const NUMEROS_DO_BRIEF = {
 const PROIBIDAS = ['futuro', 'sustentab', 'revoluç', 'grátis', 'gratuito', '95%', 'zera',
   '+300', 'indústria', 'manutenção', 'missão', '99000-0000'];
 const CORES_DA_LOGO = [...new Set(
-  readFileSync(path.join(raiz, 'material/logo.svg'), 'utf8').match(/#[0-9a-fA-F]{6}/g).map(c => c.toUpperCase())
+  readFileSync(path.join(raiz, 'assets/logo.svg'), 'utf8').match(/#[0-9a-fA-F]{6}/g).map(c => c.toUpperCase())
 )];
 
 const navegador = await chromium.launch({ channel: 'msedge' });

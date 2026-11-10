@@ -8,7 +8,6 @@ Página única para o dono de casa de Sorocaba e região pedir uma simulação d
 
 | Arquivo | O que é |
 |---|---|
-| [`brief.md`](brief.md) | O pedido do cliente. Todo número da página sai daqui |
 | [`SPEC.md`](SPEC.md) | O que a página faz, o que ficou de fora e por quê |
 | [`DESIGN.md`](DESIGN.md) | Cores (lidas da logo), tipografia, espaços e componentes |
 | [`CLAUDE.md`](CLAUDE.md) | Instruções que o agente lê ao abrir o projeto |

@@ -4,7 +4,7 @@ Os valores daqui são a fonte. O `styles.css` declara cada um como variável em 
 
 ## Cores
 
-Lidas de `material/logo.svg` (atributos `fill` e `stroke`). Não há outra cor de marca.
+Lidas de `material/logo.svg` (atributos `fill` e `stroke`), o arquivo do cliente. A página serve uma cópia idêntica em `assets/logo.svg`, porque a pasta `material/` não vai para o repositório. Não há outra cor de marca.
 
 | Token | Valor | Onde está na logo | Uso na página |
 |---|---|---|---|

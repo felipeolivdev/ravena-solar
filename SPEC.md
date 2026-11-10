@@ -53,6 +53,8 @@
    - **O formulário responde enquanto a pessoa preenche:** máscara no WhatsApp, "R$" fixo no campo da conta, erro ao sair do campo e o aviso dos R$ 450 já ao sair do campo da conta. *Por quê:* quem tem conta de R$ 200 descobre antes de terminar de preencher, e quem pode comprar não tropeça em formato.
    - **Entrada suave das seções ao rolar**, desligada para quem pede menos movimento no sistema, e sem esconder nada se o JavaScript falhar.
 
+**Sobre o repositório:** o `brief.md` e a pasta `material/` ficam só na máquina, fora do GitHub. *Por quê:* são material do cliente, não da página. A logo que a página usa é uma cópia idêntica em `assets/logo.svg`.
+
 ## Parte 2 — O que fica de fora
 
 | Corte | Motivo |
