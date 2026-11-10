@@ -84,7 +84,12 @@ Hierarquia: o maior texto da tela é sempre o número ou a promessa. Título de 
 - **Diagramas** (crédito, corte do telhado, raio de atendimento): SVG desenhado no próprio HTML, só com as cores da logo. Traço de 2px em `--azul` sobre branco ou `--branco` sobre azul, cantos e pontas arredondados. Sol e setas da sobra em `--ambar`, sede no mapa em `--ambar`. Painel como na logo: `--azul` com linhas `--branco`. Texto dentro do desenho só para nomes curtos, em `--t-pequeno`. A explicação fica na legenda (`figcaption`), em HTML. Sem animação e sem gente.
   - **Crédito:** dois quadros lado a lado no computador (empilhados no celular), "De dia" e "À noite", com a mesma casa e o poste da rede.
   - **Telhado:** corte com painel, trilho, ganchos, telhas onduladas e a madeira, com os nomes à direita.
-  - **Raio:** círculo tracejado em `--linha-clara` (80 km), Sorocaba no centro em `--ambar`, as outras cidades em `--branco`. Posições aproximadas, na proporção real das distâncias.
+  - **Raio:** duas escalas no mesmo desenho, sobre `--azul`.
+    - *Visão geral* (1,5px por km): círculo de 80 km com área em `--branco` a 0,06 (o mesmo valor de `--textura`) e borda tracejada em `--branco` a 0,4; dois anéis internos sem número em `--branco` a 0,1; uma linha do centro à borda com "80 km" em cima, que faz as vezes de escala. A região das cidades fica num retângulo tracejado em `--ambar`, ligado ao quadro ampliado por duas linhas finas.
+    - *Quadro ampliado* (5px por km): moldura em `--ambar`, as cidades na mesma posição relativa, nomes à direita do ponto e "N ↑" no canto. A sede é o sol da logo (círculo e raios em `--ambar`); as outras cidades são pontos `--branco` de 5px.
+    - *Cidade escolhida:* anel de 3px em `--ambar` em volta do ponto e nome em `--ambar` (texto âmbar só sobre azul). "Outra cidade" acende a borda do raio em `--ambar`.
+    - Texto do mapa em 18 unidades do desenho no computador (o mapa é reduzido para caber na coluna) e `--t-pequeno` no celular.
+    - *No celular:* só o quadro ampliado, dentro do formulário, logo abaixo do campo "Cidade", num bloco `--azul` com `--raio-cartao`. A visão geral aparece só a partir de 760px.
 
 ## Movimento
 

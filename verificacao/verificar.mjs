@@ -327,11 +327,17 @@ conferir(blocos.length === 25 && blocos.slice(0, 3).every(b => b === `${rgb('#F2
   && blocos.slice(4).every(b => b === `${rgb('#123A55')}|1`), 'Blocos de anos: 25 blocos, 3 âmbar, o quarto âmbar claro, o resto azul');
 conferir(await celular.locator('.caso .botao').getAttribute('href') === '#simulacao', 'O caso de Sorocaba termina com o botão que leva ao formulário');
 conferir(await celular.locator('.ancora-objecao .numero').innerText() === '11 pessoas', 'Objeção 1 tem "11 pessoas" como número de destaque');
-const diagramas = await celular.evaluate(() => [...document.querySelectorAll('figure.diagrama')].map(f => {
-  const svg = f.querySelector('svg'); const r = svg.getBoundingClientRect();
-  return { legenda: !!f.querySelector('figcaption').textContent.trim(), rotulo: svg.getAttribute('role') === 'img' && !!svg.getAttribute('aria-labelledby'), altura: r.height };
-}));
-conferir(diagramas.length === 4 && diagramas.every(d => d.legenda && d.rotulo && d.altura > 50), 'Os quatro diagramas (telhado, crédito de dia e de noite, raio) aparecem, com legenda e nome acessível', diagramas.map(d => Math.round(d.altura)).join(' / '));
+const diagramasVisiveis = (pagina) => pagina.evaluate(() => [...document.querySelectorAll('figure.diagrama')]
+  .filter(f => getComputedStyle(f).display !== 'none')
+  .map(f => {
+    const svg = f.querySelector('svg'); const r = svg.getBoundingClientRect();
+    return { classe: f.className, legenda: !!f.querySelector('figcaption').textContent.trim(), rotulo: svg.getAttribute('role') === 'img' && !!svg.getAttribute('aria-labelledby'), altura: r.height };
+  }));
+for (const [pagina, nome, classeMapa] of [[celular, 'celular', 'mapa-compacto'], [computador, 'computador', 'diagrama-mapa']]) {
+  const d = await diagramasVisiveis(pagina);
+  conferir(d.length === 4 && d.every(x => x.legenda && x.rotulo && x.altura > 50) && d.some(x => x.classe.includes(classeMapa)),
+    `${nome}: os quatro diagramas (telhado, crédito de dia e de noite, mapa) aparecem, com legenda e nome acessível`, d.map(x => Math.round(x.altura)).join(' / '));
+}
 const coresSvg = await celular.evaluate(() => {
   const s = new Set();
   document.querySelectorAll('.diagrama svg *').forEach(e => { const c = getComputedStyle(e); [c.fill, c.stroke].forEach(v => { if (v && v !== 'none') s.add(v); }); });
@@ -339,9 +345,63 @@ const coresSvg = await celular.evaluate(() => {
 });
 const permitidas = ['#123A55', '#F2A03D', '#FFFFFF'].map(rgb).concat(['rgba(18, 58, 85, 0.76)', 'rgba(18, 58, 85, 0.18)', 'rgba(18, 58, 85, 0.05)', 'rgba(255, 255, 255, 0.8)', 'rgba(255, 255, 255, 0.24)']);
 conferir(coresSvg.every(c => permitidas.includes(c)), 'Diagramas só com cores da logo (e sem laranja, que é só da ação)', coresSvg.join(' | '));
-conferir(await semJs.locator('figure.diagrama svg').evaluateAll(els => els.every(e => e.getBoundingClientRect().height > 50)), 'Sem JavaScript, os diagramas aparecem');
+conferir(await semJs.locator('figure.diagrama:not(.so-computador) svg').evaluateAll(els => els.every(e => e.getBoundingClientRect().height > 50)), 'Sem JavaScript, os diagramas aparecem');
+
+titulo('Mapa do raio');
+// Proporção: no quadro ampliado, cada cidade fica na mesma direção e a 5/1,5 da distância da visão geral.
+const proporcoes = await computador.evaluate(() => {
+  const ponto = (sel) => { const e = document.querySelector(sel); return [parseFloat(e.getAttribute('cx')), parseFloat(e.getAttribute('cy'))]; };
+  const geralSede = ponto('.diagrama-mapa [data-cidade-geral="Sorocaba"]');
+  const lupaSede = ponto('.diagrama-mapa [data-cidade="Sorocaba"] .m-sol');
+  return ['Votorantim', 'Itu', 'Salto'].map(c => {
+    const g = ponto(`.diagrama-mapa [data-cidade-geral="${c}"]`), l = ponto(`.diagrama-mapa [data-cidade="${c}"] .m-ponto`);
+    return [c, (l[0] - lupaSede[0]) / (g[0] - geralSede[0]), (l[1] - lupaSede[1]) / (g[1] - geralSede[1])];
+  });
+});
+conferir(proporcoes.every(([, x, y]) => Math.abs(x - 5 / 1.5) < 0.1 && Math.abs(y - 5 / 1.5) < 0.1),
+  'Quadro ampliado mantém as posições da visão geral (escala 5 para 1,5)', proporcoes.map(([c, x, y]) => `${c} ${x.toFixed(2)}/${y.toFixed(2)}`).join(', '));
+const iguais = await celular.evaluate(() => {
+  const pos = (m) => [...document.querySelectorAll(`${m} .m-local`)].map(g => g.dataset.cidade + g.querySelector('circle:not(.m-anel)').getAttribute('cx')).join();
+  return pos('.mapa-compacto') === pos('.diagrama-mapa');
+});
+conferir(iguais, 'O mapa do celular e o do computador têm as mesmas posições');
+conferir(await celular.locator('.mapa-compacto').isVisible() && !(await celular.locator('.diagrama-mapa').isVisible()), 'Celular: o mapa fica dentro do formulário, só com o quadro ampliado');
+conferir(await computador.locator('.diagrama-mapa').isVisible() && !(await computador.locator('.mapa-compacto').isVisible()), 'Computador: o mapa fica na coluna da esquerda, com as duas escalas');
+const campoCidade = await celular.locator('#cidade').boundingBox();
+const mapaCel = await celular.locator('.mapa-compacto').boundingBox();
+conferir(mapaCel.y > campoCidade.y && mapaCel.y - (campoCidade.y + campoCidade.height) < 80, 'Celular: o mapa aparece logo abaixo do campo "Cidade"');
+
+for (const pagina of [celular, computador]) await pagina.reload();
+const estadoMapa = (pagina, sel) => pagina.evaluate((s) => ({
+  escolhidas: [...document.querySelectorAll(`${s} .m-local.escolhida`)].map(g => g.dataset.cidade),
+  outra: document.querySelector(`${s} .mapa`).classList.contains('outra-escolhida'),
+  anel: (() => { const a = document.querySelector(`${s} .m-local.escolhida .m-anel`); return a ? getComputedStyle(a).opacity : null; })(),
+}), sel);
+for (const cidade of ['Sorocaba', 'Votorantim', 'Itu', 'Salto']) {
+  await celular.selectOption('#cidade', { label: cidade });
+  await computador.selectOption('#cidade', { label: cidade });
+  const c = await estadoMapa(celular, '.mapa-compacto'), pc = await estadoMapa(computador, '.diagrama-mapa');
+  conferir(c.escolhidas.join() === cidade && pc.escolhidas.join() === cidade && !c.outra && c.anel === '1',
+    `Escolher ${cidade} no formulário marca só ${cidade} no mapa (celular e computador)`);
+  if (cidade === 'Itu') {
+    await celular.locator('.mapa-compacto').scrollIntoViewIfNeeded();
+    await celular.screenshot({ path: path.join(aqui, `celular-390-mapa-cidade-itu${sufixo}.png`) });
+    await computador.evaluate(() => document.querySelectorAll('[data-revelar]').forEach(e => e.classList.add('visivel')));
+    await computador.evaluate(() => document.querySelector('.diagrama-mapa').scrollIntoView({ block: 'center' }));
+    await computador.screenshot({ path: path.join(aqui, `computador-1440-mapa-cidade-itu${sufixo}.png`) });
+  }
+}
+await celular.selectOption('#cidade', 'outra');
+const outra = await estadoMapa(celular, '.mapa-compacto');
+conferir(outra.outra && outra.escolhidas.length === 0, '"Outra cidade" acende o raio e não marca nenhuma das quatro');
+await celular.selectOption('#cidade', '');
+const nenhuma = await estadoMapa(celular, '.mapa-compacto');
+conferir(!nenhuma.outra && nenhuma.escolhidas.length === 0, 'Sem cidade escolhida, o mapa fica sem destaque');
+const ambarNome = await computador.evaluate(() => { const t = document.querySelector('.diagrama-mapa .m-local.escolhida text'); return t ? getComputedStyle(t).fill : ''; });
+conferir(ambarNome === '' || ambarNome === 'rgb(242, 160, 61)', 'Nome da cidade escolhida em âmbar, sobre o azul do mapa');
+
 await computador.evaluate(() => document.querySelectorAll('[data-revelar]').forEach(e => e.classList.add('visivel')));
-for (const [seletor, nome] of [['.diagrama-telhado', 'telhado'], ['.credito', 'credito'], ['.caso-acao', 'caso-acao'], ['.retorno', 'retorno'], ['.diagrama-mapa', 'formulario-raio']]) {
+for (const [seletor, nome] of [['.diagrama-telhado', 'telhado'], ['.credito', 'credito'], ['.caso-acao', 'caso-acao'], ['.retorno', 'retorno']]) {
   await computador.evaluate((s) => document.querySelector(s).scrollIntoView({ block: 'center' }), seletor);
   await computador.screenshot({ path: path.join(aqui, `computador-1440-${nome}${sufixo}.png`) });
 }

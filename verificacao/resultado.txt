@@ -1,4 +1,4 @@
-# Verificação — 2026-11-10 20:26 UTC
+# Verificação — 2026-11-10 20:34 UTC
 Alvo: file:///C:/Users/PICHAU/OneDrive/Desktop/oficina-202/ravena-solar/index.html
 
 ## Layout
@@ -138,8 +138,23 @@ OK     Valor de 780 trazido da primeira tela chega à mensagem do WhatsApp
 OK     Blocos de anos: 25 blocos, 3 âmbar, o quarto âmbar claro, o resto azul
 OK     O caso de Sorocaba termina com o botão que leva ao formulário
 OK     Objeção 1 tem "11 pessoas" como número de destaque
-OK     Os quatro diagramas (telhado, crédito de dia e de noite, raio) aparecem, com legenda e nome acessível  ->  196 / 213 / 213 / 340
-OK     Diagramas só com cores da logo (e sem laranja, que é só da ação)  ->  rgba(18, 58, 85, 0.05) | rgb(18, 58, 85) | rgb(255, 255, 255) | rgba(18, 58, 85, 0.76) | rgb(242, 160, 61) | rgba(255, 255, 255, 0.24) | rgba(255, 255, 255, 0.8)
+OK     celular: os quatro diagramas (telhado, crédito de dia e de noite, mapa) aparecem, com legenda e nome acessível  ->  196 / 213 / 213 / 250
+OK     computador: os quatro diagramas (telhado, crédito de dia e de noite, mapa) aparecem, com legenda e nome acessível  ->  235 / 160 / 160 / 205
+OK     Diagramas só com cores da logo (e sem laranja, que é só da ação)  ->  rgba(18, 58, 85, 0.05) | rgb(18, 58, 85) | rgb(255, 255, 255) | rgba(18, 58, 85, 0.76) | rgb(242, 160, 61) | rgba(255, 255, 255, 0.8)
 OK     Sem JavaScript, os diagramas aparecem
+
+## Mapa do raio
+OK     Quadro ampliado mantém as posições da visão geral (escala 5 para 1,5)  ->  Votorantim 3.26/3.33, Itu 3.33/3.33, Salto 3.33/3.33
+OK     O mapa do celular e o do computador têm as mesmas posições
+OK     Celular: o mapa fica dentro do formulário, só com o quadro ampliado
+OK     Computador: o mapa fica na coluna da esquerda, com as duas escalas
+OK     Celular: o mapa aparece logo abaixo do campo "Cidade"
+OK     Escolher Sorocaba no formulário marca só Sorocaba no mapa (celular e computador)
+OK     Escolher Votorantim no formulário marca só Votorantim no mapa (celular e computador)
+OK     Escolher Itu no formulário marca só Itu no mapa (celular e computador)
+OK     Escolher Salto no formulário marca só Salto no mapa (celular e computador)
+OK     "Outra cidade" acende o raio e não marca nenhuma das quatro
+OK     Sem cidade escolhida, o mapa fica sem destaque
+OK     Nome da cidade escolhida em âmbar, sobre o azul do mapa
 
 RESULTADO: tudo conferido, nenhuma falha.

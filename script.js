@@ -145,7 +145,19 @@
     atualizarFaixaDaConta(true);
   });
 
+  // O mapa do raio marca a cidade escolhida; "outra" acende o raio inteiro.
+  function marcarCidadeNoMapa() {
+    var escolha = campos.cidade.value;
+    document.querySelectorAll('.mapa').forEach(function (mapa) {
+      mapa.classList.toggle('outra-escolhida', escolha === 'outra');
+    });
+    document.querySelectorAll('.m-local').forEach(function (local) {
+      local.classList.toggle('escolhida', local.getAttribute('data-cidade') === escolha);
+    });
+  }
+
   campos.cidade.addEventListener('change', function () {
+    marcarCidadeNoMapa();
     campoOutraCidade.hidden = campos.cidade.value !== 'outra';
     if (campos.cidade.value !== 'outra') mostrarErro(campos.outraCidade, '');
   });

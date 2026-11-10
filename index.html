@@ -327,24 +327,30 @@
             <li><p>Se puder, deixe a conta de luz à mão: a foto ou o PDF dela ajuda muito, e você envia na própria conversa.</p></li>
           </ul>
 
-          <!-- Raio de atendimento. Posições aproximadas, na proporção real das distâncias (1,5px por km). -->
-          <figure class="diagrama diagrama-mapa">
-            <svg viewBox="0 0 300 300" role="img" aria-labelledby="mapa-legenda" xmlns="http://www.w3.org/2000/svg">
-              <circle class="d-raio" cx="150" cy="150" r="120"/>
-              <circle class="d-sede" cx="150" cy="150" r="6"/>
-              <circle class="d-cidade" cx="152" cy="158" r="4"/>
-              <circle class="d-cidade" cx="173" cy="110" r="4.5"/>
-              <circle class="d-cidade" cx="174" cy="100" r="4.5"/>
-              <path class="d-guia-clara" d="M149 162 L136 180"/>
-              <g class="d-texto-claro">
-                <text x="162" y="146">Sorocaba, sede</text>
-                <text x="132" y="194" text-anchor="end">Votorantim</text>
-                <text x="184" y="118">Itu</text>
-                <text x="184" y="100">Salto</text>
-                <text x="150" y="258" text-anchor="middle" class="d-texto-suave">raio de 80 km</text>
-              </g>
+          <!-- Raio de atendimento em duas escalas. Distâncias reais: 1,5px por km na visão geral,
+               5px por km no quadro ampliado (mesmas posições relativas). -->
+          <figure class="diagrama diagrama-mapa so-computador">
+            <svg class="mapa" viewBox="20 20 580 260" role="img" aria-labelledby="mapa-legenda" xmlns="http://www.w3.org/2000/svg">
+              <circle class="m-area" cx="150" cy="150" r="120"/>
+              <circle class="m-anel-interno" cx="150" cy="150" r="80"/>
+              <circle class="m-anel-interno" cx="150" cy="150" r="40"/>
+              <line class="m-escala" x1="143" y1="150" x2="30" y2="150"/>
+              <path class="m-escala" d="M30 144 V156"/>
+              <text class="m-escala-texto" x="86" y="140" text-anchor="middle">80 km</text>
+              <rect class="m-recorte" x="141" y="93" width="75" height="69" rx="3"/>
+              <path class="m-ligacao" d="M216 93 L340 35 M216 162 L340 265"/>
+              <circle class="m-ponto-geral" data-cidade-geral="Votorantim" cx="152.3" cy="157.2" r="2.5"/>
+              <circle class="m-ponto-geral" data-cidade-geral="Itu" cx="173.4" cy="110.4" r="2.5"/>
+              <circle class="m-ponto-geral" data-cidade-geral="Salto" cx="175.4" cy="99.9" r="2.5"/>
+              <circle class="m-sol" data-cidade-geral="Sorocaba" cx="150" cy="150" r="4"/>
+              <rect class="m-moldura" x="340" y="35" width="250" height="230" rx="6"/>
+              <text class="m-norte" x="578" y="62" text-anchor="end">N ↑</text>
+              <g class="m-local" data-cidade="Salto"><circle class="m-anel" cx="454.5" cy="58" r="11"/><circle class="m-ponto" cx="454.5" cy="58" r="5"/><text x="471" y="64">Salto</text></g>
+              <g class="m-local" data-cidade="Itu"><circle class="m-anel" cx="448" cy="93" r="11"/><circle class="m-ponto" cx="448" cy="93" r="5"/><text x="465" y="99">Itu</text></g>
+              <g class="m-local" data-cidade="Votorantim"><circle class="m-anel" cx="377.5" cy="249" r="11"/><circle class="m-ponto" cx="377.5" cy="249" r="5"/><text x="394" y="255">Votorantim</text></g>
+              <g class="m-local m-sede" data-cidade="Sorocaba"><circle class="m-anel" cx="370" cy="225" r="15"/><path class="m-raios" d="M370 208 V203 M358 213 L354 209 M382 213 L386 209 M353 225 H348"/><circle class="m-sol" cx="370" cy="225" r="8"/><text x="391" y="231">Sorocaba · sede</text></g>
             </svg>
-            <figcaption id="mapa-legenda">Atendemos num raio de 80 km de Sorocaba. Posições aproximadas.</figcaption>
+            <figcaption id="mapa-legenda">Atendemos num raio de 80 km de Sorocaba. À esquerda, o raio inteiro; à direita, a região das cidades, ampliada. Posições aproximadas.</figcaption>
           </figure>
         </div>
 
@@ -373,6 +379,19 @@
             </select>
             <p class="erro" id="erro-cidade" hidden></p>
           </div>
+
+          <!-- No celular, o quadro ampliado fica junto do campo, para o destaque da cidade aparecer onde a pessoa escolhe. -->
+          <figure class="diagrama mapa-compacto so-celular">
+            <svg class="mapa" viewBox="330 25 270 250" role="img" aria-labelledby="mapa-compacto-legenda" xmlns="http://www.w3.org/2000/svg">
+              <rect class="m-moldura" x="340" y="35" width="250" height="230" rx="6"/>
+              <text class="m-norte" x="578" y="62" text-anchor="end">N ↑</text>
+              <g class="m-local" data-cidade="Salto"><circle class="m-anel" cx="454.5" cy="58" r="11"/><circle class="m-ponto" cx="454.5" cy="58" r="5"/><text x="471" y="64">Salto</text></g>
+              <g class="m-local" data-cidade="Itu"><circle class="m-anel" cx="448" cy="93" r="11"/><circle class="m-ponto" cx="448" cy="93" r="5"/><text x="465" y="99">Itu</text></g>
+              <g class="m-local" data-cidade="Votorantim"><circle class="m-anel" cx="377.5" cy="249" r="11"/><circle class="m-ponto" cx="377.5" cy="249" r="5"/><text x="394" y="255">Votorantim</text></g>
+              <g class="m-local m-sede" data-cidade="Sorocaba"><circle class="m-anel" cx="370" cy="225" r="15"/><path class="m-raios" d="M370 208 V203 M358 213 L354 209 M382 213 L386 209 M353 225 H348"/><circle class="m-sol" cx="370" cy="225" r="8"/><text x="391" y="231">Sorocaba · sede</text></g>
+            </svg>
+            <figcaption id="mapa-compacto-legenda">Atendemos num raio de 80 km de Sorocaba. Posições aproximadas.</figcaption>
+          </figure>
 
           <div class="campo" id="campo-outra-cidade" hidden>
             <label for="outra-cidade">Qual cidade?</label>

@@ -27,7 +27,8 @@ node verificar.mjs <URL no ar>     # confere a página publicada (arquivos com s
 | `computador-1440-credito.png` | Computador: Lei 14.300 com o diagrama do crédito de dia e de noite |
 | `computador-1440-caso-acao.png` | Computador: caso de Sorocaba terminando com o botão |
 | `computador-1440-retorno.png` | Computador: os 25 blocos de anos, do retorno à vida útil |
-| `computador-1440-formulario-raio.png` | Computador: formulário com o raio de 80 km desenhado |
+| `computador-1440-mapa-cidade-itu.png` | Computador: mapa do raio em duas escalas, com Itu escolhida no formulário |
+| `celular-390-mapa-cidade-itu.png` | Celular: quadro ampliado dentro do formulário, logo abaixo do campo "Cidade", com Itu marcada |
 
 Os arquivos com `-no-ar` no nome são as mesmas capturas, tiradas da página publicada.
 
@@ -42,6 +43,8 @@ Os arquivos com `-no-ar` no nome são as mesmas capturas, tiradas da página pub
 
 7. **Primeira tela (quarta versão):** contas de 200 e 449,99 digitadas ali mostram o aviso, não descem ao formulário e não abrem link; 450 e 780 descem ao formulário com a conta preenchida e o cursor no nome, também sem abrir link; em branco, o botão só leva ao formulário; sem JavaScript, o campo é um formulário com `action="#simulacao"`. O valor trazido ainda passa pelo filtro: trocado para 300 bloqueia, e 780 chega à mensagem do WhatsApp.
 8. **Diagramas e blocos (quarta versão):** 25 blocos de anos nas cores certas; botão no fim do caso; "11 pessoas" na objeção 1; os quatro diagramas aparecem com legenda e nome acessível, inclusive sem JavaScript, e só usam cores da logo, sem laranja.
+
+9. **Mapa do raio:** o quadro ampliado mantém as posições da visão geral (escala 5 para 1,5); celular e computador têm as mesmas posições; no celular o mapa fica logo abaixo do campo "Cidade" e, no computador, na coluna da esquerda; escolher cada uma das quatro cidades marca só ela, "Outra cidade" acende o raio, e sem escolha não há destaque.
 
 As capturas são tiradas com "menos movimento" ligado, para registrar a página já assentada.
 
