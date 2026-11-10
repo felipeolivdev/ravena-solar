@@ -5,14 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ravena Solar — simulação de energia solar para casas em Sorocaba e região</title>
   <meta name="description" content="Na média dos nossos clientes, a conta de luz cai de 75% a 90%. Para casas com conta acima de R$ 450 em Sorocaba, Votorantim, Itu e Salto. 412 sistemas instalados por equipe própria.">
+  <meta name="theme-color" content="#123A55">
   <link rel="icon" href="material/logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
-  <header class="topo">
-    <div class="wrap">
+  <header class="topo" id="topo">
+    <div class="wrap topo-linha">
       <img class="logo" src="material/logo.svg" alt="Ravena Solar" width="960" height="256">
+      <a class="botao botao-topo" href="#simulacao">Pedir simulação</a>
     </div>
   </header>
 
@@ -20,12 +23,37 @@
 
     <!-- 1. Promessa -->
     <section class="hero">
-      <div class="wrap">
-        <p class="sobretitulo">Energia solar para casas em Sorocaba, Votorantim, Itu e Salto</p>
-        <h1>Na média dos nossos clientes, a conta de luz cai de 75% a 90%.</h1>
-        <p class="hero-texto">O retorno do investimento tem levado de 3 a 4 anos. Fazemos a simulação para casas com conta de luz acima de R$ 450 por mês: abaixo disso a conta não fecha, e nós mesmos desaconselhamos.</p>
-        <a class="botao" href="#simulacao">Pedir simulação</a>
-        <p class="nota-botao">Resposta no mesmo dia útil, por WhatsApp.</p>
+      <div class="wrap hero-grade">
+        <div>
+          <p class="sobretitulo">Energia solar para casas em Sorocaba, Votorantim, Itu e Salto</p>
+          <h1>Na média dos nossos clientes, a conta de luz cai de <span class="destaque-ambar">75% a 90%</span>.</h1>
+          <p class="hero-texto">O retorno do investimento tem levado de 3 a 4 anos. Fazemos a simulação para casas com conta de luz acima de R$ 450 por mês: abaixo disso a conta não fecha, e nós mesmos desaconselhamos.</p>
+          <a class="botao" id="botao-hero" href="#simulacao">Pedir simulação</a>
+          <p class="nota-botao">Resposta no mesmo dia útil, por WhatsApp.</p>
+        </div>
+
+        <!-- A marca da logo (sol e painel), ampliada. Mesma geometria de material/logo.svg. -->
+        <div class="hero-arte" aria-hidden="true">
+          <svg viewBox="30 10 248 198" xmlns="http://www.w3.org/2000/svg">
+            <circle class="arte-sol" cx="132" cy="96" r="46"/>
+            <g class="arte-raios">
+              <line x1="132" y1="22" x2="132" y2="36"/>
+              <line x1="184" y1="44" x2="194" y2="34"/>
+              <line x1="80" y1="44" x2="70" y2="34"/>
+              <line x1="206" y1="96" x2="220" y2="96"/>
+              <line x1="58" y1="96" x2="44" y2="96"/>
+            </g>
+            <path class="arte-painel-base" d="M52 196 L104 118 L212 118 L264 196 Z"/>
+            <path class="arte-painel" d="M52 196 L104 118 L212 118 L264 196 Z"/>
+            <g class="arte-grade">
+              <line x1="88" y1="118" x2="70" y2="196"/>
+              <line x1="122" y1="118" x2="114" y2="196"/>
+              <line x1="158" y1="118" x2="158" y2="196"/>
+              <line x1="194" y1="118" x2="202" y2="196"/>
+              <line x1="92" y1="157" x2="238" y2="157"/>
+            </g>
+          </svg>
+        </div>
       </div>
     </section>
 
@@ -42,11 +70,12 @@
     <!-- 2. Objeção 1: a empresa vai sumir? -->
     <section class="secao">
       <div class="wrap duas-colunas">
-        <div>
+        <div class="coluna-fixa">
+          <p class="rotulo">A pergunta que mais ouvimos</p>
           <h2>“Como sei que vocês não vão sumir daqui a dois anos?”</h2>
-          <p class="apoio">É a pergunta que mais ouvimos, e com razão: a região teve pelo menos três empresas que fecharam deixando obra pela metade.</p>
+          <p class="apoio">Com razão: a região teve pelo menos três empresas que fecharam deixando obra pela metade.</p>
         </div>
-        <div>
+        <div data-revelar>
           <ul class="fatos">
             <li>
               <h3>A equipe que sobe no telhado é nossa</h3>
@@ -65,7 +94,8 @@
               <p>Acompanhamos a produção no primeiro ano e ligamos para você se ela cair fora do previsto.</p>
             </li>
           </ul>
-          <dl class="garantias" aria-label="Garantias">
+          <h3 class="garantias-titulo">Garantias</h3>
+          <dl class="garantias">
             <div><dt>25 anos</dt><dd>de performance do painel</dd></div>
             <div><dt>10 anos</dt><dd>do inversor</dd></div>
             <div><dt>5 anos</dt><dd>da nossa instalação</dd></div>
@@ -77,11 +107,12 @@
     <!-- 3. Objeção 2: telhado -->
     <section class="secao secao-suave">
       <div class="wrap duas-colunas">
-        <div>
+        <div class="coluna-fixa">
+          <p class="rotulo">Sobre o telhado</p>
           <h2>“Isso não vai estragar meu telhado?”</h2>
         </div>
-        <div class="texto">
-          <p><strong>A nossa instalação tem 5 anos de garantia, incluindo qualquer infiltração causada pela obra.</strong></p>
+        <div class="texto" data-revelar>
+          <p class="frase-forte">A nossa instalação tem 5 anos de garantia, incluindo qualquer infiltração causada pela obra.</p>
           <p>O medo de infiltração é o que mais aparece em casa com telha de barro. Por isso, antes de qualquer proposta, fazemos a visita técnica com medição do telhado. A instalação leva dois dias e é feita pela nossa equipe, não por terceiros.</p>
         </div>
       </div>
@@ -90,25 +121,29 @@
     <!-- 4. Objeção 3: Lei 14.300 + caso -->
     <section class="secao">
       <div class="wrap duas-colunas">
-        <div>
+        <div class="coluna-fixa">
+          <p class="rotulo">Sobre a Lei 14.300</p>
           <h2>“Ouvi dizer que taxaram o sol. Ainda vale a pena?”</h2>
         </div>
-        <div class="texto">
-          <p><strong>Continua valendo, mas o cálculo mudou.</strong> Desde a Lei 14.300 existe uma cobrança sobre a energia que o sistema injeta na rede, e ela aumenta ano a ano. É por isso que a simulação é feita com a sua conta, e não com uma tabela.</p>
+        <div class="texto" data-revelar>
+          <p class="frase-forte">Continua valendo, mas o cálculo mudou.</p>
+          <p>Desde a Lei 14.300 existe uma cobrança sobre a energia que o sistema injeta na rede, e ela aumenta ano a ano. É por isso que a simulação é feita com a sua conta, e não com uma tabela.</p>
           <p>A conta de luz não chega a zero: sempre restam a taxa mínima da distribuidora e o custo do fio.</p>
         </div>
       </div>
       <div class="wrap">
-        <div class="caso">
+        <div class="caso" data-revelar>
           <p class="caso-rotulo">Um caso com números conferidos, já com a cobrança em vigor</p>
           <div class="caso-valores">
             <div>
+              <span class="legenda">Conta por mês, antes</span>
               <span class="numero numero-branco">R$ 780</span>
-              <span class="legenda">conta por mês, antes</span>
+              <span class="trilho"><span class="barra barra-antes"></span></span>
             </div>
             <div>
+              <span class="legenda">Conta média dos últimos doze meses</span>
               <span class="numero">R$ 118</span>
-              <span class="legenda">conta média dos últimos doze meses</span>
+              <span class="trilho"><span class="barra barra-depois"></span></span>
             </div>
           </div>
           <p class="caso-detalhe">Casa em Sorocaba, sistema de 6,4 kWp instalado em março de 2025.</p>
@@ -119,27 +154,28 @@
     <!-- 5. Preço, prazo, financiamento -->
     <section class="secao secao-suave">
       <div class="wrap">
+        <p class="rotulo">Preço, prazo e pagamento</p>
         <h2>Quanto custa, quanto demora e como se paga</h2>
-        <div class="tres-colunas">
-          <div class="item">
-            <h3>Investimento</h3>
-            <p class="destaque">R$ 14 mil a R$ 19 mil</p>
+        <div class="tres-colunas" data-revelar>
+          <div class="cartao">
+            <h3 class="cartao-rotulo">Investimento</h3>
+            <p class="destaque">R$&nbsp;14 mil a R$&nbsp;19&nbsp;mil</p>
             <p>É o sistema típico de uma casa: de 5 a 8 kWp, de doze a vinte painéis no telhado. O sistema dura mais de 25 anos.</p>
           </div>
-          <div class="item">
-            <h3>Prazo</h3>
+          <div class="cartao">
+            <h3 class="cartao-rotulo">Prazo</h3>
             <p class="destaque">45 a 60 dias</p>
             <p>Entre a assinatura e o sistema ligado. A instalação leva dois dias; o resto é projeto e homologação na CPFL, que é a parte que não depende de nós.</p>
           </div>
-          <div class="item">
-            <h3>Financiamento</h3>
+          <div class="cartao">
+            <h3 class="cartao-rotulo">Financiamento</h3>
             <p class="destaque">Entrada zero é possível</p>
             <p>Trabalhamos com dois bancos. Na maioria dos casos, a parcela fica próxima do valor que você já paga de luz hoje.</p>
           </div>
         </div>
 
         <h3 class="etapas-titulo">O que acontece depois que você pede a simulação</h3>
-        <ol class="etapas">
+        <ol class="etapas" data-revelar>
           <li>Simulação por WhatsApp</li>
           <li>Visita técnica com medição do telhado</li>
           <li>Proposta com três tamanhos de sistema</li>
@@ -155,17 +191,18 @@
     <!-- 6. Perguntas curtas -->
     <section class="secao">
       <div class="wrap">
+        <p class="rotulo">Para fechar</p>
         <h2>Antes de pedir, três dúvidas rápidas</h2>
-        <dl class="perguntas">
-          <div>
+        <dl class="perguntas" data-revelar>
+          <div class="cartao">
             <dt>“E se eu mudar de casa?”</dt>
             <dd>O sistema valoriza o imóvel e pode ser transferido.</dd>
           </div>
-          <div>
+          <div class="cartao">
             <dt>“E em dia nublado, e à noite?”</dt>
             <dd>Em dia nublado o sistema produz menos; à noite, não produz. O que compensa é o crédito acumulado ao longo do mês.</dd>
           </div>
-          <div>
+          <div class="cartao">
             <dt>“Preciso de bateria?”</dt>
             <dd>Para casa ligada na rede, não. Nós nem vendemos bateria.</dd>
           </div>
@@ -178,8 +215,12 @@
       <div class="wrap duas-colunas">
         <div>
           <h2>Peça a sua simulação</h2>
-          <p class="apoio">São quatro dados. Respondemos no mesmo dia útil, por WhatsApp.</p>
-          <p class="apoio">Se puder, deixe a conta de luz à mão: a foto ou o PDF dela ajuda muito, e você envia na própria conversa.</p>
+          <p class="apoio">São quatro dados. A simulação é feita com a sua conta, não com uma tabela.</p>
+          <ul class="fatos fatos-claros">
+            <li><p>Resposta no mesmo dia útil, por WhatsApp.</p></li>
+            <li><p>Visita técnica ao telhado sem custo e sem compromisso.</p></li>
+            <li><p>Se puder, deixe a conta de luz à mão: a foto ou o PDF dela ajuda muito, e você envia na própria conversa.</p></li>
+          </ul>
         </div>
 
         <form class="formulario" id="form-simulacao" novalidate>
@@ -191,7 +232,7 @@
 
           <div class="campo">
             <label for="whatsapp">WhatsApp, com DDD</label>
-            <input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" required aria-describedby="erro-whatsapp">
+            <input id="whatsapp" name="whatsapp" type="tel" inputmode="tel" autocomplete="tel-national" required aria-describedby="erro-whatsapp">
             <p class="erro" id="erro-whatsapp" hidden></p>
           </div>
 
@@ -215,9 +256,13 @@
           </div>
 
           <div class="campo">
-            <label for="conta">Valor médio da conta de luz, em R$</label>
-            <input id="conta" name="conta" type="text" inputmode="decimal" autocomplete="off" required aria-describedby="ajuda-conta erro-conta">
-            <p class="ajuda" id="ajuda-conta">Use a média dos últimos meses.</p>
+            <label for="conta">Valor médio da conta de luz</label>
+            <div class="com-prefixo">
+              <span class="prefixo" aria-hidden="true">R$</span>
+              <input id="conta" name="conta" type="text" inputmode="decimal" autocomplete="off" required aria-describedby="ajuda-conta erro-conta">
+            </div>
+            <p class="ajuda" id="ajuda-conta">Use a média dos últimos meses, em reais.</p>
+            <p class="confere" id="confere-conta" hidden>Acima de R$ 450: dá para simular.</p>
             <p class="erro" id="erro-conta" hidden></p>
           </div>
 
@@ -235,22 +280,27 @@
 
           <noscript><p class="ajuda">Para pedir a simulação, ative o JavaScript do navegador.</p></noscript>
 
-          <ul class="garantia-envio">
-            <li>Nota 4,8 no Google, com 137 avaliações.</li>
-            <li>Visita técnica ao telhado sem custo e sem compromisso.</li>
-          </ul>
+          <p class="garantia-envio">Nota 4,8 no Google, com 137 avaliações. Visita técnica sem custo e sem compromisso.</p>
         </form>
       </div>
     </section>
 
   </main>
 
-  <footer class="rodape">
-    <div class="wrap">
-      <p><strong>Ravena Solar</strong> · sede em Sorocaba</p>
-      <p>Sistemas fotovoltaicos residenciais conectados à rede. Atendemos Sorocaba, Votorantim, Itu e Salto, num raio de 80 km.</p>
+  <footer class="rodape" id="rodape">
+    <div class="wrap rodape-linha">
+      <img class="logo" src="material/logo.svg" alt="Ravena Solar" width="960" height="256" loading="lazy">
+      <div>
+        <p><strong>Sede em Sorocaba.</strong> Atendemos Sorocaba, Votorantim, Itu e Salto, num raio de 80 km.</p>
+        <p>Sistemas fotovoltaicos residenciais conectados à rede: projeto, homologação, instalação e acompanhamento.</p>
+      </div>
     </div>
   </footer>
+
+  <!-- Só no celular. Leva ao formulário, nunca direto ao WhatsApp. -->
+  <div class="barra-fixa" id="barra-fixa" hidden>
+    <a class="botao" href="#simulacao">Pedir simulação</a>
+  </div>
 
   <script src="script.js"></script>
 </body>

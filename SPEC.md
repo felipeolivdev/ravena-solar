@@ -45,6 +45,14 @@
 
 6. **O tom e o visual seguem o cliente.** Nada de "energia do futuro", "grátis", promessa acima de 90% ou prazo inventado. As cores vêm da logo e o laranja fica só na ação. Os valores ficam no arquivo de design.
 
+7. **O acabamento trabalha para a decisão, não para enfeitar.** Quem compra tem de 35 a 60 anos, pede três orçamentos e tem medo de empresa que some. Página crua parece empresa improvisada; por isso a segunda versão ganhou acabamento, sempre dentro do `DESIGN.md`:
+   - **Primeira tela em azul, com a marca da logo ampliada** e os três números de prova num cartão que avança sobre ela. *Por quê:* a promessa e a prova passam a caber no mesmo olhar, e o botão laranja vira o único ponto quente da tela.
+   - **Botão sempre à mão:** no topo fixo (computador) e numa barra no rodapé da tela (celular), que some quando o formulário aparece. Os dois levam ao formulário, nunca ao WhatsApp, então o filtro dos R$ 450 continua valendo. *Por quê:* a página é longa e a ação é uma só; ela não pode depender de rolar de volta.
+   - **O caso de Sorocaba ganhou duas barras**, com a largura proporcional a R$ 780 e R$ 118. *Por quê:* o cliente "gosta de número"; a barra mostra a queda sem a gente escrever um percentual que o brief não deu.
+   - **As etapas viraram linha do tempo.** *Por quê:* deixa visível que os 45 a 60 dias têm oito passos, e que a obra em si são dois dias.
+   - **O formulário responde enquanto a pessoa preenche:** máscara no WhatsApp, "R$" fixo no campo da conta, erro ao sair do campo e o aviso dos R$ 450 já ao sair do campo da conta. *Por quê:* quem tem conta de R$ 200 descobre antes de terminar de preencher, e quem pode comprar não tropeça em formato.
+   - **Entrada suave das seções ao rolar**, desligada para quem pede menos movimento no sistema, e sem esconder nada se o JavaScript falhar.
+
 ## Parte 2 — O que fica de fora
 
 | Corte | Motivo |
@@ -61,6 +69,10 @@
 | Fotos e vídeos | Não vieram no material. Entram quando chegarem, sem placeholder. |
 | Endereço completo e CNPJ | Não estão no brief. A página diz "sede em Sorocaba". |
 | Link para as avaliações do Google | O endereço não veio. A nota aparece como texto. |
+| Números que "contam" até o valor, carrossel, vídeo de fundo | Movimento que atrasa a leitura do número. O público quer o dado, não o efeito. |
+| Foto de banco de imagens e ilustração de família feliz | Não é obra da Ravena. A única imagem é a marca da própria logo. |
+| "Leva menos de um minuto" e frases parecidas no formulário | Seria um número que o brief não deu. |
+| Estrelas desenhadas para a nota 4,8 | Cinco estrelas cheias diriam 5,0. A nota aparece como número. |
 | Fonte Poppins, gradientes e cards com ícone do site de 2021 | O visual antigo é o da página que "quase não traz cliente". A fonte passa a ser a da própria logo. |
 
 **Pendente com o cliente:** WhatsApp real, fotos e vídeos, link do Google, endereço e CNPJ.

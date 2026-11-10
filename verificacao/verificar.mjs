@@ -44,8 +44,9 @@ const CORES_DA_LOGO = [...new Set(
 
 const navegador = await chromium.launch({ channel: 'msedge' });
 
-async function abrir(largura, altura) {
-  const contexto = await navegador.newContext({ viewport: { width: largura, height: altura }, deviceScaleFactor: 1 });
+// As capturas e medições usam "menos movimento", para pegar a página já assentada.
+async function abrir(largura, altura, opcoes = {}) {
+  const contexto = await navegador.newContext({ viewport: { width: largura, height: altura }, deviceScaleFactor: 1, reducedMotion: 'reduce', ...opcoes });
   // Captura o link que a página tentaria abrir, sem abrir o WhatsApp de verdade.
   await contexto.addInitScript(() => {
     window.__abertos = [];
@@ -85,8 +86,20 @@ const estilo = (pagina, seletor, prop) => pagina.evaluate(([s, p]) => getCompute
 conferir(await estilo(celular, '.botao', 'backgroundColor') === rgb('#E8721C'), 'Fundo do botão é #E8721C');
 conferir(await estilo(celular, '.botao', 'color') === rgb('#123A55'), 'Texto do botão é #123A55');
 conferir(await estilo(celular, 'body', 'color') === rgb('#123A55'), 'Texto da página é #123A55');
-conferir(await estilo(celular, '.prova', 'backgroundColor') === rgb('#123A55'), 'Faixa de prova tem fundo #123A55');
-conferir(await estilo(celular, '.prova .numero', 'color') === rgb('#F2A03D'), 'Número da faixa de prova é #F2A03D');
+conferir(await estilo(celular, '.hero', 'backgroundColor') === rgb('#123A55'), 'Primeira tela tem fundo #123A55');
+conferir(await estilo(celular, 'h1', 'color') === rgb('#FFFFFF'), 'Promessa em #FFFFFF sobre o azul');
+conferir(await estilo(celular, '.destaque-ambar', 'color') === rgb('#F2A03D'), 'Intervalo "75% a 90%" em #F2A03D');
+conferir(await estilo(celular, '.prova-lista', 'backgroundColor') === rgb('#FFFFFF'), 'Cartão de prova tem fundo #FFFFFF');
+conferir(await estilo(celular, '.prova .numero', 'color') === rgb('#123A55'), 'Número do cartão de prova é #123A55 (âmbar não é texto sobre branco)');
+conferir(await estilo(celular, '.caso .numero:not(.numero-branco)', 'color') === rgb('#F2A03D'), 'Valor de depois, no caso, em #F2A03D sobre azul');
+conferir(await estilo(celular, '.prova-lista', 'borderTopLeftRadius') === '12px', 'Cartão com canto de 12px', await estilo(celular, '.prova-lista', 'borderTopLeftRadius'));
+const trilho = await celular.locator('.barra-antes').boundingBox();
+const depois = await celular.locator('.barra-depois').boundingBox();
+conferir(Math.abs(depois.width / trilho.width - 118 / 780) < 0.01, 'Barras do caso na proporção de R$ 118 para R$ 780', `${Math.round(depois.width)}px de ${Math.round(trilho.width)}px`);
+const ambarEmBranco = await celular.evaluate((cor) => [...document.querySelectorAll('body *')]
+  .filter(e => getComputedStyle(e).color === cor && e.textContent.trim() && !e.closest('.hero, .secao-azul, .caso'))
+  .map(e => e.tagName.toLowerCase() + '.' + e.className), rgb('#F2A03D'));
+conferir(ambarEmBranco.length === 0, 'Nenhum texto âmbar fora de fundo azul', ambarEmBranco.join(', '));
 conferir(await estilo(celular, 'h1', 'fontSize') === '34px', 'h1 tem 34px no celular', await estilo(celular, 'h1', 'fontSize'));
 conferir(await estilo(computador, 'h1', 'fontSize') === '56px', 'h1 tem 56px no computador', await estilo(computador, 'h1', 'fontSize'));
 const familias = await celular.evaluate(() => [...new Set([...document.querySelectorAll('body *')].map(e => getComputedStyle(e).fontFamily))]);
@@ -104,6 +117,34 @@ if (!noAr) {
   conferir(!/gradient/i.test(css), 'Nenhum gradiente no styles.css');
   conferir(!/1d8f7e|0d2c42|155a7a|poppins/i.test(css + readFileSync(path.join(raiz, 'index.html'), 'utf8')), 'Nenhuma cor ou fonte do site de 2021');
 }
+
+// ---------- Mecânica: topo fixo, barra do celular, sem JavaScript
+titulo('Mecânica');
+conferir(!(await celular.locator('#barra-fixa').evaluate(e => e.classList.contains('ativa'))), 'Celular, primeira tela: a barra de ação fica escondida (o botão já está à vista)');
+await celular.locator('.caso').scrollIntoViewIfNeeded();
+await celular.waitForFunction(() => document.getElementById('barra-fixa').classList.contains('ativa'));
+conferir(true, 'Celular, meio da página: a barra de ação aparece');
+conferir((await celular.evaluate(() => getComputedStyle(document.getElementById('topo')).position)) === 'sticky'
+  && (await celular.locator('#topo').boundingBox()).y === 0, 'O topo com a logo fica preso no alto ao rolar');
+await celular.screenshot({ path: path.join(aqui, `celular-390-meio-barra-de-acao${sufixo}.png`) });
+await celular.locator('#simulacao').scrollIntoViewIfNeeded();
+await celular.waitForFunction(() => !document.getElementById('barra-fixa').classList.contains('ativa'));
+conferir(true, 'Celular, formulário à vista: a barra de ação some');
+await celular.evaluate(() => window.scrollTo(0, 0));
+conferir(await computador.locator('.botao-topo').isVisible() && !(await computador.locator('#barra-fixa').isVisible()), 'Computador: botão no topo fixo, sem barra no pé');
+conferir(await computador.locator('.hero-arte svg').isVisible(), 'Computador: a marca da logo aparece ampliada na primeira tela');
+
+const comMovimento = await abrir(390, 844, { reducedMotion: 'no-preference' });
+const altura = await comMovimento.evaluate(() => document.documentElement.scrollHeight);
+for (let y = 0; y < altura; y += 500) { await comMovimento.evaluate((v) => window.scrollTo(0, v), y); await comMovimento.waitForTimeout(120); }
+await comMovimento.waitForTimeout(900);
+const escondidos = await comMovimento.evaluate(() => [...document.querySelectorAll('[data-revelar]')].filter(e => getComputedStyle(e).opacity !== '1').length);
+conferir(escondidos === 0, 'Com movimento ligado, toda seção termina visível depois de rolar a página', `ainda escondidas: ${escondidos}`);
+
+const semJs = await abrir(390, 844, { javaScriptEnabled: false });
+const escondidosSemJs = await semJs.locator('[data-revelar]').evaluateAll(els => els.filter(e => getComputedStyle(e).opacity !== '1').length);
+conferir(escondidosSemJs === 0, 'Sem JavaScript, todo o conteúdo nasce visível');
+conferir(await semJs.locator('noscript').count() === 1 && !(await semJs.locator('#barra-fixa').isVisible()), 'Sem JavaScript, o formulário avisa que precisa dele e não há atalho de envio');
 
 // ---------- 3. Texto: tom e números
 titulo('Texto (tom e origem dos números)');
@@ -123,6 +164,7 @@ for (const n of numeros) linhas.push(`  ${n.padEnd(7)} ${NUMEROS_DO_BRIEF[n] || 
 
 // ---------- 4. Ação única e filtro de R$ 450
 titulo('Ação única e caminhos até o WhatsApp');
+await celular.reload();
 const links = await celular.evaluate(() => [...document.querySelectorAll('a')].map(a => a.getAttribute('href')));
 conferir(links.every(h => h === '#simulacao'), 'Todo link da página leva ao formulário', links.join(', '));
 const html = await celular.content();
@@ -183,6 +225,19 @@ conferir(texto2.abertos.length === 0, 'Conta sem número: não envia', texto2.er
 await celular.reload();
 await celular.selectOption('#cidade', 'outra');
 conferir(await celular.locator('#outra-cidade').isVisible(), '"Outra cidade" mostra o campo para o nome da cidade');
+
+// Resposta enquanto a pessoa preenche
+await celular.reload();
+await celular.locator('#whatsapp').pressSequentially('15912345678');
+conferir(await celular.inputValue('#whatsapp') === '(15) 91234-5678', 'Máscara do WhatsApp: 15912345678 vira (15) 91234-5678', await celular.inputValue('#whatsapp'));
+await celular.locator('#conta').pressSequentially('R$ 780 reais');
+conferir(await celular.inputValue('#conta') === '780', 'Campo da conta só aceita número', await celular.inputValue('#conta'));
+conferir(await celular.locator('#confere-conta').isVisible(), 'Conta de 780: mostra "dá para simular" ao digitar');
+await celular.fill('#conta', '200');
+await celular.locator('#nome').focus();
+conferir(await celular.locator('#aviso-bloqueio').isVisible() && !(await celular.locator('#confere-conta').isVisible()), 'Conta de 200: o aviso dos R$ 450 aparece ao sair do campo, antes de enviar');
+await celular.fill('#conta', '600');
+conferir(!(await celular.locator('#aviso-bloqueio').isVisible()), 'Corrigindo para 600, o aviso some');
 
 // Teclado: Enter dentro do campo também passa pelo filtro.
 await celular.reload();
