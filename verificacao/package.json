@@ -1,0 +1,12 @@
+{
+  "name": "ravena-solar-verificacao",
+  "version": "1.0.0",
+  "description": "Verificação da página",
+  "scripts": {
+    "test": "node verificar.mjs"
+  },
+  "private": true,
+  "devDependencies": {
+    "playwright-core": "^1.65.0"
+  }
+}
