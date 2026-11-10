@@ -11,6 +11,7 @@
   --branco-suave: rgb(255 255 255 / 0.80);
   --linha-clara: rgb(255 255 255 / 0.24);
   --sombra: 0 10px 30px rgb(18 58 85 / 0.14);
+  --textura: 0.06;
 
   --fonte: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
@@ -240,6 +241,21 @@ p { max-width: var(--medida); }
 .secao { padding-block: var(--secao); }
 .secao-suave { background: var(--fundo-suave); }
 .secao-azul { background: var(--azul); color: var(--branco); }
+
+/* Textura do painel: a grade das células do painel da logo, só sobre azul.
+   Máscara SVG (não gradiente); a cor é sempre --branco. */
+.hero, .secao-azul { position: relative; isolation: isolate; }
+.hero::before, .secao-azul::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--branco);
+  opacity: var(--textura);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='48'%3E%3Cpath d='M0 .5H72M.5 0V48' stroke='black' fill='none'/%3E%3C/svg%3E") 0 0 / 72px 48px repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='48'%3E%3Cpath d='M0 .5H72M.5 0V48' stroke='black' fill='none'/%3E%3C/svg%3E") 0 0 / 72px 48px repeat;
+  pointer-events: none;
+}
 
 .duas-colunas { display: grid; gap: var(--e-5); }
 .rotulo {
