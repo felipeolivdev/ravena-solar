@@ -2,6 +2,8 @@
 
 Página única para o dono de casa de Sorocaba e região pedir uma simulação de energia solar. Prática P1 da 202; o cliente é fictício.
 
+**No ar:** https://ravena-solar-lp.vercel.app/ (Vercel, publicada a partir da `main`)
+
 ## Onde está cada coisa
 
 | Arquivo | O que é |

@@ -1,0 +1,90 @@
+# Verificação — 2026-11-10 02:05 UTC
+Alvo: https://ravena-solar-lp.vercel.app/
+
+## Layout
+OK     Em 390px não há rolagem horizontal  ->  largura do documento: 390px
+OK     Em 390px nenhum elemento passa da borda direita
+OK     Em 390x844 o botão aparece sem rolar  ->  base do botão em 534px
+OK     Em 1440px não há rolagem horizontal  ->  largura do documento: 1440px
+
+## Design (valores renderizados x DESIGN.md)
+OK     Fundo do botão é #E8721C
+OK     Texto do botão é #123A55
+OK     Texto da página é #123A55
+OK     Faixa de prova tem fundo #123A55
+OK     Número da faixa de prova é #F2A03D
+OK     h1 tem 34px no celular  ->  34px
+OK     h1 tem 56px no computador  ->  56px
+OK     Uma família de fonte só, a da logo  ->  "Helvetica Neue", Helvetica, Arial, sans-serif
+OK     O laranja só aparece nos botões  ->  a.botao, button.botao
+
+## Texto (tom e origem dos números)
+OK     Não contém "futuro"
+OK     Não contém "sustentab"
+OK     Não contém "revoluç"
+OK     Não contém "grátis"
+OK     Não contém "gratuito"
+OK     Não contém "95%"
+OK     Não contém "zera"
+OK     Não contém "+300"
+OK     Não contém "indústria"
+OK     Não contém "manutenção"
+OK     Não contém "missão"
+OK     Não contém "99000-0000"
+OK     Todo número da página tem origem no brief
+
+Número na página -> trecho do brief
+  75      conta cai entre 75% e 90%
+  90      conta cai entre 75% e 90%
+  3       retorno de três a quatro anos
+  4       retorno de três a quatro anos
+  450     conta acima de R$ 450
+  412     412 sistemas residenciais
+  4,8     nota 4,8 no Google
+  137     137 avaliações
+  6       seis anos de empresa
+  25      25 anos de performance / dura mais de 25
+  10      10 anos do inversor
+  5       5 anos da instalação / 5 a 8 kWp
+  14.300  Lei 14.300
+  780     conta de R$ 780
+  118     conta média de R$ 118
+  6,4     sistema de 6,4 kWp
+  2025    instalado em março de 2025
+  14      R$ 14 mil a R$ 19 mil
+  19      R$ 14 mil a R$ 19 mil
+  8       5 a 8 kWp
+  45      de 45 a 60 dias
+  60      de 45 a 60 dias
+  80      raio de 80 km
+
+## Ação única e caminhos até o WhatsApp
+OK     Todo link da página leva ao formulário  ->  #simulacao
+OK     Nenhum link de WhatsApp ou telefone no HTML
+OK     O formulário não tem action (sem JavaScript, nada é enviado)
+
+## Formulário: bloqueio abaixo de R$ 450 e envio a partir disso
+OK     Conta "200": bloqueia, mostra o aviso e não abre o WhatsApp  ->  links abertos: 0
+       aviso exibido: "Com conta abaixo de R$ 450 por mês, o investimento não fecha. Nós mesmos desaconselhamos, e por isso não seguimos com a simulação. Se a média da sua conta passar desse valor, é só voltar aqui."
+OK     Conta "449": bloqueia, mostra o aviso e não abre o WhatsApp  ->  links abertos: 0
+OK     Conta "449,99": bloqueia, mostra o aviso e não abre o WhatsApp  ->  links abertos: 0
+OK     Conta "R$ 300,00": bloqueia, mostra o aviso e não abre o WhatsApp  ->  links abertos: 0
+OK     Conta "450": envia e abre um link do WhatsApp  ->  https://wa.me/?text=%5BSimula%C3%A7%C3%A3o%20site%5D%0ANome%…
+OK     Conta "450": a mensagem começa com [Simulação site]
+OK     Conta "780": envia e abre um link do WhatsApp  ->  https://wa.me/?text=%5BSimula%C3%A7%C3%A3o%20site%5D%0ANome%…
+OK     Conta "780": a mensagem começa com [Simulação site]
+OK     Conta "R$ 1.200,50": envia e abre um link do WhatsApp  ->  https://wa.me/?text=%5BSimula%C3%A7%C3%A3o%20site%5D%0ANome%…
+OK     Conta "R$ 1.200,50": a mensagem começa com [Simulação site]
+
+Mensagem gerada para a conta de R$ 780:
+  | [Simulação site]
+  | Nome: Marta Teste
+  | WhatsApp: (15) 91234-5678
+  | Cidade: Sorocaba
+  | Conta média de luz: R$ 780
+OK     Formulário vazio: quatro erros e nenhum link aberto  ->  Informe o seu nome. / Informe o WhatsApp com DDD. / Escolha a cidade. / Informe o valor médio da conta, em reais.
+OK     Conta sem número: não envia  ->  Informe o valor médio da conta, em reais.
+OK     "Outra cidade" mostra o campo para o nome da cidade
+OK     Enter no campo com conta de R$ 200: também bloqueia
+
+RESULTADO: tudo conferido, nenhuma falha.
