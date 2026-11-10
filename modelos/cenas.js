@@ -1,8 +1,8 @@
-// Os três modelos: corte do telhado, crédito (dia e noite) e maquete do raio.
+// Os modelos: corte do telhado e crédito (dia e noite).
 // Cada função devolve { cena, camera, pontos }: pontos são as âncoras da camada de texto.
 import {
   THREE, AZUL, AMBAR, BRANCO, mistura, tons, novaCena, solido, linha, segmentos,
-  cameraIso, cameraPlanta, projetar,
+  cameraIso, projetar,
 } from './comum.js';
 
 const V = (x, y, z) => new THREE.Vector3(x, y, z);
@@ -129,51 +129,5 @@ export function credito(momento) {
   molde.add(solido(new THREE.SphereGeometry(9, 8, 8).translate(...CEU), tBranco, { semContorno: true }));
   const camera = cameraIso(V(0.95, 0.9, 1.35), molde, W, H, [6, 6, 328, 182]);
   const pontos = { rede: projetar(camera, [62, -3, 34]) };
-  return { cena, camera, pontos };
-}
-
-/* ---------- Maquete do raio de atendimento ---------- */
-// Chão nas coordenadas do desenho da quarta versão: 1,5px por km na visão geral (Sorocaba em 150,150)
-// e 5px por km no quadro ampliado (Sorocaba em 370,225). Altura em unidades do desenho.
-export const MAQUETE = {
-  placa: 4,
-  geral: { centro: [150, 150], raio: 120, cidades: { Votorantim: [152.3, 157.2], Itu: [173.4, 110.4], Salto: [175.4, 99.9] }, pino: 4, sede: 6 },
-  ampliado: { caixa: [340, 35, 250, 230], cidades: { Salto: [454.5, 58], Itu: [448, 93], Votorantim: [377.5, 249] }, sedeEm: [370, 225], pino: 10, sede: 12 },
-};
-
-export function maquete(caixaDesenho) {
-  const cena = novaCena();
-  const planta = { luz: V(-0.5, 0, 1), sombra: V(1, 0, 0.3), limiarTopo: 0.5 };
-  const placa = (topo) => ({ topo: mistura(AZUL, BRANCO, topo), luz: mistura(AZUL, BRANCO, topo + 0.10), sombra: mistura(AZUL, BRANCO, topo + 0.06) });
-  const borda = '#' + mistura(AZUL, BRANCO, 0.24).getHexString();
-  const { placa: P, geral: G, ampliado: A } = MAQUETE;
-
-  const [cx, cz] = G.centro;
-  cena.add(solido(new THREE.CylinderGeometry(G.raio, G.raio, P, 128).translate(cx, P / 2, cz), placa(0.06), { ...planta, contorno: borda, largura: 1, limiarAresta: 60 }));
-
-  const [bx, bz, bw, bh] = A.caixa;
-  const r = 6, s = new THREE.Shape();
-  s.moveTo(bx + r, bz); s.lineTo(bx + bw - r, bz); s.quadraticCurveTo(bx + bw, bz, bx + bw, bz + r);
-  s.lineTo(bx + bw, bz + bh - r); s.quadraticCurveTo(bx + bw, bz + bh, bx + bw - r, bz + bh);
-  s.lineTo(bx + r, bz + bh); s.quadraticCurveTo(bx, bz + bh, bx, bz + bh - r);
-  s.lineTo(bx, bz + r); s.quadraticCurveTo(bx, bz, bx + r, bz);
-  const quadro = new THREE.ExtrudeGeometry(s, { depth: P, bevelEnabled: false, curveSegments: 6 }).rotateX(Math.PI / 2).translate(0, P, 0);
-  cena.add(solido(quadro, placa(0.10), { ...planta, contorno: borda, largura: 1, limiarAresta: 60 }));
-
-  const pino = (x, z, raio, altura, cor) => cena.add(solido(
-    new THREE.CylinderGeometry(raio, raio, altura, 40).translate(x, P + altura / 2, z), tons(cor),
-    { ...planta, contorno: AZUL, largura: raio < 3 ? 0.75 : 1.25, limiarAresta: 60 }));
-  for (const [x, z] of Object.values(G.cidades)) pino(x, z, 2.5, G.pino, BRANCO);
-  pino(cx, cz, 4, G.sede, AMBAR);
-  for (const [x, z] of Object.values(A.cidades)) pino(x, z, 5, A.pino, BRANCO);
-  pino(...A.sedeEm, 8, A.sede, AMBAR);
-
-  const camera = cameraPlanta(caixaDesenho, 1);
-  const pontos = {};
-  for (const [nome, [x, z]] of Object.entries(A.cidades)) pontos[nome] = projetar(camera, [x, P + A.pino, z]);
-  pontos.Sorocaba = projetar(camera, [A.sedeEm[0], P + A.sede, A.sedeEm[1]]);
-  for (const [nome, [x, z]] of Object.entries(G.cidades)) pontos['geral-' + nome] = projetar(camera, [x, P + G.pino, z]);
-  pontos['geral-Sorocaba'] = projetar(camera, [cx, P + G.sede, cz]);
-  pontos.placa = projetar(camera, [cx, P, cz]);
   return { cena, camera, pontos };
 }

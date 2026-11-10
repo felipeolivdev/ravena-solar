@@ -334,10 +334,10 @@ const diagramasVisiveis = (pagina) => pagina.evaluate(() => [...document.querySe
     const img = f.querySelector('.render img'); const r = img.getBoundingClientRect();
     return { classe: f.className, legenda: !!f.querySelector('figcaption').textContent.trim(), rotulo: !!img.getAttribute('alt').trim() && img.complete && img.naturalWidth > 0, altura: r.height };
   }));
-for (const [pagina, nome, classeMapa] of [[celular, 'celular', 'mapa-compacto'], [computador, 'computador', 'diagrama-mapa']]) {
+for (const [pagina, nome] of [[celular, 'celular'], [computador, 'computador']]) {
   const d = await diagramasVisiveis(pagina);
-  conferir(d.length === 4 && d.every(x => x.legenda && x.rotulo && x.altura > 50) && d.some(x => x.classe.includes(classeMapa)),
-    `${nome}: os quatro modelos 3D (telhado, crédito de dia e de noite, mapa) carregam e aparecem, com legenda e texto alternativo`, d.map(x => Math.round(x.altura)).join(' / '));
+  conferir(d.length === 3 && d.every(x => x.legenda && x.rotulo && x.altura > 50),
+    `${nome}: os três modelos 3D (telhado, crédito de dia e de noite) carregam e aparecem, com legenda e texto alternativo`, d.map(x => Math.round(x.altura)).join(' / '));
 }
 const coresSvg = await celular.evaluate(() => {
   const s = new Set();
@@ -347,7 +347,7 @@ const coresSvg = await celular.evaluate(() => {
 const permitidas = ['#123A55', '#F2A03D', '#FFFFFF'].map(rgb).concat(['rgba(18, 58, 85, 0.76)', 'rgba(18, 58, 85, 0.18)', 'rgba(18, 58, 85, 0.05)', 'rgba(255, 255, 255, 0.8)', 'rgba(255, 255, 255, 0.24)']);
 conferir(coresSvg.every(c => permitidas.includes(c)), 'Camada de texto dos diagramas só com cores da logo (e sem laranja, que é só da ação)', coresSvg.join(' | '));
 await semJs.waitForFunction(() => [...document.querySelectorAll('.render img')].every(i => i.complete));
-conferir(await semJs.locator('figure.diagrama:not(.so-computador) .render img').evaluateAll(els => els.every(e => e.naturalWidth > 0 && e.getBoundingClientRect().height > 50)), 'Sem JavaScript, os modelos 3D aparecem');
+conferir(await semJs.locator('figure.diagrama .render img').evaluateAll(els => els.every(e => e.naturalWidth > 0 && e.getBoundingClientRect().height > 50)), 'Sem JavaScript, os modelos 3D aparecem');
 
 titulo('Modelos 3D (assets/3d)');
 // Cada imagem: só as cores da logo e os tons do DESIGN.md ("Modelos 3D"), em 2x, dentro do peso.
@@ -358,9 +358,9 @@ if (!noAr) {
   const tres = (c) => c === AZ ? [mix(AZ, BR, 0.14), mix(AZ, BR, 0.06), AZ] : [c, mix(c, AZ, 0.16), mix(c, AZ, 0.32)];
   const madeira = mix(BR, AZ, 0.10);
   const paleta = [...tres(AZ), ...tres(AM), ...tres(BR), ...tres(madeira),
-    ...[0.06, 0.10, 0.12, 0.14, 0.16, 0.20, 0.24].map(t => mix(AZ, BR, t))];
+  ];
   const pontosDoModelo = JSON.parse(readFileSync(path.join(raiz, 'modelos/pontos.json'), 'utf8'));
-  for (const nome of ['telhado', 'credito-dia', 'credito-noite', 'mapa', 'mapa-compacto']) {
+  for (const nome of ['telhado', 'credito-dia', 'credito-noite']) {
     const arquivo = path.join(raiz, 'assets/3d', `${nome}.png`);
     const bytes = readFileSync(arquivo);
     const r = await celular.evaluate(async ([dados, pal]) => {
@@ -403,79 +403,13 @@ if (!noAr) {
       `${(r.tom / r.opacos * 100).toFixed(1)}% tons da paleta, ${((naPaleta - r.tom / r.opacos) * 100).toFixed(1)}% borda entre dois tons, ${(r.fora / r.opacos * 100).toFixed(2)}% fora`);
     conferir(r.largura === w * 2 && r.altura === h * 2 && bytes.length <= 120 * 1024, `${nome}.png: em 2x (${w * 2}x${h * 2}) e com até 120 KB`, `${r.largura}x${r.altura}, ${Math.round(bytes.length / 1024)} KB`);
   }
-  // A camada de texto do mapa fica exatamente sobre os pinos do modelo.
-  const desvios = await computador.evaluate((pts) => {
-    const saida = [];
-    for (const [sel, nome] of [['.diagrama-mapa', 'mapa'], ['.mapa-compacto', 'mapa-compacto']]) {
-      for (const g of document.querySelectorAll(`${sel} .m-local`)) {
-        const p = pts[nome].pontos[g.dataset.cidade];
-        const a = g.querySelector('.m-anel');
-        saida.push(Math.hypot(parseFloat(a.getAttribute('cx')) - p[0], parseFloat(a.getAttribute('cy')) - p[1]));
-      }
-    }
-    for (const c of document.querySelectorAll('.diagrama-mapa [data-cidade-geral]')) {
-      const p = pts.mapa.pontos['geral-' + c.dataset.cidadeGeral];
-      saida.push(Math.hypot(parseFloat(c.getAttribute('cx')) - p[0], parseFloat(c.getAttribute('cy')) - p[1]));
-    }
-    return saida;
-  }, pontosDoModelo);
-  conferir(desvios.length === 12 && desvios.every(d => d < 0.6), 'Mapa: anéis e pontos da camada de texto caem sobre o topo dos pinos do modelo', `maior desvio: ${Math.max(...desvios).toFixed(2)} unidades`);
 }
 
-titulo('Mapa do raio');
-// Proporção: no quadro ampliado, cada cidade fica na mesma direção e a 5/1,5 da distância da visão geral.
-const proporcoes = await computador.evaluate(() => {
-  // Posição no chão da maquete (data-chao), antes de o pino subir na projeção.
-  const ponto = (sel) => document.querySelector(sel).dataset.chao.split(' ').map(Number);
-  const geralSede = ponto('.diagrama-mapa [data-cidade-geral="Sorocaba"]');
-  const lupaSede = ponto('.diagrama-mapa [data-cidade="Sorocaba"]');
-  return ['Votorantim', 'Itu', 'Salto'].map(c => {
-    const g = ponto(`.diagrama-mapa [data-cidade-geral="${c}"]`), l = ponto(`.diagrama-mapa [data-cidade="${c}"]`);
-    return [c, (l[0] - lupaSede[0]) / (g[0] - geralSede[0]), (l[1] - lupaSede[1]) / (g[1] - geralSede[1])];
-  });
-});
-conferir(proporcoes.every(([, x, y]) => Math.abs(x - 5 / 1.5) < 0.1 && Math.abs(y - 5 / 1.5) < 0.1),
-  'Quadro ampliado mantém as posições da visão geral (escala 5 para 1,5)', proporcoes.map(([c, x, y]) => `${c} ${x.toFixed(2)}/${y.toFixed(2)}`).join(', '));
-const iguais = await celular.evaluate(() => {
-  const pos = (m) => [...document.querySelectorAll(`${m} .m-local`)].map(g => g.dataset.cidade + g.querySelector('circle:not(.m-anel)').getAttribute('cx')).join();
-  return pos('.mapa-compacto') === pos('.diagrama-mapa');
-});
-conferir(iguais, 'O mapa do celular e o do computador têm as mesmas posições');
-conferir(await celular.locator('.mapa-compacto').isVisible() && !(await celular.locator('.diagrama-mapa').isVisible()), 'Celular: o mapa fica no fim do formulário, só com o quadro ampliado');
-conferir(await computador.locator('.diagrama-mapa').isVisible() && !(await computador.locator('.mapa-compacto').isVisible()), 'Computador: o mapa fica na coluna da esquerda, com as duas escalas');
-const caixa = (sel) => celular.locator(sel).boundingBox();
-const [campoCidade, campoConta, botaoForm, mapaCel] = await Promise.all(['#cidade', '#conta', '#form-simulacao .botao', '.mapa-compacto'].map(caixa));
-conferir(mapaCel.y > botaoForm.y + botaoForm.height, 'Celular: o mapa fica depois do botão do formulário');
-conferir(campoConta.y - (campoCidade.y + campoCidade.height) < 120, 'Celular: nada de grande entre o campo "Cidade" e o da conta', `${Math.round(campoConta.y - (campoCidade.y + campoCidade.height))}px`);
-
-for (const pagina of [celular, computador]) await pagina.reload();
-const estadoMapa = (pagina, sel) => pagina.evaluate((s) => ({
-  escolhidas: [...document.querySelectorAll(`${s} .m-local.escolhida`)].map(g => g.dataset.cidade),
-  outra: document.querySelector(`${s} .mapa`).classList.contains('outra-escolhida'),
-  anel: (() => { const a = document.querySelector(`${s} .m-local.escolhida .m-anel`); return a ? getComputedStyle(a).opacity : null; })(),
-}), sel);
-for (const cidade of ['Sorocaba', 'Votorantim', 'Itu', 'Salto']) {
-  await celular.selectOption('#cidade', { label: cidade });
-  await computador.selectOption('#cidade', { label: cidade });
-  const c = await estadoMapa(celular, '.mapa-compacto'), pc = await estadoMapa(computador, '.diagrama-mapa');
-  conferir(c.escolhidas.join() === cidade && pc.escolhidas.join() === cidade && !c.outra && c.anel === '1',
-    `Escolher ${cidade} no formulário marca só ${cidade} no mapa (celular e computador)`);
-  if (cidade === 'Itu') {
-    await celular.locator('.mapa-compacto').scrollIntoViewIfNeeded();
-    await celular.screenshot({ path: path.join(aqui, `celular-390-mapa-cidade-itu${sufixo}.png`) });
-    await computador.evaluate(() => document.querySelectorAll('[data-revelar]').forEach(e => e.classList.add('visivel')));
-    await computador.evaluate(() => document.querySelector('.diagrama-mapa').scrollIntoView({ block: 'center' }));
-    await computador.screenshot({ path: path.join(aqui, `computador-1440-mapa-cidade-itu${sufixo}.png`) });
-  }
+titulo('Sem mapa (sexta versão)');
+for (const [pagina, nome] of [[celular, 'celular'], [computador, 'computador']]) {
+  conferir(await pagina.locator('.mapa, .diagrama-mapa, .mapa-compacto, [data-cidade]').count() === 0, `${nome}: o mapa do raio saiu da página`);
 }
-await celular.selectOption('#cidade', 'outra');
-const outra = await estadoMapa(celular, '.mapa-compacto');
-conferir(outra.outra && outra.escolhidas.length === 0, '"Outra cidade" acende o raio e não marca nenhuma das quatro');
-await celular.selectOption('#cidade', '');
-const nenhuma = await estadoMapa(celular, '.mapa-compacto');
-conferir(!nenhuma.outra && nenhuma.escolhidas.length === 0, 'Sem cidade escolhida, o mapa fica sem destaque');
-const ambarNome = await computador.evaluate(() => { const t = document.querySelector('.diagrama-mapa .m-local.escolhida text'); return t ? getComputedStyle(t).fill : ''; });
-conferir(ambarNome === '' || ambarNome === 'rgb(242, 160, 61)', 'Nome da cidade escolhida em âmbar, sobre o azul do mapa');
+conferir((await celular.locator('#cidade option').allInnerTexts()).includes('Outra cidade a até 80 km de Sorocaba'), 'O campo "Cidade" continua dizendo o raio de 80 km');
 
 await computador.evaluate(() => document.querySelectorAll('[data-revelar]').forEach(e => e.classList.add('visivel')));
 for (const [seletor, nome] of [['.diagrama-telhado', 'telhado'], ['.credito', 'credito'], ['.caso-acao', 'caso-acao'], ['.retorno', 'retorno']]) {

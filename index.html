@@ -305,38 +305,6 @@
             <li><p>Visita técnica ao telhado sem custo e sem compromisso.</p></li>
             <li><p>Se puder, deixe a conta de luz à mão: a foto ou o PDF dela ajuda muito, e você envia na própria conversa.</p></li>
           </ul>
-
-          <!-- Raio de atendimento: maquete 3D (assets/3d, modelos/cenas.js) em duas escalas, com texto e destaques por cima.
-               Chão: 1,5px por km na visão geral, 5px por km no quadro ampliado. data-chao = posição no chão;
-               cx/cy = topo do pino na imagem (projeção oblíqua de planta: sobe 1 unidade por unidade de altura). -->
-          <figure class="diagrama diagrama-mapa so-computador">
-            <div class="render">
-              <img src="assets/3d/mapa.png" width="580" height="260" decoding="async" alt="Maquete do raio de atendimento: à esquerda, o disco de 80 km em volta de Sorocaba; à direita, a região de Sorocaba, Votorantim, Itu e Salto, ampliada.">
-              <svg class="mapa render-texto" viewBox="20 20 580 260" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
-              <g transform="translate(0 -4)">
-                <circle class="m-area" cx="150" cy="150" r="120"/>
-                <circle class="m-anel-interno" cx="150" cy="150" r="80"/>
-                <circle class="m-anel-interno" cx="150" cy="150" r="40"/>
-                <line class="m-escala" x1="143" y1="150" x2="30" y2="150"/>
-                <path class="m-escala" d="M30 144 V156"/>
-                <text class="m-escala-texto" x="86" y="140" text-anchor="middle">80 km</text>
-                <rect class="m-recorte" x="141" y="88" width="75" height="74" rx="3"/>
-              </g>
-              <path class="m-ligacao" d="M216 84 L340 31 M216 158 L340 261"/>
-              <circle class="m-ponto-geral" data-cidade-geral="Votorantim" data-chao="152.3 157.2" cx="152.3" cy="149.2" r="2.5"/>
-              <circle class="m-ponto-geral" data-cidade-geral="Itu" data-chao="173.4 110.4" cx="173.4" cy="102.4" r="2.5"/>
-              <circle class="m-ponto-geral" data-cidade-geral="Salto" data-chao="175.4 99.9" cx="175.4" cy="91.9" r="2.5"/>
-              <circle class="m-sol" data-cidade-geral="Sorocaba" data-chao="150 150" cx="150" cy="140" r="4"/>
-              <rect class="m-moldura" x="340" y="31" width="250" height="230" rx="6"/>
-              <text class="m-norte" x="578" y="58" text-anchor="end">N ↑</text>
-              <g class="m-local" data-cidade="Salto" data-chao="454.5 58"><circle class="m-anel" cx="454.5" cy="44" r="11"/><circle class="m-ponto" cx="454.5" cy="44" r="5"/><text x="471" y="50">Salto</text></g>
-              <g class="m-local" data-cidade="Itu" data-chao="448 93"><circle class="m-anel" cx="448" cy="79" r="11"/><circle class="m-ponto" cx="448" cy="79" r="5"/><text x="465" y="85">Itu</text></g>
-              <g class="m-local" data-cidade="Votorantim" data-chao="377.5 249"><circle class="m-anel" cx="377.5" cy="235" r="11"/><circle class="m-ponto" cx="377.5" cy="235" r="5"/><text x="394" y="241">Votorantim</text></g>
-              <g class="m-local m-sede" data-cidade="Sorocaba" data-chao="370 225"><circle class="m-anel" cx="370" cy="209" r="15"/><path class="m-raios" d="M370 192 V187 M358 197 L354 193 M382 197 L386 193 M353 209 H348"/><circle class="m-sol" cx="370" cy="209" r="8"/><text x="391" y="215">Sorocaba · sede</text></g>
-              </svg>
-            </div>
-            <figcaption id="mapa-legenda">Atendemos num raio de 80 km de Sorocaba. À esquerda, o raio inteiro; à direita, a região das cidades, ampliada. Posições aproximadas.</figcaption>
-          </figure>
         </div>
 
         <form class="formulario" id="form-simulacao" novalidate>
@@ -398,21 +366,6 @@
 
           <p class="garantia-envio">Nota 4,8 no Google, com 137 avaliações. Visita técnica sem custo e sem compromisso.</p>
 
-          <!-- No celular, o quadro ampliado fica depois do botão: não alonga o formulário entre os campos. -->
-          <figure class="diagrama mapa-compacto so-celular">
-            <div class="render">
-              <img src="assets/3d/mapa-compacto.png" width="270" height="250" decoding="async" alt="Maquete da região atendida: Sorocaba, Votorantim, Itu e Salto, dentro do raio de 80 km.">
-              <svg class="mapa render-texto" viewBox="330 25 270 250" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
-              <rect class="m-moldura" x="340" y="31" width="250" height="230" rx="6"/>
-              <text class="m-norte" x="578" y="58" text-anchor="end">N ↑</text>
-              <g class="m-local" data-cidade="Salto" data-chao="454.5 58"><circle class="m-anel" cx="454.5" cy="44" r="11"/><circle class="m-ponto" cx="454.5" cy="44" r="5"/><text x="471" y="50">Salto</text></g>
-              <g class="m-local" data-cidade="Itu" data-chao="448 93"><circle class="m-anel" cx="448" cy="79" r="11"/><circle class="m-ponto" cx="448" cy="79" r="5"/><text x="465" y="85">Itu</text></g>
-              <g class="m-local" data-cidade="Votorantim" data-chao="377.5 249"><circle class="m-anel" cx="377.5" cy="235" r="11"/><circle class="m-ponto" cx="377.5" cy="235" r="5"/><text x="394" y="241">Votorantim</text></g>
-              <g class="m-local m-sede" data-cidade="Sorocaba" data-chao="370 225"><circle class="m-anel" cx="370" cy="209" r="15"/><path class="m-raios" d="M370 192 V187 M358 197 L354 193 M382 197 L386 193 M353 209 H348"/><circle class="m-sol" cx="370" cy="209" r="8"/><text x="391" y="215">Sorocaba · sede</text></g>
-              </svg>
-            </div>
-            <figcaption id="mapa-compacto-legenda">Atendemos num raio de 80 km de Sorocaba. Posições aproximadas.</figcaption>
-          </figure>
         </form>
       </div>
     </section>

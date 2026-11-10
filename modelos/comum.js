@@ -124,24 +124,6 @@ export function cameraIso(direcao, cena, W, H, regiao) {
   return cam;
 }
 
-// Projeção oblíqua de planta: chão visto de cima, norte para cima, altura sobe na tela (k por unidade).
-// O chão usa as coordenadas do desenho: x = x do desenho, z = y do desenho.
-export function cameraPlanta(caixa, k = 1) {
-  const [vx, vy, vw, vh] = caixa;
-  const ALTURA = 1000;
-  const cam = new THREE.OrthographicCamera(vx, vx + vw, -vy, -(vy + vh), 1, 2000);
-  cam.position.set(0, ALTURA, 0);
-  cam.up.set(0, 0, -1);
-  cam.lookAt(0, 0, 0);
-  cam.updateMatrixWorld(true);
-  cam.updateProjectionMatrix();
-  const cisalha = new THREE.Matrix4().set(1, 0, 0, 0, 0, 1, k, k * ALTURA, 0, 0, 1, 0, 0, 0, 0, 1);
-  cam.projectionMatrix.multiply(cisalha);
-  cam.projectionMatrixInverse.copy(cam.projectionMatrix).invert();
-  cam.userData.desenho = caixa;
-  return cam;
-}
-
 // Onde um ponto do modelo cai no desenho (unidades do viewBox da camada de texto).
 export function projetar(cam, [x, y, z]) {
   const [vx, vy, vw, vh] = cam.userData.desenho;

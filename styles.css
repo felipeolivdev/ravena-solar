@@ -740,43 +740,6 @@ p { max-width: var(--medida); }
 .credito .d-texto { font-size: 17px; }
 .diagrama-telhado .d-texto { font-size: 17px; }
 
-/* Mapa do raio: visão geral + quadro ampliado, sobre azul */
-.diagrama-mapa figcaption { color: var(--branco-suave); }
-.mapa text { fill: var(--branco); font-size: 18px; font-weight: 700; }
-.m-area { fill: none; stroke: var(--branco); stroke-opacity: 0.4; stroke-width: 1.5; stroke-dasharray: 6 6; }
-.m-anel-interno { stroke: var(--branco); stroke-opacity: 0.1; stroke-width: 1; }
-.m-escala { stroke: var(--branco-suave); stroke-width: 1.5; }
-.mapa .m-escala-texto { font-weight: 400; fill: var(--branco-suave); }
-.m-recorte { stroke: var(--ambar); stroke-width: 1.5; stroke-dasharray: 4 3; }
-.m-ligacao { stroke: var(--ambar); stroke-opacity: 0.5; stroke-width: 1; }
-.m-moldura { fill: none; stroke: var(--ambar); stroke-width: 1.5; }
-.mapa .m-norte { font-weight: 400; fill: var(--branco-suave); }
-.m-ponto, .m-ponto-geral { fill: var(--branco); }
-.m-sol { fill: var(--ambar); }
-.m-raios { stroke: var(--ambar); stroke-width: 3; }
-/* Cidade escolhida no formulário: anel âmbar e nome em âmbar (texto âmbar só sobre azul) */
-.m-anel { stroke: var(--ambar); stroke-width: 3; opacity: 0; transition: opacity 0.2s ease; }
-.m-local.escolhida .m-anel { opacity: 1; }
-.mapa .m-local.escolhida text { fill: var(--ambar); }
-/* "Outra cidade": acende o raio e a moldura */
-.mapa.outra-escolhida .m-area { stroke: var(--ambar); stroke-opacity: 1; stroke-width: 2.5; }
-.mapa.outra-escolhida .m-moldura { stroke-width: 3; }
-
-/* No celular, só o quadro ampliado, dentro do formulário */
-.so-computador { display: none; }
-.mapa-compacto {
-  margin: 0;
-  padding: var(--e-3);
-  border-radius: var(--raio-cartao);
-  background: var(--azul);
-}
-.mapa-compacto .mapa text { font-size: 15px; }
-.mapa-compacto figcaption { margin-top: var(--e-2); color: var(--branco-suave); }
-
-@media (prefers-reduced-motion: reduce) {
-  .m-anel { transition: none; }
-}
-
 @media (min-width: 760px) {
   .hero-conta-linha { grid-template-columns: 1fr auto; }
   .caso-acao { grid-template-columns: 1fr auto; align-items: center; gap: var(--e-6); }
@@ -785,6 +748,4 @@ p { max-width: var(--medida); }
   .ano { height: 36px; }
   .credito { grid-template-columns: 1fr 1fr; gap: var(--e-4); }
   .diagrama-telhado { max-width: 420px; }
-  .so-computador { display: block; }
-  .so-celular { display: none; }
 }

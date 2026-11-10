@@ -67,7 +67,7 @@
    - **Retorno contra vida útil, em blocos de um ano.** No bloco de preço, 25 blocos: os 3 primeiros em âmbar, o quarto em âmbar claro (o "3 a 4 anos"), o resto em azul, com "mais de 25 anos" no fim. *Por quê:* mostra de relance que o sistema se paga numa fração da vida dele, só com números do brief, e sem escrever quanto se economiza no total.
    - **Diagrama do crédito na Lei 14.300.** Dois quadros, de dia e de noite: a sobra vai para a rede da CPFL e vira crédito; à noite a casa usa a rede e o crédito compensa. *Por quê:* a cobrança da lei é sobre essa sobra, e quase ninguém entende como funciona. Imagem com texto se entende mais rápido que parágrafo.
    - **Corte do telhado.** Painel, estrutura de fixação e telhado, ao lado do "5 anos". *Por quê:* o medo é do que acontece com a telha. O corte mostra onde a obra toca o telhado, e a garantia aparece logo ao lado.
-   - **Raio de 80 km desenhado no formulário**, com Sorocaba no centro e as outras três cidades em posição aproximada. *Por quê:* responde "vocês atendem aqui?" no momento de escolher a cidade.
+   - **Raio de 80 km desenhado no formulário** *(retirado na sexta versão; ver item 10)*, com Sorocaba no centro e as outras três cidades em posição aproximada. *Por quê:* responde "vocês atendem aqui?" no momento de escolher a cidade.
      Na primeira versão o mapa ficou cru: na escala real as quatro cidades cabem em uns 35 km de um raio de 80, então o círculo ficava vazio e Votorantim encostava em Sorocaba. Agora ele tem duas escalas. A visão geral mostra o raio com a área preenchida e a linha "80 km" como escala, e a região das cidades fica marcada. Ao lado, um quadro ampliado mostra as quatro cidades nas mesmas posições relativas. A sede é o sol da logo. *Por quê:* é o recurso clássico de mapa com quadro de detalhe; resolve a leitura sem distorcer distância nenhuma.
      **O mapa responde ao campo "Cidade":** a cidade escolhida ganha um anel âmbar e o nome em âmbar; "Outra cidade a até 80 km" acende o raio inteiro. *Por quê:* o mapa deixa de ser enfeite e confirma, na hora, que a pessoa está dentro da área atendida.
      **No celular, o mapa fica no fim do formulário,** depois do botão, só com o quadro ampliado, sobre fundo azul. No computador ele continua na coluna da esquerda, ao lado do campo. *Por quê:* a primeira tentativa pôs o mapa logo abaixo do campo "Cidade", para o destaque aparecer onde a pessoa escolhe. Mas eram cerca de 300px no meio de um formulário de quatro campos, justamente onde a pessoa está preenchendo, e rolagem a mais ali faz gente desistir. Depois do botão, o mapa continua respondendo à escolha sem atrapalhar o preenchimento.
@@ -81,13 +81,17 @@
 
    **Ficou de fora das outras páginas:** percentual de queda e economia calculada ("−85%", "R$ 662 a menos", "R$ 7.020 por ano"), calculadora, estrelas, endereço, telefone e CNPJ inventados, foto de banco de imagens, menu, formulário em janela por cima da página, contadores animados, "até 90%", irradiação solar "ao vivo" e conteúdo escondido até a animação rodar.
 
-9. **Quinta versão: os diagramas viram modelos 3D.** O corte do telhado, os dois quadros do crédito e o mapa do raio passam a ser modelos tridimensionais feitos por nós em código (Three.js, pasta `modelos/`) e exportados como imagens prontas. A página não roda 3D: recebe PNG, com os nomes e os destaques num SVG por cima.
+9. **Quinta versão: os diagramas viram modelos 3D.** O corte do telhado, os dois quadros do crédito e o mapa do raio (retirado depois; ver item 10) passam a ser modelos tridimensionais feitos por nós em código (Three.js, pasta `modelos/`) e exportados como imagens prontas. A página não roda 3D: recebe PNG, com os nomes e os destaques num SVG por cima.
    *Por quê:* no corte plano não dava para ver o ponto que gera o medo, onde o gancho passa por baixo da telha e sobe até o trilho. Em volume, com o corte na frente, esse caminho aparece. A casa e o poste do crédito ficam reconhecíveis de relance, e o mapa ganha leitura de maquete sem perder a escala.
    *Por que imagem pronta e não 3D girando na página:* 3D ao vivo custaria uns 150 KB de biblioteca, não apareceria sem JavaScript e acrescentaria movimento a uma página que corta movimento de propósito. Quem tem de 35 a 60 anos quer ver a peça, não girá-la.
    - **Cor sem luz realista.** Cada face recebe uma cor da logo; a face de lado é a mesma cor com o azul da logo transparente por cima. É a regra dos neutros do `DESIGN.md` aplicada ao volume. Luz e sombra realistas criariam tons que a marca não tem.
    - **O mapa usa projeção oblíqua de planta.** O chão fica visto de cima, na mesma escala da quarta versão (1,5px e 5px por km), e só o que tem altura sobe na tela. *Por quê:* numa perspectiva ou numa isométrica, a distância norte-sul encolhe e Votorantim volta a encostar em Sorocaba. Assim as posições no chão continuam exatamente as mesmas.
    - **Texto fora da imagem.** Nomes das peças, das cidades, "rede" e "80 km" ficam no SVG por cima, como texto de verdade. O anel âmbar da cidade escolhida e a borda do raio também, para o mapa continuar respondendo ao campo "Cidade". As posições saem do próprio modelo, calculadas no render.
    - **Fica igual:** barras do caso, garantias e blocos de anos (são número, e perspectiva distorce proporção), a marca da logo na primeira tela, as legendas e o lugar de cada diagrama. Sem JavaScript tudo aparece, só sem o destaque do mapa.
+
+10. **Sexta versão: o mapa do raio sai da página, por enquanto.** Saem a maquete do formulário (no computador e no celular), o destaque ligado ao campo "Cidade" e a imagem da maquete. O campo continua igual: a lista com as quatro cidades e "Outra cidade a até 80 km de Sorocaba" já diz quem é atendido.
+    *Por quê:* nem em SVG nem em 3D o mapa convenceu. Ele responde com um desenho grande e técnico a uma pergunta de sim ou não ("vocês atendem aqui?"). E, na escala real, as quatro cidades ocupam uns 35 km de um raio de 80, então o desenho é quase todo vazio; as duas escalas e a maquete só remendaram isso. Melhor sem mapa do que com um mapa que não convence.
+    *O que pode voltar:* um conceito novo, não o mesmo desenho. Os caminhos em estudo são o mapa como o próprio campo "Cidade" (as cidades viram as opções, na posição relativa) e o mapa na objeção 1, como prova de que a empresa é local. Volta só com o porquê registrado aqui antes.
 
 **Sobre o repositório:** o `brief.md` e a pasta `material/` ficam só na máquina, fora do GitHub. *Por quê:* são material do cliente, não da página. A logo que a página usa é uma cópia idêntica em `assets/logo.svg`.
 
@@ -99,6 +103,7 @@
 | Comercial, indústria, rural, manutenção de terceiros | A empresa não faz isso ou não é o público desta página. |
 | Quem somos, missão, visão, valores | É o que a página não pode continuar sendo. Os fatos que importam foram para a objeção 1. |
 | Parceiros, blog, mapa, redes, banner de cookies | Não ajudam a pedir a simulação. |
+| Mapa do raio de atendimento (por enquanto) | Saiu na sexta versão: ocupava muito espaço para uma resposta de sim ou não. A lista de cidades do formulário responde. Ver item 10. |
 | Menu e botão flutuante de WhatsApp | São saídas, e o botão flutuante pularia o filtro dos R$ 450. |
 | Calculadora de economia | Depois da Lei 14.300 o cálculo é individual. A simulação é o produto. O campo da conta na primeira tela não calcula nada: só aplica o filtro e leva o valor ao formulário. |
 | Percentual de economia do caso de Sorocaba | O brief dá R$ 780 e R$ 118, não o percentual. Número calculado por nós não é número do brief. |
@@ -108,7 +113,7 @@
 | Endereço completo e CNPJ | Não estão no brief. A página diz "sede em Sorocaba". |
 | Link para as avaliações do Google | O endereço não veio. A nota aparece como texto. |
 | Números que "contam" até o valor, carrossel, vídeo de fundo | Movimento que atrasa a leitura do número. O público quer o dado, não o efeito. |
-| Foto de banco de imagens e ilustração de família feliz | Não é obra da Ravena. As imagens são a marca da própria logo e três diagramas técnicos nas cores dela (crédito, telhado e raio de atendimento), modelados em 3D por nós desde a quinta versão. |
+| Foto de banco de imagens e ilustração de família feliz | Não é obra da Ravena. As imagens são a marca da própria logo e dois diagramas técnicos nas cores dela (crédito e telhado), modelados em 3D por nós desde a quinta versão. |
 | "Leva menos de um minuto" e frases parecidas no formulário | Seria um número que o brief não deu. |
 | Estrelas desenhadas para a nota 4,8 | Cinco estrelas cheias diriam 5,0. A nota aparece como número. |
 | Cortes diagonais entre as seções | A única inclinação da logo é a lateral do painel, com cerca de 56°, íngreme demais para cortar uma seção. Um ângulo mais suave seria forma inventada, não da marca. |
