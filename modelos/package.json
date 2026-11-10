@@ -1,0 +1,12 @@
+{
+  "name": "ravena-solar-modelos",
+  "version": "1.0.0",
+  "description": "Modelos 3D dos diagramas e o render para assets/3d",
+  "private": true,
+  "type": "module",
+  "scripts": { "render": "node renderizar.mjs" },
+  "devDependencies": {
+    "three": "0.170.0",
+    "playwright-core": "^1.65.0"
+  }
+}

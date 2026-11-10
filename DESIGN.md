@@ -81,7 +81,7 @@ Hierarquia: o maior texto da tela é sempre o número ou a promessa. Título de 
 - **Campo da conta na primeira tela:** rótulo em `--branco` negrito; campo `--branco` de 56px, sem borda, com "R$" fixo em `--texto-suave` e foco em `--laranja`. O botão "Pedir simulação" fica embaixo no celular e ao lado no computador.
 - **Ação do caso:** no fim da faixa azul do caso, uma frase em `--branco` e o botão de ação, separados dos valores por uma divisória `--linha-clara`.
 - **Blocos de anos** (retorno contra vida útil): 25 blocos iguais de 28px de altura e 3px de vão, um por ano, em grade. Os 3 primeiros em `--ambar`, o quarto em `--ambar` com 45% de opacidade (o "a 4"), o resto em `--azul`. Legenda com amostras do mesmo tamanho. É forma, então o âmbar sobre branco vale.
-- **Diagramas** (crédito, corte do telhado, raio de atendimento): SVG desenhado no próprio HTML, só com as cores da logo. Traço de 2px em `--azul` sobre branco ou `--branco` sobre azul, cantos e pontas arredondados. Sol e setas da sobra em `--ambar`, sede no mapa em `--ambar`. Painel como na logo: `--azul` com linhas `--branco`. Texto dentro do desenho só para nomes curtos, em `--t-pequeno`. A explicação fica na legenda (`figcaption`), em HTML. Sem animação e sem gente.
+- **Diagramas** (crédito, corte do telhado, raio de atendimento): desde a quinta versão, modelos 3D (ver "Modelos 3D" abaixo). O que segue vale para a camada de texto e para as escolhas de cor e forma, que o 3D mantém. Antes: SVG desenhado no próprio HTML, só com as cores da logo. Traço de 2px em `--azul` sobre branco ou `--branco` sobre azul, cantos e pontas arredondados. Sol e setas da sobra em `--ambar`, sede no mapa em `--ambar`. Painel como na logo: `--azul` com linhas `--branco`. Texto dentro do desenho só para nomes curtos, em `--t-pequeno`. A explicação fica na legenda (`figcaption`), em HTML. Sem animação e sem gente.
   - **Crédito:** dois quadros lado a lado no computador (empilhados no celular), "De dia" e "À noite", com a mesma casa e o poste da rede.
   - **Telhado:** corte com painel, trilho, ganchos, telhas onduladas e a madeira, com os nomes à direita.
   - **Raio:** duas escalas no mesmo desenho, sobre `--azul`.
@@ -90,6 +90,28 @@ Hierarquia: o maior texto da tela é sempre o número ou a promessa. Título de 
     - *Cidade escolhida:* anel de 3px em `--ambar` em volta do ponto e nome em `--ambar` (texto âmbar só sobre azul). "Outra cidade" acende a borda do raio em `--ambar`.
     - Texto do mapa em 18 unidades do desenho no computador (o mapa é reduzido para caber na coluna) e `--t-pequeno` no celular.
     - *No celular:* só o quadro ampliado, no fim do formulário, depois do botão e da nota do Google, num bloco `--azul` com `--raio-cartao`. A visão geral aparece só a partir de 760px.
+
+## Modelos 3D (desde a quinta versão)
+
+Os três diagramas são modelos em Three.js na pasta `modelos/`, renderizados para `assets/3d/` por `modelos/renderizar.mjs`. A página recebe a imagem (PNG em 2x, fundo transparente) e, por cima, um SVG com o mesmo enquadramento para texto e destaques.
+
+- **Sombreado chapado, em três tons por cor.** Sem luz realista, sem reflexo, sem gradiente. A orientação da face escolhe o tom:
+
+  | Face | Cor clara (branco, âmbar) | Azul |
+  |---|---|---|
+  | Topo | a cor | `--azul` + `--branco` a 0,14 |
+  | Lado iluminado | a cor + `--azul` a 0,16 | `--azul` + `--branco` a 0,06 |
+  | Lado na sombra | a cor + `--azul` a 0,32 | `--azul` |
+
+  É a mesma lógica dos neutros: cores da logo com transparência, nada novo.
+- **Contorno:** 2px em `--azul` nas arestas, como o traço dos diagramas planos.
+- **Laranja:** nunca. É só da ação.
+- **Câmera:** isométrica fixa no telhado e no crédito (mesma câmera nos quadros de dia e de noite). O mapa usa projeção oblíqua de planta: chão visto de cima, norte para cima, altura sobe na vertical da tela. As posições no chão são as mesmas da quarta versão.
+- **Telhado:** corte isométrico com madeira (`--branco` + `--azul` a 0,10 no topo), telhas onduladas em `--branco`, ganchos e trilho em `--azul`, painel em `--azul` com as linhas das células em `--branco`. O corte fica na face da frente.
+- **Crédito:** base fina de chão, casa em `--branco` com telhado de duas águas, painel na água da frente, poste da rede em `--azul`. De dia, sol em `--ambar` e seta da sobra em `--ambar`, da casa para o poste. À noite, lua em `--azul` e seta em `--azul`, do poste para a casa.
+- **Mapa:** disco do raio de 80 km como placa de `--branco` a 0,06 sobre o azul (o mesmo `--textura`), quadro ampliado como placa de `--branco` a 0,10. Cidades são pinos baixos em `--branco`, todos da mesma altura; a sede é um pino em `--ambar` com o sol da logo no topo. A visão geral e o quadro ampliado estão no mesmo modelo, cada um na sua escala.
+- **Camada de texto (SVG):** nomes em `--t-pequeno`/negrito como antes; guias em `--texto-suave`. No mapa, o anel de 3px em `--ambar` da cidade escolhida, a borda tracejada do raio (que acende em `--ambar` com "Outra cidade"), o recorte, as ligações, "80 km" e "N ↑".
+- **Peso:** até 120 KB por imagem.
 
 ## Movimento
 

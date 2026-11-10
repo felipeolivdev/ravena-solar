@@ -331,31 +331,106 @@ conferir(await celular.locator('.ancora-objecao .numero').innerText() === '11 pe
 const diagramasVisiveis = (pagina) => pagina.evaluate(() => [...document.querySelectorAll('figure.diagrama')]
   .filter(f => getComputedStyle(f).display !== 'none')
   .map(f => {
-    const svg = f.querySelector('svg'); const r = svg.getBoundingClientRect();
-    return { classe: f.className, legenda: !!f.querySelector('figcaption').textContent.trim(), rotulo: svg.getAttribute('role') === 'img' && !!svg.getAttribute('aria-labelledby'), altura: r.height };
+    const img = f.querySelector('.render img'); const r = img.getBoundingClientRect();
+    return { classe: f.className, legenda: !!f.querySelector('figcaption').textContent.trim(), rotulo: !!img.getAttribute('alt').trim() && img.complete && img.naturalWidth > 0, altura: r.height };
   }));
 for (const [pagina, nome, classeMapa] of [[celular, 'celular', 'mapa-compacto'], [computador, 'computador', 'diagrama-mapa']]) {
   const d = await diagramasVisiveis(pagina);
   conferir(d.length === 4 && d.every(x => x.legenda && x.rotulo && x.altura > 50) && d.some(x => x.classe.includes(classeMapa)),
-    `${nome}: os quatro diagramas (telhado, crédito de dia e de noite, mapa) aparecem, com legenda e nome acessível`, d.map(x => Math.round(x.altura)).join(' / '));
+    `${nome}: os quatro modelos 3D (telhado, crédito de dia e de noite, mapa) carregam e aparecem, com legenda e texto alternativo`, d.map(x => Math.round(x.altura)).join(' / '));
 }
 const coresSvg = await celular.evaluate(() => {
   const s = new Set();
-  document.querySelectorAll('.diagrama svg *').forEach(e => { const c = getComputedStyle(e); [c.fill, c.stroke].forEach(v => { if (v && v !== 'none') s.add(v); }); });
+  document.querySelectorAll('.diagrama .render-texto *').forEach(e => { const c = getComputedStyle(e); [c.fill, c.stroke].forEach(v => { if (v && v !== 'none') s.add(v); }); });
   return [...s];
 });
 const permitidas = ['#123A55', '#F2A03D', '#FFFFFF'].map(rgb).concat(['rgba(18, 58, 85, 0.76)', 'rgba(18, 58, 85, 0.18)', 'rgba(18, 58, 85, 0.05)', 'rgba(255, 255, 255, 0.8)', 'rgba(255, 255, 255, 0.24)']);
-conferir(coresSvg.every(c => permitidas.includes(c)), 'Diagramas só com cores da logo (e sem laranja, que é só da ação)', coresSvg.join(' | '));
-conferir(await semJs.locator('figure.diagrama:not(.so-computador) svg').evaluateAll(els => els.every(e => e.getBoundingClientRect().height > 50)), 'Sem JavaScript, os diagramas aparecem');
+conferir(coresSvg.every(c => permitidas.includes(c)), 'Camada de texto dos diagramas só com cores da logo (e sem laranja, que é só da ação)', coresSvg.join(' | '));
+await semJs.waitForFunction(() => [...document.querySelectorAll('.render img')].every(i => i.complete));
+conferir(await semJs.locator('figure.diagrama:not(.so-computador) .render img').evaluateAll(els => els.every(e => e.naturalWidth > 0 && e.getBoundingClientRect().height > 50)), 'Sem JavaScript, os modelos 3D aparecem');
+
+titulo('Modelos 3D (assets/3d)');
+// Cada imagem: só as cores da logo e os tons do DESIGN.md ("Modelos 3D"), em 2x, dentro do peso.
+if (!noAr) {
+  const hexRgb = (h) => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+  const mix = (a, b, t) => a.map((v, i) => v + (b[i] - v) * t);
+  const [AZ, AM, BR] = ['#123A55', '#F2A03D', '#FFFFFF'].map(hexRgb);
+  const tres = (c) => c === AZ ? [mix(AZ, BR, 0.14), mix(AZ, BR, 0.06), AZ] : [c, mix(c, AZ, 0.16), mix(c, AZ, 0.32)];
+  const madeira = mix(BR, AZ, 0.10);
+  const paleta = [...tres(AZ), ...tres(AM), ...tres(BR), ...tres(madeira),
+    ...[0.06, 0.10, 0.12, 0.14, 0.16, 0.20, 0.24].map(t => mix(AZ, BR, t))];
+  const pontosDoModelo = JSON.parse(readFileSync(path.join(raiz, 'modelos/pontos.json'), 'utf8'));
+  for (const nome of ['telhado', 'credito-dia', 'credito-noite', 'mapa', 'mapa-compacto']) {
+    const arquivo = path.join(raiz, 'assets/3d', `${nome}.png`);
+    const bytes = readFileSync(arquivo);
+    const r = await celular.evaluate(async ([dados, pal]) => {
+      const img = new Image(); img.src = dados; await img.decode();
+      const c = document.createElement('canvas'); c.width = img.width; c.height = img.height;
+      const g = c.getContext('2d'); g.drawImage(img, 0, 0);
+      const d = g.getImageData(0, 0, c.width, c.height).data;
+      // Um pixel vale se é um tom da paleta ou a mistura de dois deles (borda suavizada entre duas faces).
+      const perto = (px, q) => Math.abs(q[0] - px[0]) + Math.abs(q[1] - px[1]) + Math.abs(q[2] - px[2]) <= 6;
+      const entre = (px, a, b) => {
+        const ab = [0, 1, 2].map(k => b[k] - a[k]), len = ab.reduce((s, v) => s + v * v, 0);
+        if (!len) return false;
+        const t = Math.max(0, Math.min(1, [0, 1, 2].reduce((s, k) => s + (px[k] - a[k]) * ab[k], 0) / len));
+        return perto(px, [0, 1, 2].map(k => a[k] + ab[k] * t));
+      };
+      const memo = new Map();
+      const vale = (px) => {
+        const chave = px.join();
+        if (!memo.has(chave)) {
+          let ok = pal.some(p => perto(px, p)), tipo = ok ? 'tom' : 'fora';
+          for (let i = 0; !ok && i < pal.length; i++) for (let j = i + 1; !ok && j < pal.length; j++) if (entre(px, pal[i], pal[j])) { ok = true; tipo = 'borda'; }
+          memo.set(chave, tipo);
+        }
+        return memo.get(chave);
+      };
+      let opacos = 0, fora = 0, tom = 0; const laranja = [232, 114, 28]; let laranjas = 0;
+      for (let i = 0; i < d.length; i += 4) {
+        if (d[i + 3] < 255) continue;
+        opacos++;
+        const px = [d[i], d[i + 1], d[i + 2]];
+        const v = vale(px);
+        if (v === 'fora') fora++; else if (v === 'tom') tom++;
+        if (Math.abs(px[0] - laranja[0]) + Math.abs(px[1] - laranja[1]) + Math.abs(px[2] - laranja[2]) <= 6) laranjas++;
+      }
+      return { largura: img.width, altura: img.height, opacos, fora, tom, laranjas };
+    }, ['data:image/png;base64,' + bytes.toString('base64'), paleta]);
+    const [, , w, h] = pontosDoModelo[nome].desenho;
+    const naPaleta = 1 - r.fora / r.opacos;
+    conferir(naPaleta >= 0.995 && r.laranjas === 0, `${nome}.png: pixels opacos nas cores da logo e nos tons do DESIGN.md (ou borda entre dois deles), sem laranja`,
+      `${(r.tom / r.opacos * 100).toFixed(1)}% tons da paleta, ${((naPaleta - r.tom / r.opacos) * 100).toFixed(1)}% borda entre dois tons, ${(r.fora / r.opacos * 100).toFixed(2)}% fora`);
+    conferir(r.largura === w * 2 && r.altura === h * 2 && bytes.length <= 120 * 1024, `${nome}.png: em 2x (${w * 2}x${h * 2}) e com até 120 KB`, `${r.largura}x${r.altura}, ${Math.round(bytes.length / 1024)} KB`);
+  }
+  // A camada de texto do mapa fica exatamente sobre os pinos do modelo.
+  const desvios = await computador.evaluate((pts) => {
+    const saida = [];
+    for (const [sel, nome] of [['.diagrama-mapa', 'mapa'], ['.mapa-compacto', 'mapa-compacto']]) {
+      for (const g of document.querySelectorAll(`${sel} .m-local`)) {
+        const p = pts[nome].pontos[g.dataset.cidade];
+        const a = g.querySelector('.m-anel');
+        saida.push(Math.hypot(parseFloat(a.getAttribute('cx')) - p[0], parseFloat(a.getAttribute('cy')) - p[1]));
+      }
+    }
+    for (const c of document.querySelectorAll('.diagrama-mapa [data-cidade-geral]')) {
+      const p = pts.mapa.pontos['geral-' + c.dataset.cidadeGeral];
+      saida.push(Math.hypot(parseFloat(c.getAttribute('cx')) - p[0], parseFloat(c.getAttribute('cy')) - p[1]));
+    }
+    return saida;
+  }, pontosDoModelo);
+  conferir(desvios.length === 12 && desvios.every(d => d < 0.6), 'Mapa: anéis e pontos da camada de texto caem sobre o topo dos pinos do modelo', `maior desvio: ${Math.max(...desvios).toFixed(2)} unidades`);
+}
 
 titulo('Mapa do raio');
 // Proporção: no quadro ampliado, cada cidade fica na mesma direção e a 5/1,5 da distância da visão geral.
 const proporcoes = await computador.evaluate(() => {
-  const ponto = (sel) => { const e = document.querySelector(sel); return [parseFloat(e.getAttribute('cx')), parseFloat(e.getAttribute('cy'))]; };
+  // Posição no chão da maquete (data-chao), antes de o pino subir na projeção.
+  const ponto = (sel) => document.querySelector(sel).dataset.chao.split(' ').map(Number);
   const geralSede = ponto('.diagrama-mapa [data-cidade-geral="Sorocaba"]');
-  const lupaSede = ponto('.diagrama-mapa [data-cidade="Sorocaba"] .m-sol');
+  const lupaSede = ponto('.diagrama-mapa [data-cidade="Sorocaba"]');
   return ['Votorantim', 'Itu', 'Salto'].map(c => {
-    const g = ponto(`.diagrama-mapa [data-cidade-geral="${c}"]`), l = ponto(`.diagrama-mapa [data-cidade="${c}"] .m-ponto`);
+    const g = ponto(`.diagrama-mapa [data-cidade-geral="${c}"]`), l = ponto(`.diagrama-mapa [data-cidade="${c}"]`);
     return [c, (l[0] - lupaSede[0]) / (g[0] - geralSede[0]), (l[1] - lupaSede[1]) / (g[1] - geralSede[1])];
   });
 });

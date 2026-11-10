@@ -136,26 +136,20 @@
           <p class="rotulo">Sobre o telhado</p>
           <h2>“Isso não vai estragar meu telhado?”</h2>
           <figure class="diagrama diagrama-telhado">
-            <svg viewBox="0 0 340 190" role="img" aria-labelledby="telhado-legenda" xmlns="http://www.w3.org/2000/svg">
-              <rect class="d-madeira" x="10" y="152" width="230" height="14" rx="2"/>
-              <path class="d-telha" d="M10 150 q14.4 -22 28.75 0 q14.4 -22 28.75 0 q14.4 -22 28.75 0 q14.4 -22 28.75 0 q14.4 -22 28.75 0 q14.4 -22 28.75 0 q14.4 -22 28.75 0 q14.4 -22 28.75 0"/>
-              <g class="d-estrutura">
-                <path d="M70 150 V90 M180 150 V90"/>
-                <path d="M62 150 H84 M172 150 H194"/>
-              </g>
-              <line class="d-trilho" x1="30" y1="88" x2="220" y2="88"/>
-              <rect class="d-painel" x="20" y="60" width="210" height="22" rx="2"/>
-              <path class="d-painel-linhas" d="M62 60 V82 M104 60 V82 M146 60 V82 M188 60 V82"/>
-              <g class="d-guia">
-                <path d="M234 71 H254 M224 88 Q240 88 248 104 L254 104 M244 140 H254"/>
-              </g>
-              <g class="d-texto">
-                <text x="260" y="76">Painel</text>
-                <text x="260" y="102">Estrutura</text>
-                <text x="260" y="120">de fixação</text>
-                <text x="260" y="145">Seu telhado</text>
-              </g>
-            </svg>
+            <div class="render">
+              <img src="assets/3d/telhado.png" width="420" height="250" decoding="async" alt="Modelo 3D do telhado em corte: telhas onduladas sobre a madeira, ganchos presos na madeira que passam por baixo da telha e sobem até os trilhos, e o painel por cima.">
+              <svg class="render-texto" viewBox="0 0 420 250" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                <g class="d-guia">
+                  <path d="M276 134 H300 M248 163 H300 M254 182 Q280 182 290 206 H300"/>
+                </g>
+                <g class="d-texto">
+                  <text x="306" y="139">Painel</text>
+                  <text x="306" y="161">Estrutura</text>
+                  <text x="306" y="179">de fixação</text>
+                  <text x="306" y="211">Seu telhado</text>
+                </g>
+              </svg>
+            </div>
             <figcaption id="telhado-legenda">Corte do telhado: o painel fica sobre uma estrutura fixada no telhado. Quem faz essa fixação é a nossa equipe.</figcaption>
           </figure>
         </div>
@@ -179,38 +173,23 @@
           <p>A conta de luz não chega a zero: sempre restam a taxa mínima da distribuidora e o custo do fio, que é o que se paga pelo uso da rede da CPFL.</p>
 
           <!-- Como o crédito funciona: dia e noite -->
-          <svg class="d-defs" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <g id="d-casa">
-                <path class="d-casa-corpo" d="M90 92 V150 H180 V92"/>
-                <path class="d-casa-telhado" d="M80 94 L135 52 L190 94"/>
-                <polygon class="d-painel" points="91,79 122,57 117,50 87,72"/>
-                <path class="d-casa-porta" d="M126 150 V124 H144 V150"/>
-                <path class="d-rede" d="M250 58 V150 M236 70 H264 M240 82 H260"/>
-                <line class="d-chao" x1="20" y1="150" x2="270" y2="150"/>
-              </g>
-              <marker id="d-ponta-ambar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="d-ponta-ambar" d="M0 0 L10 5 L0 10 z"/></marker>
-              <marker id="d-ponta-azul" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="d-ponta-azul" d="M0 0 L10 5 L0 10 z"/></marker>
-            </defs>
-          </svg>
           <div class="credito">
             <figure class="diagrama">
-              <svg viewBox="0 0 280 170" role="img" aria-labelledby="credito-dia" xmlns="http://www.w3.org/2000/svg">
-                <circle class="d-sol" cx="42" cy="36" r="15"/>
-                <line class="d-luz" x1="55" y1="46" x2="86" y2="66"/>
-                <use href="#d-casa"/>
-                <line class="d-seta-ambar" x1="186" y1="112" x2="236" y2="112" marker-end="url(#d-ponta-ambar)"/>
-                <text class="d-texto" x="250" y="166" text-anchor="middle">rede</text>
-              </svg>
+              <div class="render">
+                <img src="assets/3d/credito-dia.png" width="340" height="210" decoding="async" alt="Modelo 3D de dia: o sol bate no painel da casa e a sobra de energia segue pelo fio até o poste da rede.">
+                <svg class="render-texto" viewBox="0 0 340 210" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                  <text class="d-texto" x="250" y="96">rede</text>
+                </svg>
+              </div>
               <figcaption id="credito-dia"><strong>De dia</strong> a casa usa primeiro a energia do telhado. A sobra vai para a rede da CPFL e vira crédito. É sobre essa sobra que vale a cobrança da Lei 14.300.</figcaption>
             </figure>
             <figure class="diagrama">
-              <svg viewBox="0 0 280 170" role="img" aria-labelledby="credito-noite" xmlns="http://www.w3.org/2000/svg">
-                <path class="d-lua" d="M50 20 A17 17 0 1 0 62 50 A13 13 0 1 1 50 20 Z"/>
-                <use href="#d-casa"/>
-                <line class="d-seta-azul" x1="236" y1="112" x2="186" y2="112" marker-end="url(#d-ponta-azul)"/>
-                <text class="d-texto" x="250" y="166" text-anchor="middle">rede</text>
-              </svg>
+              <div class="render">
+                <img src="assets/3d/credito-noite.png" width="340" height="210" decoding="async" alt="Modelo 3D à noite: a mesma casa, com a lua no céu, recebendo energia do poste da rede.">
+                <svg class="render-texto" viewBox="0 0 340 210" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+                  <text class="d-texto" x="250" y="96">rede</text>
+                </svg>
+              </div>
               <figcaption id="credito-noite"><strong>À noite</strong> o sistema não produz, e em dia nublado produz menos. A casa usa a energia da rede, e o crédito acumulado no mês compensa.</figcaption>
             </figure>
           </div>
@@ -327,29 +306,35 @@
             <li><p>Se puder, deixe a conta de luz à mão: a foto ou o PDF dela ajuda muito, e você envia na própria conversa.</p></li>
           </ul>
 
-          <!-- Raio de atendimento em duas escalas. Distâncias reais: 1,5px por km na visão geral,
-               5px por km no quadro ampliado (mesmas posições relativas). -->
+          <!-- Raio de atendimento: maquete 3D (assets/3d, modelos/cenas.js) em duas escalas, com texto e destaques por cima.
+               Chão: 1,5px por km na visão geral, 5px por km no quadro ampliado. data-chao = posição no chão;
+               cx/cy = topo do pino na imagem (projeção oblíqua de planta: sobe 1 unidade por unidade de altura). -->
           <figure class="diagrama diagrama-mapa so-computador">
-            <svg class="mapa" viewBox="20 20 580 260" role="img" aria-labelledby="mapa-legenda" xmlns="http://www.w3.org/2000/svg">
-              <circle class="m-area" cx="150" cy="150" r="120"/>
-              <circle class="m-anel-interno" cx="150" cy="150" r="80"/>
-              <circle class="m-anel-interno" cx="150" cy="150" r="40"/>
-              <line class="m-escala" x1="143" y1="150" x2="30" y2="150"/>
-              <path class="m-escala" d="M30 144 V156"/>
-              <text class="m-escala-texto" x="86" y="140" text-anchor="middle">80 km</text>
-              <rect class="m-recorte" x="141" y="93" width="75" height="69" rx="3"/>
-              <path class="m-ligacao" d="M216 93 L340 35 M216 162 L340 265"/>
-              <circle class="m-ponto-geral" data-cidade-geral="Votorantim" cx="152.3" cy="157.2" r="2.5"/>
-              <circle class="m-ponto-geral" data-cidade-geral="Itu" cx="173.4" cy="110.4" r="2.5"/>
-              <circle class="m-ponto-geral" data-cidade-geral="Salto" cx="175.4" cy="99.9" r="2.5"/>
-              <circle class="m-sol" data-cidade-geral="Sorocaba" cx="150" cy="150" r="4"/>
-              <rect class="m-moldura" x="340" y="35" width="250" height="230" rx="6"/>
-              <text class="m-norte" x="578" y="62" text-anchor="end">N ↑</text>
-              <g class="m-local" data-cidade="Salto"><circle class="m-anel" cx="454.5" cy="58" r="11"/><circle class="m-ponto" cx="454.5" cy="58" r="5"/><text x="471" y="64">Salto</text></g>
-              <g class="m-local" data-cidade="Itu"><circle class="m-anel" cx="448" cy="93" r="11"/><circle class="m-ponto" cx="448" cy="93" r="5"/><text x="465" y="99">Itu</text></g>
-              <g class="m-local" data-cidade="Votorantim"><circle class="m-anel" cx="377.5" cy="249" r="11"/><circle class="m-ponto" cx="377.5" cy="249" r="5"/><text x="394" y="255">Votorantim</text></g>
-              <g class="m-local m-sede" data-cidade="Sorocaba"><circle class="m-anel" cx="370" cy="225" r="15"/><path class="m-raios" d="M370 208 V203 M358 213 L354 209 M382 213 L386 209 M353 225 H348"/><circle class="m-sol" cx="370" cy="225" r="8"/><text x="391" y="231">Sorocaba · sede</text></g>
-            </svg>
+            <div class="render">
+              <img src="assets/3d/mapa.png" width="580" height="260" decoding="async" alt="Maquete do raio de atendimento: à esquerda, o disco de 80 km em volta de Sorocaba; à direita, a região de Sorocaba, Votorantim, Itu e Salto, ampliada.">
+              <svg class="mapa render-texto" viewBox="20 20 580 260" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+              <g transform="translate(0 -4)">
+                <circle class="m-area" cx="150" cy="150" r="120"/>
+                <circle class="m-anel-interno" cx="150" cy="150" r="80"/>
+                <circle class="m-anel-interno" cx="150" cy="150" r="40"/>
+                <line class="m-escala" x1="143" y1="150" x2="30" y2="150"/>
+                <path class="m-escala" d="M30 144 V156"/>
+                <text class="m-escala-texto" x="86" y="140" text-anchor="middle">80 km</text>
+                <rect class="m-recorte" x="141" y="88" width="75" height="74" rx="3"/>
+              </g>
+              <path class="m-ligacao" d="M216 84 L340 31 M216 158 L340 261"/>
+              <circle class="m-ponto-geral" data-cidade-geral="Votorantim" data-chao="152.3 157.2" cx="152.3" cy="149.2" r="2.5"/>
+              <circle class="m-ponto-geral" data-cidade-geral="Itu" data-chao="173.4 110.4" cx="173.4" cy="102.4" r="2.5"/>
+              <circle class="m-ponto-geral" data-cidade-geral="Salto" data-chao="175.4 99.9" cx="175.4" cy="91.9" r="2.5"/>
+              <circle class="m-sol" data-cidade-geral="Sorocaba" data-chao="150 150" cx="150" cy="140" r="4"/>
+              <rect class="m-moldura" x="340" y="31" width="250" height="230" rx="6"/>
+              <text class="m-norte" x="578" y="58" text-anchor="end">N ↑</text>
+              <g class="m-local" data-cidade="Salto" data-chao="454.5 58"><circle class="m-anel" cx="454.5" cy="44" r="11"/><circle class="m-ponto" cx="454.5" cy="44" r="5"/><text x="471" y="50">Salto</text></g>
+              <g class="m-local" data-cidade="Itu" data-chao="448 93"><circle class="m-anel" cx="448" cy="79" r="11"/><circle class="m-ponto" cx="448" cy="79" r="5"/><text x="465" y="85">Itu</text></g>
+              <g class="m-local" data-cidade="Votorantim" data-chao="377.5 249"><circle class="m-anel" cx="377.5" cy="235" r="11"/><circle class="m-ponto" cx="377.5" cy="235" r="5"/><text x="394" y="241">Votorantim</text></g>
+              <g class="m-local m-sede" data-cidade="Sorocaba" data-chao="370 225"><circle class="m-anel" cx="370" cy="209" r="15"/><path class="m-raios" d="M370 192 V187 M358 197 L354 193 M382 197 L386 193 M353 209 H348"/><circle class="m-sol" cx="370" cy="209" r="8"/><text x="391" y="215">Sorocaba · sede</text></g>
+              </svg>
+            </div>
             <figcaption id="mapa-legenda">Atendemos num raio de 80 km de Sorocaba. À esquerda, o raio inteiro; à direita, a região das cidades, ampliada. Posições aproximadas.</figcaption>
           </figure>
         </div>
@@ -415,14 +400,17 @@
 
           <!-- No celular, o quadro ampliado fica depois do botão: não alonga o formulário entre os campos. -->
           <figure class="diagrama mapa-compacto so-celular">
-            <svg class="mapa" viewBox="330 25 270 250" role="img" aria-labelledby="mapa-compacto-legenda" xmlns="http://www.w3.org/2000/svg">
-              <rect class="m-moldura" x="340" y="35" width="250" height="230" rx="6"/>
-              <text class="m-norte" x="578" y="62" text-anchor="end">N ↑</text>
-              <g class="m-local" data-cidade="Salto"><circle class="m-anel" cx="454.5" cy="58" r="11"/><circle class="m-ponto" cx="454.5" cy="58" r="5"/><text x="471" y="64">Salto</text></g>
-              <g class="m-local" data-cidade="Itu"><circle class="m-anel" cx="448" cy="93" r="11"/><circle class="m-ponto" cx="448" cy="93" r="5"/><text x="465" y="99">Itu</text></g>
-              <g class="m-local" data-cidade="Votorantim"><circle class="m-anel" cx="377.5" cy="249" r="11"/><circle class="m-ponto" cx="377.5" cy="249" r="5"/><text x="394" y="255">Votorantim</text></g>
-              <g class="m-local m-sede" data-cidade="Sorocaba"><circle class="m-anel" cx="370" cy="225" r="15"/><path class="m-raios" d="M370 208 V203 M358 213 L354 209 M382 213 L386 209 M353 225 H348"/><circle class="m-sol" cx="370" cy="225" r="8"/><text x="391" y="231">Sorocaba · sede</text></g>
-            </svg>
+            <div class="render">
+              <img src="assets/3d/mapa-compacto.png" width="270" height="250" decoding="async" alt="Maquete da região atendida: Sorocaba, Votorantim, Itu e Salto, dentro do raio de 80 km.">
+              <svg class="mapa render-texto" viewBox="330 25 270 250" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+              <rect class="m-moldura" x="340" y="31" width="250" height="230" rx="6"/>
+              <text class="m-norte" x="578" y="58" text-anchor="end">N ↑</text>
+              <g class="m-local" data-cidade="Salto" data-chao="454.5 58"><circle class="m-anel" cx="454.5" cy="44" r="11"/><circle class="m-ponto" cx="454.5" cy="44" r="5"/><text x="471" y="50">Salto</text></g>
+              <g class="m-local" data-cidade="Itu" data-chao="448 93"><circle class="m-anel" cx="448" cy="79" r="11"/><circle class="m-ponto" cx="448" cy="79" r="5"/><text x="465" y="85">Itu</text></g>
+              <g class="m-local" data-cidade="Votorantim" data-chao="377.5 249"><circle class="m-anel" cx="377.5" cy="235" r="11"/><circle class="m-ponto" cx="377.5" cy="235" r="5"/><text x="394" y="241">Votorantim</text></g>
+              <g class="m-local m-sede" data-cidade="Sorocaba" data-chao="370 225"><circle class="m-anel" cx="370" cy="209" r="15"/><path class="m-raios" d="M370 192 V187 M358 197 L354 193 M382 197 L386 193 M353 209 H348"/><circle class="m-sol" cx="370" cy="209" r="8"/><text x="391" y="215">Sorocaba · sede</text></g>
+              </svg>
+            </div>
             <figcaption id="mapa-compacto-legenda">Atendemos num raio de 80 km de Sorocaba. Posições aproximadas.</figcaption>
           </figure>
         </form>

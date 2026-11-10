@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Render dos modelos 3D</title>
+<script type="importmap">
+{ "imports": {
+  "three": "./node_modules/three/build/three.module.js",
+  "three/addons/": "./node_modules/three/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<script type="module">
+  import { renderizar } from './comum.js';
+  import { telhado, credito, maquete } from './cenas.js';
+
+  const modelos = {
+    'telhado': () => telhado(),
+    'credito-dia': () => credito('dia'),
+    'credito-noite': () => credito('noite'),
+    'mapa': () => maquete([20, 20, 580, 260]),
+    'mapa-compacto': () => maquete([330, 25, 270, 250]),
+  };
+  window.nomes = Object.keys(modelos);
+  window.gerar = (nome) => {
+    const { cena, camera, pontos } = modelos[nome]();
+    return { ...renderizar(cena, camera), pontos, desenho: camera.userData.desenho };
+  };
+  window.pronto = true;
+</script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+{
+  "telhado": {
+    "desenho": [
+      0,
+      0,
+      420,
+      250
+    ],
+    "largura": 840,
+    "altura": 500,
+    "pontos": {
+      "painel": [
+        270.3,
+        134.1
+      ],
+      "estrutura": [
+        241.8,
+        162.6
+      ],
+      "telhado": [
+        247.9,
+        181
+      ]
+    }
+  },
+  "credito-dia": {
+    "desenho": [
+      0,
+      0,
+      340,
+      210
+    ],
+    "largura": 680,
+    "altura": 420,
+    "pontos": {
+      "rede": [
+        201.1,
+        179.5
+      ]
+    }
+  },
+  "credito-noite": {
+    "desenho": [
+      0,
+      0,
+      340,
+      210
+    ],
+    "largura": 680,
+    "altura": 420,
+    "pontos": {
+      "rede": [
+        201.1,
+        179.5
+      ]
+    }
+  },
+  "mapa": {
+    "desenho": [
+      20,
+      20,
+      580,
+      260
+    ],
+    "largura": 1160,
+    "altura": 520,
+    "pontos": {
+      "Salto": [
+        454.5,
+        44
+      ],
+      "Itu": [
+        448,
+        79
+      ],
+      "Votorantim": [
+        377.5,
+        235
+      ],
+      "Sorocaba": [
+        370,
+        209
+      ],
+      "geral-Votorantim": [
+        152.3,
+        149.2
+      ],
+      "geral-Itu": [
+        173.4,
+        102.4
+      ],
+      "geral-Salto": [
+        175.4,
+        91.9
+      ],
+      "geral-Sorocaba": [
+        150,
+        140
+      ],
+      "placa": [
+        150,
+        146
+      ]
+    }
+  },
+  "mapa-compacto": {
+    "desenho": [
+      330,
+      25,
+      270,
+      250
+    ],
+    "largura": 540,
+    "altura": 500,
+    "pontos": {
+      "Salto": [
+        454.5,
+        44
+      ],
+      "Itu": [
+        448,
+        79
+      ],
+      "Votorantim": [
+        377.5,
+        235
+      ],
+      "Sorocaba": [
+        370,
+        209
+      ],
+      "geral-Votorantim": [
+        152.3,
+        149.2
+      ],
+      "geral-Itu": [
+        173.4,
+        102.4
+      ],
+      "geral-Salto": [
+        175.4,
+        91.9
+      ],
+      "geral-Sorocaba": [
+        150,
+        140
+      ],
+      "placa": [
+        150,
+        146
+      ]
+    }
+  }
+}

@@ -23,11 +23,11 @@ node verificar.mjs <URL no ar>     # confere a página publicada (arquivos com s
 | `celular-390-bloqueio-conta-200.png` | Celular: formulário enviado com conta de R$ 200, mostrando o aviso de bloqueio |
 | `celular-390-envio-conta-780.png` | Celular: formulário enviado com conta de R$ 780, mostrando a confirmação |
 | `celular-390-primeira-tela-bloqueio-200.png` | Celular: conta de R$ 200 digitada na primeira tela, com o aviso ali mesmo |
-| `computador-1440-telhado.png` | Computador: objeção do telhado, com o corte do telhado sob a pergunta |
-| `computador-1440-credito.png` | Computador: Lei 14.300 com o diagrama do crédito de dia e de noite |
+| `computador-1440-telhado.png` | Computador: objeção do telhado, com o corte do telhado em 3D sob a pergunta |
+| `computador-1440-credito.png` | Computador: Lei 14.300 com o crédito de dia e de noite em 3D |
 | `computador-1440-caso-acao.png` | Computador: caso de Sorocaba terminando com o botão |
 | `computador-1440-retorno.png` | Computador: os 25 blocos de anos, do retorno à vida útil |
-| `computador-1440-mapa-cidade-itu.png` | Computador: mapa do raio em duas escalas, com Itu escolhida no formulário |
+| `computador-1440-mapa-cidade-itu.png` | Computador: maquete 3D do raio em duas escalas, com Itu escolhida no formulário |
 | `celular-390-mapa-cidade-itu.png` | Celular: quadro ampliado no fim do formulário, depois do botão, com Itu marcada |
 
 Os arquivos com `-no-ar` no nome são as mesmas capturas, tiradas da página publicada.
@@ -42,9 +42,11 @@ Os arquivos com `-no-ar` no nome são as mesmas capturas, tiradas da página pub
 6. **Filtro de R$ 450:** contas de 200, 449, 449,99 e 300,00 bloqueiam e não abrem link nenhum; 450, 780 e 1.200,50 abrem um link cuja mensagem começa com `[Simulação site]`; formulário vazio, valor sem número e Enter no campo também não passam. A máscara do WhatsApp, o campo da conta só com número e o aviso ao sair do campo também são testados.
 
 7. **Primeira tela (quarta versão):** contas de 200 e 449,99 digitadas ali mostram o aviso, não descem ao formulário e não abrem link; 450 e 780 descem ao formulário com a conta preenchida e o cursor no nome, também sem abrir link; em branco, o botão só leva ao formulário; sem JavaScript, o campo é um formulário com `action="#simulacao"`. O valor trazido ainda passa pelo filtro: trocado para 300 bloqueia, e 780 chega à mensagem do WhatsApp.
-8. **Diagramas e blocos (quarta versão):** 25 blocos de anos nas cores certas; botão no fim do caso; "11 pessoas" na objeção 1; os quatro diagramas aparecem com legenda e nome acessível, inclusive sem JavaScript, e só usam cores da logo, sem laranja.
+8. **Diagramas e blocos (quarta versão):** 25 blocos de anos nas cores certas; botão no fim do caso; "11 pessoas" na objeção 1; os quatro diagramas aparecem com legenda e nome acessível, inclusive sem JavaScript, e a camada de texto só usa cores da logo, sem laranja.
 
 9. **Mapa do raio:** o quadro ampliado mantém as posições da visão geral (escala 5 para 1,5); celular e computador têm as mesmas posições; no celular o mapa fica depois do botão, sem nada grande entre o campo "Cidade" e o da conta, e, no computador, na coluna da esquerda; escolher cada uma das quatro cidades marca só ela, "Outra cidade" acende o raio, e sem escolha não há destaque.
+
+10. **Modelos 3D (quinta versão):** as cinco imagens de `assets/3d/` (geradas por `modelos/renderizar.mjs`) carregam, têm texto alternativo e aparecem sem JavaScript. Cada pixel opaco é um tom do `DESIGN.md` (cor da logo, ou cor da logo com azul ou branco transparente por cima) ou a borda suavizada entre dois desses tons; o script imprime a porcentagem de cada caso e falha se houver qualquer laranja. Cada imagem está em 2x e tem até 120 KB. Os anéis e pontos da camada de texto do mapa caem sobre o topo dos pinos calculados pelo modelo (`modelos/pontos.json`), e a escala 5 para 1,5 é conferida na posição dos pinos no chão.
 
 As capturas são tiradas com "menos movimento" ligado, para registrar a página já assentada.
 

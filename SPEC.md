@@ -81,6 +81,14 @@
 
    **Ficou de fora das outras páginas:** percentual de queda e economia calculada ("−85%", "R$ 662 a menos", "R$ 7.020 por ano"), calculadora, estrelas, endereço, telefone e CNPJ inventados, foto de banco de imagens, menu, formulário em janela por cima da página, contadores animados, "até 90%", irradiação solar "ao vivo" e conteúdo escondido até a animação rodar.
 
+9. **Quinta versão: os diagramas viram modelos 3D.** O corte do telhado, os dois quadros do crédito e o mapa do raio passam a ser modelos tridimensionais feitos por nós em código (Three.js, pasta `modelos/`) e exportados como imagens prontas. A página não roda 3D: recebe PNG, com os nomes e os destaques num SVG por cima.
+   *Por quê:* no corte plano não dava para ver o ponto que gera o medo, onde o gancho passa por baixo da telha e sobe até o trilho. Em volume, com o corte na frente, esse caminho aparece. A casa e o poste do crédito ficam reconhecíveis de relance, e o mapa ganha leitura de maquete sem perder a escala.
+   *Por que imagem pronta e não 3D girando na página:* 3D ao vivo custaria uns 150 KB de biblioteca, não apareceria sem JavaScript e acrescentaria movimento a uma página que corta movimento de propósito. Quem tem de 35 a 60 anos quer ver a peça, não girá-la.
+   - **Cor sem luz realista.** Cada face recebe uma cor da logo; a face de lado é a mesma cor com o azul da logo transparente por cima. É a regra dos neutros do `DESIGN.md` aplicada ao volume. Luz e sombra realistas criariam tons que a marca não tem.
+   - **O mapa usa projeção oblíqua de planta.** O chão fica visto de cima, na mesma escala da quarta versão (1,5px e 5px por km), e só o que tem altura sobe na tela. *Por quê:* numa perspectiva ou numa isométrica, a distância norte-sul encolhe e Votorantim volta a encostar em Sorocaba. Assim as posições no chão continuam exatamente as mesmas.
+   - **Texto fora da imagem.** Nomes das peças, das cidades, "rede" e "80 km" ficam no SVG por cima, como texto de verdade. O anel âmbar da cidade escolhida e a borda do raio também, para o mapa continuar respondendo ao campo "Cidade". As posições saem do próprio modelo, calculadas no render.
+   - **Fica igual:** barras do caso, garantias e blocos de anos (são número, e perspectiva distorce proporção), a marca da logo na primeira tela, as legendas e o lugar de cada diagrama. Sem JavaScript tudo aparece, só sem o destaque do mapa.
+
 **Sobre o repositório:** o `brief.md` e a pasta `material/` ficam só na máquina, fora do GitHub. *Por quê:* são material do cliente, não da página. A logo que a página usa é uma cópia idêntica em `assets/logo.svg`.
 
 ## Parte 2 — O que fica de fora
@@ -100,7 +108,7 @@
 | Endereço completo e CNPJ | Não estão no brief. A página diz "sede em Sorocaba". |
 | Link para as avaliações do Google | O endereço não veio. A nota aparece como texto. |
 | Números que "contam" até o valor, carrossel, vídeo de fundo | Movimento que atrasa a leitura do número. O público quer o dado, não o efeito. |
-| Foto de banco de imagens e ilustração de família feliz | Não é obra da Ravena. As imagens são a marca da própria logo e três diagramas técnicos nas cores dela (crédito, telhado e raio de atendimento). |
+| Foto de banco de imagens e ilustração de família feliz | Não é obra da Ravena. As imagens são a marca da própria logo e três diagramas técnicos nas cores dela (crédito, telhado e raio de atendimento), modelados em 3D por nós desde a quinta versão. |
 | "Leva menos de um minuto" e frases parecidas no formulário | Seria um número que o brief não deu. |
 | Estrelas desenhadas para a nota 4,8 | Cinco estrelas cheias diriam 5,0. A nota aparece como número. |
 | Cortes diagonais entre as seções | A única inclinação da logo é a lateral do painel, com cerca de 56°, íngreme demais para cortar uma seção. Um ângulo mais suave seria forma inventada, não da marca. |
