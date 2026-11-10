@@ -293,25 +293,45 @@ p { max-width: var(--medida); }
   text-transform: uppercase;
   color: var(--texto-suave);
 }
-.garantias {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--e-2);
-  margin-top: var(--e-3);
-}
+/* Garantias: uma barra por garantia, proporcional aos anos sobre os 25 da maior */
+.garantias { display: grid; margin-top: var(--e-3); }
 .garantias div {
-  padding: var(--e-3) 12px;
-  border: 1px solid var(--linha);
-  border-top: 3px solid var(--azul);
-  border-radius: var(--raio);
-  background: var(--branco);
+  display: grid;
+  grid-template-columns: 5.2em 1fr;
+  gap: var(--e-3);
+  align-items: start;
+  padding-block: var(--e-3);
+  border-top: 1px solid var(--linha);
 }
-.garantias dt { font-size: 21px; line-height: 1.1; font-weight: 700; white-space: nowrap; }
+.garantias div:last-child { border-bottom: 1px solid var(--linha); }
+.garantias dt {
+  font-size: 24px;
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
 .garantias dd {
-  margin-top: var(--e-1);
-  font-size: 14px;
+  font-size: var(--t-pequeno);
   line-height: 1.35;
   color: var(--texto-suave);
+}
+.garantias .trilho { height: 10px; margin-top: var(--e-2); background: var(--linha); }
+.garantias .barra { background: var(--azul); }
+.garantia-25 { width: calc(25 / 25 * 100%); }
+.garantia-10 { width: calc(10 / 25 * 100%); }
+.garantia-5  { width: calc(5 / 25 * 100%); }
+
+/* Número de destaque da objeção: azul, porque âmbar não é texto sobre branco */
+.numero-azul { color: var(--azul); }
+.texto .ancora { color: var(--azul); }
+.ancora .numero { margin-bottom: var(--e-2); }
+.ancora span {
+  display: block;
+  font-size: var(--t-h3);
+  line-height: 1.3;
+  font-weight: 700;
+  text-wrap: balance;
 }
 
 /* Caso */
@@ -541,12 +561,13 @@ p { max-width: var(--medida); }
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 .js [data-revelar].visivel { opacity: 1; transform: none; }
-.js .caso .barra { transform: scaleX(0); transition: transform 0.9s ease 0.25s; }
-.js .caso.visivel .barra { transform: none; }
+/* Barras do caso e das garantias crescem da esquerda quando o bloco aparece */
+.js [data-revelar] .barra { transform: scaleX(0); transition: transform 0.9s ease 0.25s; }
+.js [data-revelar].visivel .barra { transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .js [data-revelar], .js .caso .barra { opacity: 1; transform: none; transition: none; }
+  .js [data-revelar], .js [data-revelar] .barra { opacity: 1; transform: none; transition: none; }
   .botao, .barra-fixa, .topo { transition: none; }
 }
 
@@ -584,10 +605,9 @@ p { max-width: var(--medida); }
   .coluna-fixa { position: sticky; top: calc(var(--topo) + var(--e-5)); }
 
   .texto .frase-forte { font-size: 26px; }
-  .garantias { gap: var(--e-3); }
-  .garantias div { padding: var(--e-4); }
-  .garantias dt { font-size: 28px; }
-  .garantias dd { font-size: var(--t-pequeno); }
+  .garantias div { grid-template-columns: 5.6em 1fr; padding-block: var(--e-4); }
+  .garantias dt { font-size: 30px; }
+  .ancora span { font-size: 22px; }
 
   .caso { padding: var(--e-6); }
   .caso-valores { grid-template-columns: 1fr 1fr; gap: var(--e-6); }
