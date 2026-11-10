@@ -1,22 +1,40 @@
-# Verificação — 2026-11-10 02:05 UTC
+# Verificação — 2026-11-10 02:18 UTC
 Alvo: https://ravena-solar-lp.vercel.app/
 
 ## Layout
 OK     Em 390px não há rolagem horizontal  ->  largura do documento: 390px
 OK     Em 390px nenhum elemento passa da borda direita
-OK     Em 390x844 o botão aparece sem rolar  ->  base do botão em 534px
+OK     Em 390x844 o botão aparece sem rolar  ->  base do botão em 530px
 OK     Em 1440px não há rolagem horizontal  ->  largura do documento: 1440px
 
 ## Design (valores renderizados x DESIGN.md)
 OK     Fundo do botão é #E8721C
 OK     Texto do botão é #123A55
 OK     Texto da página é #123A55
-OK     Faixa de prova tem fundo #123A55
-OK     Número da faixa de prova é #F2A03D
+OK     Primeira tela tem fundo #123A55
+OK     Promessa em #FFFFFF sobre o azul
+OK     Intervalo "75% a 90%" em #F2A03D
+OK     Cartão de prova tem fundo #FFFFFF
+OK     Número do cartão de prova é #123A55 (âmbar não é texto sobre branco)
+OK     Valor de depois, no caso, em #F2A03D sobre azul
+OK     Cartão com canto de 12px  ->  12px
+OK     Barras do caso na proporção de R$ 118 para R$ 780  ->  46px de 302px
+OK     Nenhum texto âmbar fora de fundo azul
 OK     h1 tem 34px no celular  ->  34px
 OK     h1 tem 56px no computador  ->  56px
 OK     Uma família de fonte só, a da logo  ->  "Helvetica Neue", Helvetica, Arial, sans-serif
-OK     O laranja só aparece nos botões  ->  a.botao, button.botao
+OK     O laranja só aparece nos botões  ->  a.botao botao-topo, a.botao, button.botao, a.botao
+
+## Mecânica
+OK     Celular, primeira tela: a barra de ação fica escondida (o botão já está à vista)
+OK     Celular, meio da página: a barra de ação aparece
+OK     O topo com a logo fica preso no alto ao rolar
+OK     Celular, formulário à vista: a barra de ação some
+OK     Computador: botão no topo fixo, sem barra no pé
+OK     Computador: a marca da logo aparece ampliada na primeira tela
+OK     Com movimento ligado, toda seção termina visível depois de rolar a página  ->  ainda escondidas: 0
+OK     Sem JavaScript, todo o conteúdo nasce visível
+OK     Sem JavaScript, o formulário avisa que precisa dele e não há atalho de envio
 
 ## Texto (tom e origem dos números)
 OK     Não contém "futuro"
@@ -59,7 +77,7 @@ Número na página -> trecho do brief
   80      raio de 80 km
 
 ## Ação única e caminhos até o WhatsApp
-OK     Todo link da página leva ao formulário  ->  #simulacao
+OK     Todo link da página leva ao formulário  ->  #simulacao, #simulacao, #simulacao
 OK     Nenhum link de WhatsApp ou telefone no HTML
 OK     O formulário não tem action (sem JavaScript, nada é enviado)
 
@@ -85,6 +103,11 @@ Mensagem gerada para a conta de R$ 780:
 OK     Formulário vazio: quatro erros e nenhum link aberto  ->  Informe o seu nome. / Informe o WhatsApp com DDD. / Escolha a cidade. / Informe o valor médio da conta, em reais.
 OK     Conta sem número: não envia  ->  Informe o valor médio da conta, em reais.
 OK     "Outra cidade" mostra o campo para o nome da cidade
+OK     Máscara do WhatsApp: 15912345678 vira (15) 91234-5678  ->  (15) 91234-5678
+OK     Campo da conta só aceita número  ->  780
+OK     Conta de 780: mostra "dá para simular" ao digitar
+OK     Conta de 200: o aviso dos R$ 450 aparece ao sair do campo, antes de enviar
+OK     Corrigindo para 600, o aviso some
 OK     Enter no campo com conta de R$ 200: também bloqueia
 
 RESULTADO: tudo conferido, nenhuma falha.
