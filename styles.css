@@ -351,14 +351,14 @@ p { max-width: var(--medida); }
 }
 
 /* Caso */
+/* Caso: faixa azul de ponta a ponta */
 .caso {
-  margin-top: var(--e-6);
-  padding: var(--e-5) var(--e-4);
-  border-radius: var(--raio-cartao);
+  padding-block: var(--secao);
   background: var(--azul);
   color: var(--branco);
 }
 .caso-rotulo {
+  max-width: none;
   font-size: 13px;
   font-weight: 700;
   line-height: 1.4;
@@ -625,8 +625,7 @@ p { max-width: var(--medida); }
   .garantias dt { font-size: 30px; }
   .ancora span { font-size: 22px; }
 
-  .caso { padding: var(--e-6); }
-  .caso-valores { grid-template-columns: 1fr 1fr; gap: var(--e-6); }
+  .caso-valores { grid-template-columns: 1fr 1fr; gap: var(--e-7); margin-block: var(--e-5); padding-block: var(--e-5); }
 
   .tres-colunas { grid-template-columns: repeat(3, 1fr); gap: var(--e-4); }
   .cartao { padding: var(--e-5); }
