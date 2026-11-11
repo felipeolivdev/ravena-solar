@@ -1,4 +1,4 @@
-# Verificação — 2026-11-11 02:18 UTC
+# Verificação — 2026-11-11 02:22 UTC
 Alvo: file:///C:/Users/PICHAU/OneDrive/Desktop/oficina-202/ravena-solar/index.html
 
 ## Layout
@@ -23,8 +23,8 @@ OK     Barras do caso na proporção de R$ 118 para R$ 780  ->  53px de 350px
 OK     Barras das garantias na proporção de 25, 10 e 5 anos sobre 25  ->  1.00 / 0.40 / 0.20
 OK     Número de destaque do telhado ("5 anos") em #123A55
 OK     O número de destaque do telhado é a garantia de 5 anos da instalação
-OK     Etapa da CPFL com ponto vazado; as outras com ponto cheio
-OK     Etapa da instalação com anel #F2A03D
+OK     As oito etapas têm a mesma marca, em #123A55
+OK     A legenda abaixo das etapas diz onde vão os 45 a 60 dias
 OK     Textura do painel em .hero: #FFFFFF com opacidade 0,06, sem imagem de fundo
 OK     Textura do painel em .secao-azul: #FFFFFF com opacidade 0,06, sem imagem de fundo
 OK     Caso de Sorocaba em faixa de ponta a ponta (390px no celular)

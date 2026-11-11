@@ -636,11 +636,9 @@ p { max-width: var(--medida); }
   background: var(--azul);
 }
 .amostra-paga { background: var(--ambar); }
-/* Legenda das etapas: as amostras repetem as marcas da linha do tempo */
-.etapas-legenda { margin-top: var(--e-5); }
-.amostra-cpfl, .amostra-obra { border-radius: 50%; }
-.amostra-cpfl { background: var(--branco); box-shadow: inset 0 0 0 2px var(--azul); }
-.amostra-obra { box-shadow: 0 0 0 2px var(--ambar); }
+/* Legenda das etapas: uma frase sobre onde vai o prazo, sem marca para decifrar */
+.etapas-legenda { max-width: none; margin-top: var(--e-5); font-size: var(--t-pequeno); color: var(--texto-suave); }
+.etapas-legenda strong { color: var(--azul); }
 .retorno .ajuda { margin-top: var(--e-2); }
 
 /* Etapas: linha do tempo */
@@ -686,21 +684,6 @@ p { max-width: var(--medida); }
   background: var(--linha);
 }
 .etapas li:last-child::after { display: none; }
-/* A etapa da CPFL tem o ponto vazado; a instalação, um anel âmbar (forma, não texto) */
-.etapas .etapa-cpfl::before {
-  background: var(--branco);
-  color: var(--azul);
-  box-shadow: inset 0 0 0 2px var(--azul);
-}
-.etapas .etapa-obra::before { box-shadow: 0 0 0 3px var(--ambar); }
-.etapa-nota {
-  display: block;
-  margin-top: var(--e-1);
-  font-size: var(--t-pequeno);
-  font-weight: 400;
-  line-height: 1.4;
-  color: var(--texto-suave);
-}
 
 /* Perguntas curtas */
 .perguntas { display: grid; gap: var(--e-5); margin-top: var(--e-6); }

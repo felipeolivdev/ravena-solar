@@ -47,8 +47,7 @@ Cada decisão abaixo vem com o seu porquê. Mudou a página, muda aqui antes.
 22. **Preço, prazo e financiamento ficam abertos, em três colunas de ficha:** R$ 14 mil a R$ 19 mil, 45 a 60 dias, entrada zero possível. *Por quê:* o preço é o segundo filtro, e coluna com fio se compara fácil entre três orçamentos.
 23. **O prazo explica que a CPFL é a parte que não depende da Ravena.** *Por quê:* prazo explicado não vira prazo prometido.
 24. **25 blocos de um ano: 3 em âmbar, o quarto em âmbar claro, o resto em azul.** *Por quê:* mostra que o sistema se paga numa fração da vida dele sem escrever quanto se economiza no total.
-25. **As oito etapas viram linha do tempo, com a CPFL de ponto vazado e a instalação com anel âmbar.** *Por quê:* mostra onde os 45 a 60 dias são gastos e que a obra são dois dias, sem dar prazo por etapa.
-   *Legenda:* abaixo da linha do tempo, uma legenda com as duas marcas explica o que cada uma quer dizer. *Por quê:* sem ela o ponto vazado podia ser lido como "etapa pendente", e a diferença só se explicava pelas notas pequenas de cada etapa.
+25. **As oito etapas viram linha do tempo, todas com a mesma marca, e uma legenda curta abaixo diz onde vai o prazo:** dos 45 a 60 dias entre a assinatura e o sistema ligado, a instalação leva dois dias e o resto é projeto e homologação na CPFL, que não depende da Ravena. *Por quê:* mostrar onde o tempo é gasto e que a obra são dois dias, sem dar prazo por etapa. *Por que não marcar as etapas 5 e 6 com ponto vazado e anel âmbar:* foi testado, e mesmo com legenda das marcas a diferença não ficou clara para o cliente; o ponto vazado parecia etapa pendente. Uma frase diz o mesmo sem código visual para decifrar.
 
 ### Dúvidas antes do pedido
 

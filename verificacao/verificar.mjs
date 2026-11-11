@@ -112,10 +112,9 @@ conferir(Math.abs(g25 - 1) < 0.01 && Math.abs(g10 - 10 / 25) < 0.01 && Math.abs(
 conferir(await estilo(celular, '.texto .ancora .numero', 'color') === rgb('#123A55'), 'Número de destaque do telhado ("5 anos") em #123A55');
 conferir((await celular.locator('.texto .ancora .numero').innerText()) === '5 anos', 'O número de destaque do telhado é a garantia de 5 anos da instalação');
 const pseudo = (s, p, prop) => celular.evaluate(([a, b, c]) => getComputedStyle(document.querySelector(a), b)[c], [s, p, prop]);
-conferir(await pseudo('.etapa-cpfl', '::before', 'backgroundColor') === rgb('#FFFFFF')
-  && await pseudo('.etapas li:first-child', '::before', 'backgroundColor') === rgb('#123A55'),
-  'Etapa da CPFL com ponto vazado; as outras com ponto cheio');
-conferir((await pseudo('.etapa-obra', '::before', 'boxShadow')).includes(rgb('#F2A03D')), 'Etapa da instalação com anel #F2A03D');
+conferir(await celular.evaluate(() => [...document.querySelectorAll('.etapas li')].every(li => !li.className && getComputedStyle(li, '::before').backgroundColor === 'rgb(18, 58, 85)')),
+  'As oito etapas têm a mesma marca, em #123A55');
+conferir(/45 a 60 dias/.test(await celular.locator('.etapas-legenda').innerText()), 'A legenda abaixo das etapas diz onde vão os 45 a 60 dias');
 for (const s of ['.hero', '.secao-azul']) {
   const ok = await pseudo(s, '::before', 'backgroundColor') === rgb('#FFFFFF')
     && await pseudo(s, '::before', 'opacity') === '0.06'
