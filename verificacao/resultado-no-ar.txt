@@ -1,4 +1,4 @@
-# Verificação — 2026-11-11 01:45 UTC
+# Verificação — 2026-11-11 01:47 UTC
 Alvo: https://ravena-solar-lp.vercel.app/
 
 ## Layout
@@ -94,8 +94,9 @@ Número na página -> trecho do brief
   80      raio de 80 km
 
 ## Ação única e caminhos até o WhatsApp
+OK     A logo do topo leva ao início da página
 OK     Navegação do topo: seis links para as seções  ->  #empresa, #telhado, #lei, #caso, #preco, #duvidas
-OK     Fora a navegação de seções, todo link da página leva ao formulário  ->  #empresa, #telhado, #lei, #caso, #preco, #duvidas, #simulacao, #simulacao, #simulacao
+OK     Fora a logo e a navegação de seções, todo link da página leva ao formulário  ->  #inicio, #empresa, #telhado, #lei, #caso, #preco, #duvidas, #simulacao, #simulacao, #simulacao
 OK     Cada link de seção aponta para uma seção que existe
 OK     Navegação do topo só no computador (some no celular)
 OK     Links da navegação em texto suave, sem cor de ação
