@@ -49,9 +49,9 @@ Cada decisão abaixo vem com o seu porquê. Mudou a página, muda aqui antes.
 24. **25 blocos de um ano: 3 em âmbar, o quarto em âmbar claro, o resto em azul.** *Por quê:* mostra que o sistema se paga numa fração da vida dele sem escrever quanto se economiza no total.
 25. **As oito etapas viram linha do tempo, com a CPFL de ponto vazado e a instalação com anel âmbar.** *Por quê:* mostra onde os 45 a 60 dias são gastos e que a obra são dois dias, sem dar prazo por etapa.
 
-### Perguntas curtas
+### Dúvidas antes do pedido
 
-26. **Mudança de casa, dia nublado e bateria ficam numa lista curta logo antes do formulário.** *Por quê:* são dúvidas de uma linha e não pedem mais do que isso.
+26. **Cinco dúvidas ficam numa lista logo antes do formulário: mudança de casa, dia nublado e noite, bateria, cidade atendida e se pedir a simulação compromete.** Cada resposta explica o porquê em duas ou três frases, só com fatos do brief. *Por quê:* na versão de uma linha, as respostas soavam secas e deixavam a dúvida no ar, e a pessoa está a um passo do formulário. "Atendem a minha cidade?" e "Pedir me compromete?" entram porque são as hesitações de quem está prestes a pedir: o raio só aparecia no campo Cidade, e o cliente costuma pedir três orçamentos antes de decidir. Manutenção de sistema de terceiros e comércio continuam fora (Parte 2).
 
 ### Formulário
 
