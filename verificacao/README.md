@@ -25,8 +25,11 @@ node verificar.mjs <URL no ar>     # confere a página publicada (arquivos com s
 | `celular-390-primeira-tela-bloqueio-200.png` | Celular: conta de R$ 200 digitada na primeira tela, com o aviso ali mesmo |
 | `computador-1440-telhado.png` | Computador: objeção do telhado, com o corte do telhado em 3D sob a pergunta |
 | `computador-1440-credito.png` | Computador: Lei 14.300 com o crédito de dia e de noite em 3D |
-| `computador-1440-caso-acao.png` | Computador: caso de Sorocaba terminando com o botão |
+| `computador-1440-caso-acao.png` | Computador: caso de Sorocaba, com os dois valores, a ficha da casa e o botão |
 | `computador-1440-retorno.png` | Computador: os 25 blocos de anos, do retorno à vida útil |
+| `celular-390-primeira-tela-regua-780.png` | Celular: conta de R$ 780 digitada na primeira tela, com o ponto da régua à direita da marca de R$ 450 |
+| `computador-1440-equipe.png` | Computador: objeção 1, com "11 pessoas" e os quatro fatos |
+| `computador-1440-formulario.png` | Computador: o formulário como ficha de pedido, com os campos numerados |
 
 Os arquivos com `-no-ar` no nome são as mesmas capturas, tiradas da página publicada.
 
@@ -47,6 +50,10 @@ Os arquivos com `-no-ar` no nome são as mesmas capturas, tiradas da página pub
 10. **Modelos 3D (quinta versão):** as três imagens de `assets/3d/` (geradas por `modelos/renderizar.mjs`) carregam, têm texto alternativo e aparecem sem JavaScript. Cada pixel opaco é um tom do `DESIGN.md` (cor da logo, ou cor da logo com azul ou branco transparente por cima) ou a borda suavizada entre dois desses tons; o script imprime a porcentagem de cada caso e falha se houver qualquer laranja. Cada imagem está em 2x e tem até 120 KB.
 
 As capturas são tiradas com "menos movimento" ligado, para registrar a página já assentada.
+
+11. **Ficha técnica (sétima versão):** o maior texto da página é o número (a promessa e os dois valores do caso têm o mesmo tamanho, e nada é maior); os rótulos têm letras espaçadas; as seis seções e os quatro campos são numerados pelo CSS, então a numeração não entra no texto nem na conferência de números; o painel de prova tem as linhas brancas a 0,85 e o sol da primeira tela tem os mesmos raios da `logo.svg`; o quadro do dia é branco e o da noite, azul. **Régua dos R$ 450:** sem valor não há ponto; 200 e 449 caem à esquerda da marca, 450 em cima dela e 780 à direita; valor alto para na ponta; o único número escrito é 450; digitar não abre link; sem JavaScript a régua aparece parada.
+
+As capturas só são tiradas depois que as imagens dos diagramas estão decodificadas. Antes da sétima versão isso não era esperado, e a página inteira podia sair com os diagramas em branco.
 
 ## O que o script não confere
 

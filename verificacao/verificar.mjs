@@ -54,6 +54,10 @@ async function abrir(largura, altura, opcoes = {}) {
   });
   const pagina = await contexto.newPage();
   await pagina.goto(alvo, { waitUntil: 'load' });
+  // Espera cada imagem estar decodificada: sem isso, a captura da página inteira
+  // podia sair com os diagramas em branco.
+  // (Só os diagramas: a logo do rodapé carrega sob demanda e não entra na espera.)
+  await pagina.evaluate(() => Promise.all([...document.querySelectorAll('.render img')].map((i) => i.decode().catch(() => {}))));
   return pagina;
 }
 
@@ -89,10 +93,12 @@ conferir(await estilo(celular, 'body', 'color') === rgb('#123A55'), 'Texto da p�
 conferir(await estilo(celular, '.hero', 'backgroundColor') === rgb('#123A55'), 'Primeira tela tem fundo #123A55');
 conferir(await estilo(celular, 'h1', 'color') === rgb('#FFFFFF'), 'Promessa em #FFFFFF sobre o azul');
 conferir(await estilo(celular, '.destaque-ambar', 'color') === rgb('#F2A03D'), 'Intervalo "75% a 90%" em #F2A03D');
-conferir(await estilo(celular, '.prova-lista', 'backgroundColor') === rgb('#FFFFFF'), 'Cartão de prova tem fundo #FFFFFF');
-conferir(await estilo(celular, '.prova .numero', 'color') === rgb('#123A55'), 'Número do cartão de prova é #123A55 (âmbar não é texto sobre branco)');
+conferir(await estilo(celular, '.prova-lista', 'backgroundColor') === rgb('#123A55') && await estilo(celular, '.prova-lista li', 'backgroundColor') === 'rgba(255, 255, 255, 0.1)',
+  'Painel de prova: célula em branco a 0,10 sobre #123A55');
+conferir(await estilo(celular, '.prova-lista', 'borderTopColor') === 'rgba(255, 255, 255, 0.85)', 'Linhas do painel de prova em branco a 0,85, como na logo');
+conferir(await estilo(celular, '.prova .numero', 'color') === rgb('#FFFFFF'), 'Número do painel de prova em #FFFFFF sobre azul');
 conferir(await estilo(celular, '.caso .numero:not(.numero-branco)', 'color') === rgb('#F2A03D'), 'Valor de depois, no caso, em #F2A03D sobre azul');
-conferir(await estilo(celular, '.prova-lista', 'borderTopLeftRadius') === '12px', 'Cartão com canto de 12px', await estilo(celular, '.prova-lista', 'borderTopLeftRadius'));
+conferir(await estilo(celular, '.formulario', 'borderTopLeftRadius') === '12px', 'Ficha do formulário com canto de 12px', await estilo(celular, '.formulario', 'borderTopLeftRadius'));
 const trilho = await celular.locator('.barra-antes').boundingBox();
 const depois = await celular.locator('.barra-depois').boundingBox();
 conferir(Math.abs(depois.width / trilho.width - 118 / 780) < 0.01, 'Barras do caso na proporção de R$ 118 para R$ 780', `${Math.round(depois.width)}px de ${Math.round(trilho.width)}px`);
@@ -121,8 +127,27 @@ const ambarEmBranco = await celular.evaluate((cor) => [...document.querySelector
   .filter(e => getComputedStyle(e).color === cor && e.textContent.trim() && !e.closest('.hero, .secao-azul, .caso'))
   .map(e => e.tagName.toLowerCase() + '.' + e.className), rgb('#F2A03D'));
 conferir(ambarEmBranco.length === 0, 'Nenhum texto âmbar fora de fundo azul', ambarEmBranco.join(', '));
-conferir(await estilo(celular, 'h1', 'fontSize') === '34px', 'h1 tem 34px no celular', await estilo(celular, 'h1', 'fontSize'));
-conferir(await estilo(computador, 'h1', 'fontSize') === '56px', 'h1 tem 56px no computador', await estilo(computador, 'h1', 'fontSize'));
+const px = async (pagina, s) => parseFloat(await estilo(pagina, s, 'fontSize'));
+conferir(await px(celular, 'h1') === 24 && await px(computador, 'h1') === 36, 'Frase da promessa: 24px no celular e 36px no computador');
+conferir(Math.abs(await px(celular, '.h1-numero') - 58.5) < 0.1 && await px(computador, '.h1-numero') === 136,
+  'Intervalo "75% a 90%" monumental: 15vw no celular (58,5px em 390) e 136px em 1440', `${await px(celular, '.h1-numero')} / ${await px(computador, '.h1-numero')}`);
+for (const [pagina, nome] of [[celular, 'celular'], [computador, 'computador']]) {
+  const tamanhos = await pagina.evaluate(() => [...document.querySelectorAll('body *')]
+    .filter(e => e.textContent.trim() && e.getClientRects().length).map(e => parseFloat(getComputedStyle(e).fontSize)));
+  const maior = Math.max(...tamanhos);
+  conferir(maior === await px(pagina, '.h1-numero') && maior === await px(pagina, '.caso .numero'),
+    `${nome}: o maior texto da página é o número (a promessa e os dois valores do caso)`, `${maior}px`);
+}
+conferir(await estilo(computador, '.rotulo', 'letterSpacing') === '2.4px' && await estilo(computador, '.rotulo', 'textTransform') === 'uppercase',
+  'Rótulos em caixa alta com letras espaçadas (0,2em), como "SOLAR" na logo', await estilo(computador, '.rotulo', 'letterSpacing'));
+const folhas = await celular.evaluate(() => [...document.querySelectorAll('.folha .rotulo')].map(e => getComputedStyle(e, '::before').content));
+conferir(folhas.length === 6 && folhas.every(c => /counter\(folha/.test(c)), 'Seis seções numeradas pelo CSS (o número da folha não entra no texto)', `${folhas.length} folhas`);
+conferir(await celular.locator('.formulario .campo-numerado').count() === 4, 'Formulário: quatro campos numerados pelo CSS');
+conferir(await celular.locator('.prova .sol').isVisible() && await computador.locator('.prova .sol').isVisible()
+  && await estilo(celular, '.arte-sol', 'fill') === rgb('#F2A03D'), 'O sol da logo aparece atrás do painel de prova, em #F2A03D, no celular e no computador');
+const raios = (svg) => (svg.match(/<line[^>]+>/g) || []).slice(0, 5).map(l => ['x1', 'y1', 'x2', 'y2'].map(a => l.match(new RegExp(a + '="([^"]+)"'))[1]).join()).join(';');
+conferir(raios(readFileSync(path.join(raiz, 'assets/logo.svg'), 'utf8')) === raios(await celular.locator('.sol').evaluate(e => e.outerHTML)),
+  'O sol da primeira tela tem os mesmos raios da logo.svg');
 const familias = await celular.evaluate(() => [...new Set([...document.querySelectorAll('body *')].map(e => getComputedStyle(e).fontFamily))]);
 conferir(familias.length === 1 && familias[0].includes('Helvetica Neue'), 'Uma família de fonte só, a da logo', familias.join(' | '));
 const laranjas = await celular.evaluate((cor) => {
@@ -153,7 +178,6 @@ await celular.waitForFunction(() => !document.getElementById('barra-fixa').class
 conferir(true, 'Celular, formulário à vista: a barra de ação some');
 await celular.evaluate(() => window.scrollTo(0, 0));
 conferir(await computador.locator('.botao-topo').isVisible() && !(await computador.locator('#barra-fixa').isVisible()), 'Computador: botão no topo fixo, sem barra no pé');
-conferir(await computador.locator('.hero-arte svg').isVisible(), 'Computador: a marca da logo aparece ampliada na primeira tela');
 
 const comMovimento = await abrir(390, 844, { reducedMotion: 'no-preference' });
 const altura = await comMovimento.evaluate(() => document.documentElement.scrollHeight);
@@ -271,6 +295,32 @@ await celular.fill('#conta', '200');
 await celular.press('#conta', 'Enter');
 conferir((await celular.evaluate(() => window.__abertos)).length === 0, 'Enter no campo com conta de R$ 200: também bloqueia');
 
+// Régua dos R$ 450: só mostra de que lado o valor cai.
+titulo('Primeira tela: régua dos R$ 450');
+{
+  await celular.reload();
+  await celular.evaluate(() => window.scrollTo(0, 0));
+  const lado = async (valor) => {
+    await celular.fill('#conta-hero', '');
+    if (valor) await celular.locator('#conta-hero').pressSequentially(valor);
+    return celular.evaluate(() => {
+      const p = document.getElementById('regua-ponto'), t = document.querySelector('.regua-trilho').getBoundingClientRect();
+      if (p.hidden) return null;
+      const r = p.getBoundingClientRect();
+      return (r.left + r.width / 2 - t.left) / t.width;
+    });
+  };
+  conferir(await lado('') === null, 'Régua: sem valor digitado, não há ponto');
+  const p200 = await lado('200'), p449 = await lado('449'), p450 = await lado('450'), p9000 = await lado('9000'), p780 = await lado('780');
+  conferir(p200 < 0.4 && p449 < 0.4, 'Régua: 200 e 449 caem à esquerda da marca de R$ 450', `${p200.toFixed(3)} / ${p449.toFixed(3)}`);
+  conferir(Math.abs(p450 - 0.4) < 0.005 && p780 > 0.4, 'Régua: 450 cai em cima da marca e 780 à direita', `${p450.toFixed(3)} / ${p780.toFixed(3)}`);
+  conferir(p9000 <= 1, 'Régua: valor alto para na ponta, sem sair da régua', p9000.toFixed(3));
+  conferir((await celular.locator('.regua').innerText()).match(/\d+/g).join() === '450', 'Régua: o único número escrito é 450');
+  conferir((await celular.evaluate(() => window.__abertos)).length === 0, 'Régua: digitar não abre o WhatsApp');
+  await celular.screenshot({ path: path.join(aqui, `celular-390-primeira-tela-regua-780${sufixo}.png`) });
+  conferir(await semJs.locator('.regua').isVisible() && !(await semJs.locator('#regua-ponto').isVisible()), 'Sem JavaScript, a régua aparece parada, sem o ponto');
+}
+
 // Primeira tela: a conta como primeiro passo. Nunca abre o WhatsApp.
 titulo('Primeira tela: campo da conta');
 async function hero(pagina, valor) {
@@ -339,6 +389,8 @@ for (const [pagina, nome] of [[celular, 'celular'], [computador, 'computador']])
   conferir(d.length === 3 && d.every(x => x.legenda && x.rotulo && x.altura > 50),
     `${nome}: os três modelos 3D (telhado, crédito de dia e de noite) carregam e aparecem, com legenda e texto alternativo`, d.map(x => Math.round(x.altura)).join(' / '));
 }
+conferir(await estilo(celular, '.credito-dia', 'backgroundColor') === rgb('#FFFFFF') && await estilo(celular, '.credito-noite', 'backgroundColor') === rgb('#123A55'),
+  'Crédito: o quadro do dia sobre #FFFFFF e o da noite sobre #123A55');
 const coresSvg = await celular.evaluate(() => {
   const s = new Set();
   document.querySelectorAll('.diagrama .render-texto *').forEach(e => { const c = getComputedStyle(e); [c.fill, c.stroke].forEach(v => { if (v && v !== 'none') s.add(v); }); });
@@ -412,7 +464,7 @@ for (const [pagina, nome] of [[celular, 'celular'], [computador, 'computador']])
 conferir((await celular.locator('#cidade option').allInnerTexts()).includes('Outra cidade a até 80 km de Sorocaba'), 'O campo "Cidade" continua dizendo o raio de 80 km');
 
 await computador.evaluate(() => document.querySelectorAll('[data-revelar]').forEach(e => e.classList.add('visivel')));
-for (const [seletor, nome] of [['.diagrama-telhado', 'telhado'], ['.credito', 'credito'], ['.caso-acao', 'caso-acao'], ['.retorno', 'retorno']]) {
+for (const [seletor, nome] of [['.diagrama-telhado', 'telhado'], ['.credito', 'credito'], ['.caso-conteudo', 'caso-acao'], ['.retorno', 'retorno'], ['.equipe', 'equipe'], ['.formulario', 'formulario']]) {
   await computador.evaluate((s) => document.querySelector(s).scrollIntoView({ block: 'center' }), seletor);
   await computador.screenshot({ path: path.join(aqui, `computador-1440-${nome}${sufixo}.png`) });
 }

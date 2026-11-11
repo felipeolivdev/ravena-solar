@@ -184,10 +184,23 @@
   var avisoHero = document.getElementById('aviso-hero');
   var menosMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  // Régua dos R$ 450: só mostra de que lado o valor cai. A marca fica em --limite (40%)
+  // da régua; o ponto anda na mesma proporção e para nas pontas. Não decide nada.
+  var reguaPonto = document.getElementById('regua-ponto');
+  var REGUA_LIMITE = 40;
+  function moverRegua(v) {
+    var valido = !isNaN(v) && v > 0;
+    reguaPonto.hidden = !valido;
+    if (!valido) return;
+    var posicao = Math.min(98, Math.max(2, v / CONTA_MINIMA * REGUA_LIMITE));
+    reguaPonto.style.setProperty('--posicao', posicao + '%');
+  }
+
   contaHero.addEventListener('input', function () {
     contaHero.value = contaHero.value.replace(/[^\d.,]/g, '');
     var v = lerValor(contaHero.value);
     if (isNaN(v) || v >= CONTA_MINIMA) avisoHero.hidden = true;
+    moverRegua(v);
   });
 
   formHero.addEventListener('submit', function (evento) {

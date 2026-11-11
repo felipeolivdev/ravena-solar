@@ -10,19 +10,24 @@
   --fundo-suave: rgb(18 58 85 / 0.05);
   --branco-suave: rgb(255 255 255 / 0.80);
   --linha-clara: rgb(255 255 255 / 0.24);
+  --linha-painel: rgb(255 255 255 / 0.85); /* as linhas do painel, com a opacidade que têm na logo */
+  --painel: rgb(255 255 255 / 0.10);       /* a célula do painel sobre o azul */
   --sombra: 0 10px 30px rgb(18 58 85 / 0.14);
   --textura: 0.06;
 
   --fonte: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --leve: 300;      /* o peso de "SOLAR" na logo; onde o sistema não tem, cai em 400 */
+  --rastro: 0.2em;  /* letras espaçadas dos rótulos, como "SOLAR" na logo */
 
-  --t-h1: 34px;
-  --t-h2: 26px;
-  --t-numero: 40px;
+  --t-monumental: clamp(46px, 15vw, 60px);
+  --t-numero: 56px;
+  --t-prova: 44px;
+  --t-h1: 24px;
+  --t-h2: 30px;
   --t-h3: 19px;
   --t-corpo: 17px;
   --t-pequeno: 15px;
-  --l-h1: 1.12;
-  --l-h2: 1.2;
+  --t-rotulo: 12px;
   --l-corpo: 1.55;
 
   --e-1: 4px;
@@ -41,18 +46,18 @@
   --raio: 6px;
   --raio-cartao: 12px;
   --topo: 64px;
-  --avanco: 56px; /* quanto o cartão de prova sobe sobre a primeira tela */
+  --limite: 40%; /* onde a marca de R$ 450 fica na régua */
 }
 
 @media (min-width: 760px) {
   :root {
-    --t-h1: 56px;
-    --t-h2: 36px;
-    --t-numero: 52px;
+    --t-monumental: clamp(88px, 12vw, 136px);
+    --t-numero: clamp(60px, 8.2vw, 96px);
+    --t-prova: clamp(48px, 6.6vw, 88px);
+    --t-h1: 36px;
+    --t-h2: clamp(40px, 5vw, 56px);
     --t-h3: 20px;
     --t-corpo: 18px;
-    --l-h1: 1.08;
-    --l-h2: 1.15;
     --l-corpo: 1.6;
     --secao: 96px;
     --margem: 32px;
@@ -77,37 +82,46 @@ body {
   line-height: var(--l-corpo);
   font-variant-numeric: tabular-nums;
   -webkit-font-smoothing: antialiased;
+  counter-reset: folha;
 }
 
-h1, h2, h3, p, ul, ol, dl, dd { margin: 0; }
+h1, h2, h3, p, ul, ol, dl, dd, figure { margin: 0; }
 ul, ol { padding: 0; list-style: none; }
+[hidden] { display: none !important; }
 
+/* A promessa: frase leve, número monumental */
 h1 {
   font-size: var(--t-h1);
-  line-height: var(--l-h1);
-  font-weight: 700;
-  letter-spacing: -0.015em;
+  line-height: 1.2;
+  font-weight: 400;
+}
+.h1-frase {
+  display: block;
+  max-width: 17em;
+  font-weight: var(--leve);
+  letter-spacing: -0.005em;
   text-wrap: balance;
+}
+.h1-numero {
+  display: block;
+  margin-top: var(--e-2);
+  font-size: var(--t-monumental);
+  line-height: 0.95;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  white-space: nowrap;
 }
 
+/* Título de seção: a pergunta do cliente, grande, na largura toda */
 h2 {
   font-size: var(--t-h2);
-  line-height: var(--l-h2);
+  line-height: 1.08;
   font-weight: 700;
-  letter-spacing: -0.01em;
-  max-width: 24em;
+  letter-spacing: -0.025em;
+  max-width: 17em;
   text-wrap: balance;
 }
-/* Traço âmbar acima de cada título de seção */
-h2::before {
-  content: "";
-  display: block;
-  width: 40px;
-  height: 4px;
-  margin-bottom: var(--e-3);
-  border-radius: 2px;
-  background: var(--ambar);
-}
+.citacao { text-indent: -0.42em; } /* a aspa fica pendurada para fora do alinhamento */
 
 h3 {
   font-size: var(--t-h3);
@@ -172,26 +186,62 @@ p { max-width: var(--medida); }
 .botao:active { transform: translateY(0); box-shadow: none; }
 .botao-topo { display: none; }
 
+/* Rótulo: fio no topo, traço âmbar e letras espaçadas. Nas seções numeradas,
+   o número da folha vem do CSS (é ordem, não cifra, e não entra no texto). */
+.rotulo {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  gap: var(--e-3);
+  max-width: none;
+  margin-bottom: var(--e-5);
+  padding-top: var(--e-3);
+  border-top: 1px solid var(--linha);
+  font-size: var(--t-rotulo);
+  line-height: 1.4;
+  letter-spacing: var(--rastro);
+  text-transform: uppercase;
+  color: var(--texto-suave);
+}
+.rotulo::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -2px;
+  width: 40px;
+  height: 4px;
+  background: var(--ambar);
+}
+.folha { counter-increment: folha; }
+.folha .rotulo::before {
+  content: counter(folha, decimal-leading-zero);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--azul);
+}
+.secao-azul .rotulo { border-top-color: var(--linha-clara); color: var(--branco-suave); }
+.secao-azul.folha .rotulo::before { color: var(--branco); }
+
 /* 1. Promessa */
 .hero {
+  position: relative;
+  isolation: isolate;
   background: var(--azul);
   color: var(--branco);
-  padding-block: var(--e-6) calc(var(--e-6) + var(--avanco));
+  padding-top: var(--e-5);
   overflow: hidden;
 }
-.hero-grade { display: grid; }
-.hero-arte { display: none; }
 .sobretitulo {
-  margin-bottom: var(--e-3);
-  font-size: var(--t-pequeno);
-  font-weight: 700;
-  line-height: 1.45;
+  margin-bottom: var(--e-4);
+  font-size: var(--t-rotulo);
+  line-height: 1.5;
+  letter-spacing: var(--rastro);
+  text-transform: uppercase;
   color: var(--ambar);
 }
-.destaque-ambar { color: var(--ambar); white-space: nowrap; }
+.destaque-ambar { color: var(--ambar); }
 .hero-texto {
   margin-top: var(--e-4);
-  margin-bottom: var(--e-5);
   color: var(--branco-suave);
 }
 .nota-botao {
@@ -200,39 +250,122 @@ p { max-width: var(--medida); }
   color: var(--branco-suave);
 }
 
+/* O campo da conta como primeiro passo do formulário */
+.hero-conta { display: grid; gap: var(--e-2); margin-top: var(--e-4); max-width: 560px; }
+.hero-conta label { font-weight: 700; color: var(--branco); }
+.hero-conta-linha { display: grid; gap: var(--e-3); }
+.hero-conta input {
+  width: 100%;
+  min-height: 56px;
+  padding: var(--e-2) var(--e-3) var(--e-2) 52px;
+  border: 0;
+  border-radius: var(--raio);
+  background: var(--branco);
+  color: var(--azul);
+  font: inherit;
+  font-size: 20px;
+  font-weight: 700;
+}
+.hero-conta input:focus { outline: 3px solid var(--laranja); outline-offset: 2px; }
+.hero-conta .aviso { margin-top: var(--e-2); }
+
+/* Régua dos R$ 450: à esquerda da marca a conta não fecha; à direita, fazemos a simulação */
+.regua { margin-top: var(--e-2); }
+.regua-trilho {
+  position: relative;
+  height: 8px;
+  background: var(--linha-clara);
+}
+.regua-trilho::before { /* o lado em que fazemos a simulação */
+  content: "";
+  position: absolute;
+  left: var(--limite);
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: var(--branco);
+}
+.regua-trilho::after { /* a marca dos R$ 450 */
+  content: "";
+  position: absolute;
+  left: var(--limite);
+  top: -6px;
+  bottom: -6px;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--branco);
+}
+.regua-ponto {
+  position: absolute;
+  z-index: 1;
+  left: var(--posicao, 0%);
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  border: 3px solid var(--azul);
+  border-radius: 50%;
+  background: var(--ambar);
+  transition: left 0.3s ease;
+}
+.regua-legenda {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--e-2);
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--branco-suave);
+}
+.regua-limite {
+  position: absolute;
+  left: var(--limite);
+  transform: translateX(-50%);
+  font-weight: 700;
+  color: var(--branco);
+  white-space: nowrap;
+}
+
+/* O pé da primeira tela repete a logo: o sol nasce por trás do painel */
+.prova { position: relative; margin-top: 104px; }
+.sol {
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  bottom: 100%;
+  width: 168px;
+  height: auto;
+  transform: translateY(30%);
+}
 .arte-sol { fill: var(--ambar); }
 .arte-raios { stroke: var(--ambar); stroke-width: 9; stroke-linecap: round; }
-.arte-painel-base { fill: var(--azul); }
-.arte-painel { fill: var(--branco); fill-opacity: 0.14; stroke: var(--branco); stroke-width: 2; stroke-linejoin: round; }
-.arte-grade { stroke: var(--branco); stroke-width: 3; opacity: 0.7; }
 
-/* Cartão de prova, avançando sobre a primeira tela */
-.prova { margin-top: calc(-1 * var(--avanco)); position: relative; z-index: 1; }
+/* Painel de prova: células com as linhas brancas da logo */
 .prova-lista {
   display: grid;
-  border-radius: var(--raio-cartao);
-  border-top: 4px solid var(--ambar);
-  background: var(--branco);
-  box-shadow: var(--sombra);
+  border-top: 2px solid var(--linha-painel);
+  background: var(--azul); /* tampa o sol; cada célula põe --painel por cima */
 }
 .prova-lista li {
   display: grid;
-  grid-template-columns: 7.2em 1fr;
+  grid-template-columns: 4.1em 1fr;
   gap: var(--e-3);
   align-items: center;
-  padding: var(--e-4);
-  border-top: 1px solid var(--linha);
+  padding: var(--e-4) var(--e-3);
+  border-top: 2px solid var(--linha-painel);
+  background: var(--painel);
+  font-size: var(--t-prova);
 }
 .prova-lista li:first-child { border-top: 0; }
-.prova-lista span { color: var(--texto-suave); font-size: var(--t-pequeno); line-height: 1.4; }
-.prova .numero { color: var(--azul); font-size: 34px; white-space: nowrap; }
+.prova-lista span { color: var(--branco-suave); font-size: var(--t-pequeno); line-height: 1.4; }
+.prova .numero { color: var(--branco); font-size: 1em; white-space: nowrap; }
 
 .numero {
   display: block;
   font-size: var(--t-numero);
-  line-height: 1;
+  line-height: 0.95;
   font-weight: 700;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.035em;
   color: var(--ambar);
 }
 .numero-branco { color: var(--branco); }
@@ -241,10 +374,11 @@ p { max-width: var(--medida); }
 .secao { padding-block: var(--secao); }
 .secao-suave { background: var(--fundo-suave); }
 .secao-azul { background: var(--azul); color: var(--branco); }
+.cabeca { margin-bottom: var(--e-6); }
 
 /* Textura do painel: a grade das células do painel da logo, só sobre azul.
    Desenhada por máscara SVG; a cor é sempre --branco. */
-.hero, .secao-azul { position: relative; isolation: isolate; }
+.secao-azul { position: relative; isolation: isolate; }
 .hero::before, .secao-azul::before {
   content: "";
   position: absolute;
@@ -258,24 +392,16 @@ p { max-width: var(--medida); }
 }
 
 .duas-colunas { display: grid; gap: var(--e-5); }
-.rotulo {
-  margin-bottom: var(--e-3);
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1.3;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--texto-suave);
-}
-.apoio { margin-top: var(--e-3); color: var(--texto-suave); }
+.apoio { margin-top: var(--e-4); color: var(--texto-suave); }
 .secao-azul .apoio { color: var(--branco-suave); }
 
 .texto p + p { margin-top: var(--e-3); }
 .texto p { color: var(--texto-suave); }
 .texto .frase-forte {
-  font-size: 22px;
-  line-height: 1.3;
+  font-size: 26px;
+  line-height: 1.15;
   font-weight: 700;
+  letter-spacing: -0.015em;
   color: var(--azul);
   text-wrap: balance;
 }
@@ -302,29 +428,48 @@ p { max-width: var(--medida); }
 .fatos-claros li::before { background: var(--ambar); }
 .fatos-claros p { margin-top: 0; color: var(--branco); }
 
+/* Número de destaque da objeção: azul, porque âmbar não é texto sobre branco */
+.numero-azul { color: var(--azul); }
+.texto .ancora { color: var(--azul); }
+.ancora .numero { margin-bottom: var(--e-3); white-space: nowrap; }
+.ancora span {
+  display: block;
+  max-width: 20em;
+  font-size: var(--t-h3);
+  line-height: 1.3;
+  font-weight: 700;
+  text-wrap: balance;
+}
+.texto .ancora + p { margin-top: var(--e-4); }
+
+/* Objeção 1: o número da equipe em cima, os fatos embaixo */
+.equipe { display: grid; gap: var(--e-5); }
+
+/* Garantias: uma barra por garantia, proporcional aos anos sobre os 25 da maior */
 .garantias-titulo {
   margin-top: var(--e-6);
-  font-size: 13px;
-  letter-spacing: 0.08em;
+  font-size: var(--t-rotulo);
+  font-weight: 400;
+  letter-spacing: var(--rastro);
   text-transform: uppercase;
   color: var(--texto-suave);
 }
-/* Garantias: uma barra por garantia, proporcional aos anos sobre os 25 da maior */
 .garantias { display: grid; margin-top: var(--e-3); }
 .garantias div {
   display: grid;
-  grid-template-columns: 5.2em 1fr;
+  grid-template-columns: 4.6em 1fr;
   gap: var(--e-3);
-  align-items: start;
+  align-items: center;
   padding-block: var(--e-3);
   border-top: 1px solid var(--linha);
+  font-size: 26px;
 }
 .garantias div:last-child { border-bottom: 1px solid var(--linha); }
 .garantias dt {
-  font-size: 24px;
-  line-height: 1.1;
+  font-size: 1em;
+  line-height: 1;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   white-space: nowrap;
 }
 .garantias dd {
@@ -332,26 +477,29 @@ p { max-width: var(--medida); }
   line-height: 1.35;
   color: var(--texto-suave);
 }
-.garantias .trilho { height: 10px; margin-top: var(--e-2); background: var(--linha); }
+.garantias .trilho { height: 12px; margin-top: var(--e-2); background: var(--linha); }
 .garantias .barra { background: var(--azul); }
 .garantia-25 { width: calc(25 / 25 * 100%); }
 .garantia-10 { width: calc(10 / 25 * 100%); }
 .garantia-5  { width: calc(5 / 25 * 100%); }
 
-/* Número de destaque da objeção: azul, porque âmbar não é texto sobre branco */
-.numero-azul { color: var(--azul); }
-.texto .ancora { color: var(--azul); }
-.ancora .numero { margin-bottom: var(--e-2); }
-.ancora span {
+/* Barras: ponta reta, como em desenho técnico */
+.trilho {
   display: block;
-  font-size: var(--t-h3);
-  line-height: 1.3;
-  font-weight: 700;
-  text-wrap: balance;
+  height: 14px;
+  margin-top: var(--e-3);
+  border-radius: 2px;
+  background: var(--linha-clara);
+  overflow: hidden;
+}
+.barra {
+  display: block;
+  height: 100%;
+  border-radius: 2px;
+  transform-origin: left center;
 }
 
-/* Caso */
-/* Caso: faixa azul de ponta a ponta */
+/* Caso: faixa azul de ponta a ponta, com os maiores números da página */
 .caso {
   padding-block: var(--secao);
   background: var(--azul);
@@ -359,20 +507,18 @@ p { max-width: var(--medida); }
 }
 .caso-rotulo {
   max-width: none;
-  font-size: 13px;
-  font-weight: 700;
-  line-height: 1.4;
-  letter-spacing: 0.08em;
+  font-size: var(--t-rotulo);
+  line-height: 1.5;
+  letter-spacing: var(--rastro);
   text-transform: uppercase;
   color: var(--ambar);
 }
 .caso-valores {
   display: grid;
   gap: var(--e-5);
-  margin-block: var(--e-4);
-  padding-block: var(--e-4);
-  border-block: 1px solid var(--linha-clara);
+  margin-top: var(--e-5);
 }
+.caso .numero { font-size: var(--t-monumental); letter-spacing: -0.045em; white-space: nowrap; }
 .legenda {
   display: block;
   margin-bottom: var(--e-2);
@@ -380,53 +526,84 @@ p { max-width: var(--medida); }
   line-height: 1.35;
   color: var(--branco-suave);
 }
-.trilho {
-  display: block;
-  height: 12px;
-  margin-top: var(--e-3);
-  border-radius: 6px;
-  background: var(--linha-clara);
-  overflow: hidden;
-}
-.barra {
-  display: block;
-  height: 100%;
-  border-radius: 6px;
-  transform-origin: left center;
-}
 .barra-antes { width: 100%; background: var(--branco); }
 /* Proporção entre os dois valores do brief: R$ 118 e R$ 780 */
 .barra-depois { width: calc(118 / 780 * 100%); background: var(--ambar); }
-.caso-detalhe { color: var(--branco-suave); }
 
-/* Cartão de conteúdo */
-.cartao {
-  padding: var(--e-4);
-  border: 1px solid var(--linha);
-  border-radius: var(--raio-cartao);
-  background: var(--branco);
+/* Ficha do caso: os dados da casa, em três campos */
+.caso-ficha {
+  display: grid;
+  margin-top: var(--e-5);
+  border-top: 1px solid var(--linha-clara);
 }
+.caso-ficha div {
+  display: grid;
+  grid-template-columns: 9em 1fr;
+  gap: var(--e-3);
+  align-items: baseline;
+  padding-block: var(--e-3);
+  border-bottom: 1px solid var(--linha-clara);
+}
+.caso-ficha dt {
+  font-size: var(--t-rotulo);
+  letter-spacing: var(--rastro);
+  text-transform: uppercase;
+  color: var(--branco-suave);
+}
+.caso-ficha dd { font-weight: 700; }
+.caso-acao {
+  display: grid;
+  gap: var(--e-3);
+  margin-top: var(--e-5);
+}
+.caso-acao p { color: var(--branco); }
 
-/* Preço, prazo, financiamento */
-.tres-colunas { display: grid; gap: var(--e-3); margin-top: var(--e-5); }
+/* Preço, prazo e financiamento: três colunas de ficha, com fio azul no topo */
+.tres-colunas { display: grid; gap: var(--e-5); margin-top: var(--e-6); }
+.cartao {
+  padding-top: var(--e-3);
+  border-top: 3px solid var(--azul);
+}
 .cartao-rotulo {
-  font-size: 13px;
-  letter-spacing: 0.08em;
+  font-size: var(--t-rotulo);
+  font-weight: 400;
+  letter-spacing: var(--rastro);
   text-transform: uppercase;
   color: var(--texto-suave);
 }
 .destaque {
-  margin-block: var(--e-2) var(--e-3);
-  font-size: 26px;
-  line-height: 1.15;
+  margin-block: var(--e-3);
+  font-size: 30px;
+  line-height: 1.05;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.025em;
   text-wrap: balance;
 }
 .cartao p:last-child { color: var(--texto-suave); }
 
+/* Retorno contra vida útil: um bloco por ano */
+.retorno { margin-top: var(--e-4); }
+.anos { display: grid; grid-template-columns: repeat(25, 1fr); gap: 3px; }
+.ano { display: block; height: 28px; border-radius: 2px; background: var(--azul); }
+.ano-paga { background: var(--ambar); }
+.ano-talvez { background: var(--ambar); opacity: 0.45; }
+.anos-legenda { display: grid; gap: var(--e-2); margin-top: var(--e-3); color: var(--texto-suave); }
+.anos-legenda li { position: relative; padding-left: 28px; }
+.anos-legenda strong { color: var(--azul); }
+.amostra {
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  background: var(--azul);
+}
+.amostra-paga { background: var(--ambar); }
+.retorno .ajuda { margin-top: var(--e-2); }
+
 /* Etapas: linha do tempo */
-.etapas-titulo { margin-top: var(--e-6); }
+.etapas-titulo { margin-top: var(--e-7); }
 .etapas {
   display: grid;
   gap: var(--e-4);
@@ -485,12 +662,35 @@ p { max-width: var(--medida); }
 }
 
 /* Perguntas curtas */
-.perguntas { display: grid; gap: var(--e-4); margin-top: var(--e-5); }
+.perguntas { display: grid; gap: var(--e-4); margin-top: var(--e-6); }
 .perguntas > div { padding-top: var(--e-4); border-top: 1px solid var(--linha); }
 .perguntas dt { font-size: var(--t-h3); line-height: 1.3; font-weight: 700; }
 .perguntas dd { margin-top: var(--e-2); color: var(--texto-suave); }
 
-/* Formulário */
+/* Diagramas: modelos 3D renderizados (assets/3d) com texto em SVG por cima; legenda em HTML */
+.diagrama figcaption { margin-top: var(--e-3); font-size: var(--t-pequeno); line-height: 1.45; color: var(--texto-suave); max-width: var(--medida); }
+.diagrama figcaption strong { color: var(--azul); }
+.render { position: relative; }
+.render img { display: block; width: 100%; height: auto; }
+.render-texto { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; fill: none; }
+.render-texto * { stroke-linecap: round; stroke-linejoin: round; }
+.d-texto, .d-texto text { fill: var(--azul); font-size: 17px; font-weight: 700; }
+.d-guia { fill: none; stroke: var(--texto-suave); stroke-width: 1.5; }
+
+/* Crédito: dia sobre branco, noite sobre azul, num quadro só */
+.credito {
+  display: grid;
+  margin-top: var(--e-6);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio-cartao);
+  overflow: hidden;
+}
+.credito .diagrama { padding: var(--e-4); background: var(--branco); }
+.credito .credito-noite { background: var(--azul); }
+.credito-noite figcaption { color: var(--branco-suave); }
+.credito-noite figcaption strong, .credito-noite .d-texto { color: var(--branco); fill: var(--branco); }
+
+/* Formulário: ficha de pedido, com os campos numerados pelo CSS */
 .formulario {
   display: grid;
   gap: var(--e-4);
@@ -499,10 +699,33 @@ p { max-width: var(--medida); }
   border-top: 4px solid var(--ambar);
   background: var(--branco);
   color: var(--azul);
+  counter-reset: campo;
+}
+.formulario-cabeca {
+  max-width: none;
+  padding-bottom: var(--e-3);
+  border-bottom: 1px solid var(--linha);
+  font-size: var(--t-rotulo);
+  letter-spacing: var(--rastro);
+  text-transform: uppercase;
+  color: var(--texto-suave);
 }
 .campo { display: grid; gap: var(--e-2); }
-[hidden] { display: none !important; }
 .campo label { font-weight: 700; }
+.campo-numerado { counter-increment: campo; }
+.campo-numerado label::before {
+  content: counter(campo);
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin-right: var(--e-2);
+  border: 1.5px solid var(--azul);
+  border-radius: 2px;
+  font-size: 14px;
+  line-height: 1;
+  vertical-align: 1px;
+}
 .campo input,
 .campo select {
   width: 100%;
@@ -549,6 +772,8 @@ p { max-width: var(--medida); }
   background: var(--fundo-suave);
 }
 .aviso p + p { margin-top: var(--e-2); }
+/* Sobre azul a borda azul sumiria: o aviso vira cartão branco com traço âmbar (forma) */
+.aviso-claro { background: var(--branco); color: var(--azul); border-left-color: var(--ambar); }
 
 .garantia-envio {
   font-size: var(--t-pequeno);
@@ -600,7 +825,7 @@ p { max-width: var(--medida); }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .js [data-revelar], .js [data-revelar] .barra { opacity: 1; transform: none; transition: none; }
-  .botao, .barra-fixa, .topo { transition: none; }
+  .botao, .barra-fixa, .topo, .regua-ponto { transition: none; }
 }
 
 /* A partir de 760px */
@@ -611,41 +836,65 @@ p { max-width: var(--medida); }
   .formulario .botao { width: 100%; display: flex; }
   .barra-fixa { display: none; }
 
-  .hero { padding-block: var(--e-7) calc(var(--e-7) + var(--avanco)); }
-  .hero-grade { grid-template-columns: 7fr 4fr; gap: var(--e-6); align-items: center; }
-  .hero-arte { display: block; }
-  .hero-arte svg { display: block; width: 100%; height: auto; }
+  .hero { padding-top: var(--e-7); }
+  .hero-conteudo { max-width: 600px; }
+  .hero-texto { margin-top: var(--e-5); }
+  .hero-conta { margin-top: var(--e-5); }
+  .hero-conta-linha { grid-template-columns: 1fr auto; }
+  .regua-legenda { font-size: var(--t-pequeno); }
 
+  .prova { margin-top: var(--e-7); }
+  /* O sol ocupa o que sobra à direita do texto (600px), para nunca passar por trás da régua */
+  .sol { width: clamp(140px, calc(min(100vw - 2 * var(--margem), var(--largura)) - 624px), 520px); }
   .prova-lista { grid-template-columns: repeat(3, 1fr); }
   .prova-lista li {
     grid-template-columns: 1fr;
-    gap: var(--e-2);
+    gap: var(--e-3);
     align-content: start;
-    padding: var(--e-5);
+    padding: var(--e-5) var(--e-4) var(--e-6);
     border-top: 0;
-    border-left: 1px solid var(--linha);
+    border-left: 2px solid var(--linha-painel);
   }
   .prova-lista li:first-child { border-left: 0; }
-  .prova .numero { font-size: var(--t-numero); }
   .prova-lista span { font-size: 16px; }
 
+  .cabeca { margin-bottom: var(--e-7); }
+  .apoio { font-size: 20px; }
   .duas-colunas {
-    grid-template-columns: 5fr 6fr;
+    grid-template-columns: 6fr 5fr;
     gap: var(--e-7);
     align-items: start;
   }
-  .coluna-fixa { position: sticky; top: calc(var(--topo) + var(--e-5)); }
+  .colunas-telhado { grid-template-columns: 7fr 5fr; align-items: center; }
+  .diagrama-telhado .d-texto { font-size: 13px; }
+  .credito .d-texto { font-size: 15px; }
 
-  .texto .frase-forte { font-size: 26px; }
-  .garantias div { grid-template-columns: 5.6em 1fr; padding-block: var(--e-4); }
-  .garantias dt { font-size: 30px; }
+  .equipe { gap: var(--e-6); }
+  .equipe .ancora { max-width: none; display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--e-3) var(--e-5); }
+  .equipe .ancora .numero { margin-bottom: 0; }
+  .equipe .ancora span { flex: 1 1 14em; padding-bottom: 0.35em; }
+  .equipe .fatos { grid-template-columns: 1fr 1fr; gap: var(--e-5) var(--e-7); padding-top: var(--e-5); border-top: 1px solid var(--linha); }
+  .colunas-pedido { grid-template-columns: 5fr 6fr; }
+
+  .texto .frase-forte { font-size: 40px; }
   .ancora span { font-size: 22px; }
+  .garantias div { grid-template-columns: 4.6em 1fr; padding-block: var(--e-4); font-size: 44px; }
+  .garantias dd { font-size: 16px; }
+  .garantias .trilho { height: 16px; }
 
-  .caso-valores { grid-template-columns: 1fr 1fr; gap: var(--e-7); margin-block: var(--e-5); padding-block: var(--e-5); }
+  .caso-valores { grid-template-columns: 1fr 1fr; gap: var(--e-7); margin-top: var(--e-6); }
+  .caso .trilho { height: 18px; }
+  .caso-ficha { grid-template-columns: repeat(3, 1fr); gap: var(--e-7); margin-top: var(--e-6); border-top: 0; }
+  .caso-ficha div { grid-template-columns: 1fr; gap: var(--e-1); border-top: 1px solid var(--linha-clara); border-bottom: 0; }
+  .caso-ficha dd { font-size: 22px; }
+  .caso-acao { grid-template-columns: 1fr auto; align-items: center; gap: var(--e-6); margin-top: var(--e-6); }
+  .caso-acao p { max-width: none; }
 
-  .tres-colunas { grid-template-columns: repeat(3, 1fr); gap: var(--e-4); }
-  .cartao { padding: var(--e-5); }
-  .destaque { font-size: 30px; }
+  .tres-colunas { grid-template-columns: repeat(3, 1fr); gap: var(--e-6); }
+  .destaque { font-size: 40px; }
+
+  .anos { gap: 4px; }
+  .ano { height: 36px; }
 
   /* Linha do tempo horizontal: quatro etapas por linha */
   .etapas { grid-template-columns: repeat(4, 1fr); gap: var(--e-5) var(--e-4); }
@@ -661,91 +910,8 @@ p { max-width: var(--medida); }
   .etapas li:nth-child(4n)::after { display: none; }
 
   .perguntas { grid-template-columns: repeat(3, 1fr); gap: var(--e-6); }
+  .credito { grid-template-columns: 1fr 1fr; }
+  .credito .diagrama { padding: var(--e-5); }
   .formulario { padding: var(--e-5); }
   .rodape-linha { grid-template-columns: auto 1fr; gap: var(--e-6); align-items: center; }
-}
-
-/* ---------- Quarta versão ---------- */
-
-/* Primeira tela: o campo da conta como primeiro passo do formulário */
-.hero-conta { display: grid; gap: var(--e-2); margin-top: var(--e-5); max-width: 560px; }
-.hero-conta label { font-weight: 700; color: var(--branco); }
-.hero-conta-linha { display: grid; gap: var(--e-3); }
-.hero-conta input {
-  width: 100%;
-  min-height: 56px;
-  padding: var(--e-2) var(--e-3) var(--e-2) 52px;
-  border: 0;
-  border-radius: var(--raio);
-  background: var(--branco);
-  color: var(--azul);
-  font: inherit;
-  font-size: 20px;
-  font-weight: 700;
-}
-.hero-conta input:focus { outline: 3px solid var(--laranja); outline-offset: 2px; }
-.hero-conta .aviso { margin-top: var(--e-2); }
-/* Sobre azul a borda azul sumiria: o aviso vira cartão branco com traço âmbar (forma) */
-.aviso-claro { background: var(--branco); color: var(--azul); border-left-color: var(--ambar); }
-
-/* Objeção 1: número de destaque */
-.ancora-objecao { margin-bottom: var(--e-5); }
-
-/* Caso: ação no fim da faixa */
-.caso-acao {
-  display: grid;
-  gap: var(--e-3);
-  margin-top: var(--e-5);
-  padding-top: var(--e-5);
-  border-top: 1px solid var(--linha-clara);
-}
-.caso-acao p { color: var(--branco); }
-
-/* Retorno contra vida útil: um bloco por ano */
-.retorno { margin-top: var(--e-4); }
-.anos { display: grid; grid-template-columns: repeat(25, 1fr); gap: 3px; }
-.ano { display: block; height: 28px; border-radius: 2px; background: var(--azul); }
-.ano-paga { background: var(--ambar); }
-.ano-talvez { background: var(--ambar); opacity: 0.45; }
-.anos-legenda { display: grid; gap: var(--e-2); margin-top: var(--e-3); color: var(--texto-suave); }
-.anos-legenda li { position: relative; padding-left: 28px; }
-.anos-legenda strong { color: var(--azul); }
-.amostra {
-  position: absolute;
-  left: 0;
-  top: 5px;
-  width: 16px;
-  height: 16px;
-  border-radius: 2px;
-  background: var(--azul);
-}
-.amostra-paga { background: var(--ambar); }
-.retorno .ajuda { margin-top: var(--e-2); }
-
-/* Diagramas: modelos 3D renderizados (assets/3d) com texto em SVG por cima; legenda em HTML */
-.diagrama { margin: var(--e-5) 0 0; }
-.diagrama figcaption { margin-top: var(--e-3); font-size: var(--t-pequeno); line-height: 1.45; color: var(--texto-suave); max-width: var(--medida); }
-.diagrama figcaption strong { color: var(--azul); }
-
-.render { position: relative; }
-.render img { display: block; width: 100%; height: auto; }
-.render-texto { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; fill: none; }
-.render-texto * { stroke-linecap: round; stroke-linejoin: round; }
-.d-texto, .d-texto text { fill: var(--azul); font-size: 15px; font-weight: 700; }
-.d-guia { fill: none; stroke: var(--texto-suave); stroke-width: 1.5; }
-
-.credito { display: grid; gap: var(--e-5); }
-.credito .diagrama { margin-top: 0; }
-.texto .credito { margin-top: var(--e-5); }
-.credito .d-texto { font-size: 17px; }
-.diagrama-telhado .d-texto { font-size: 17px; }
-
-@media (min-width: 760px) {
-  .hero-conta-linha { grid-template-columns: 1fr auto; }
-  .caso-acao { grid-template-columns: 1fr auto; align-items: center; gap: var(--e-6); }
-  .caso-acao p { max-width: none; }
-  .anos { gap: 4px; }
-  .ano { height: 36px; }
-  .credito { grid-template-columns: 1fr 1fr; gap: var(--e-4); }
-  .diagrama-telhado { max-width: 420px; }
 }

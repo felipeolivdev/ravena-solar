@@ -76,6 +76,9 @@ export function credito(momento) {
   const cena = novaCena();
   const iso = { luz: V(0, 0, 1), sombra: V(1, 0, 0) };
   const tAzul = tons(AZUL), tBranco = tons(BRANCO);
+  // O quadro da noite fica sobre fundo azul: o que é azul e passa pelo céu ganha contorno branco.
+  const noCeu = momento === 'noite' ? BRANCO : AZUL;
+  const tPoste = momento === 'noite' ? tBranco : tAzul;
 
   cena.add(solido(caixa(-62, 84, -3, 0, -34, 34), tons(MADEIRA), iso));
   // Casa
@@ -93,12 +96,12 @@ export function credito(momento) {
   const porta = caixa(-14, -6, 0, 14, 20, 21);
   cena.add(solido(porta, tAzul, iso));
   // Poste da rede e fio até a casa
-  cena.add(solido(new THREE.CylinderGeometry(1.6, 1.6, 54, 16).translate(62, 27, 0), tAzul, { ...iso, limiarAresta: 60 }));
-  cena.add(solido(caixa(53, 71, 46, 48, -1.2, 1.2), tAzul, iso));
-  cena.add(solido(caixa(56, 68, 39, 41, -1.2, 1.2), tAzul, iso));
+  cena.add(solido(new THREE.CylinderGeometry(1.6, 1.6, 54, 16).translate(62, 27, 0), tPoste, { ...iso, limiarAresta: 60 }));
+  cena.add(solido(caixa(53, 71, 46, 48, -1.2, 1.2), tPoste, iso));
+  cena.add(solido(caixa(56, 68, 39, 41, -1.2, 1.2), tPoste, iso));
   const fio = [];
   for (let i = 0; i <= 16; i++) { const t = i / 16; fio.push([62 - t * 62, 47 - t * 25 - Math.sin(Math.PI * t) * 3, 0]); }
-  cena.add(linha(fio, AZUL, 1.5));
+  cena.add(linha(fio, noCeu, 1.5));
 
   // Céu: sol ou lua, no mesmo lugar dos dois quadros.
   const CEU = [-58, 64, -24];
@@ -115,7 +118,7 @@ export function credito(momento) {
     lua.absarc(0, 0, 9, Math.PI * 0.35, Math.PI * 1.65, false);
     lua.absarc(4.5, 0, 7.2, Math.PI * 1.75, Math.PI * 0.25, true);
     const g = new THREE.ExtrudeGeometry(lua, { depth: 2, bevelEnabled: false });
-    const m = solido(g, tAzul, { semContorno: true });
+    const m = solido(g, tBranco, { semContorno: true });
     m.position.set(...CEU);
     m.lookAt(V(...CEU).add(V(0.95, 0.9, 1.35)));
     cena.add(m);
