@@ -1,4 +1,4 @@
-# Verificação — 2026-11-11 01:40 UTC
+# Verificação — 2026-11-11 01:45 UTC
 Alvo: https://ravena-solar-lp.vercel.app/
 
 ## Layout
@@ -94,7 +94,11 @@ Número na página -> trecho do brief
   80      raio de 80 km
 
 ## Ação única e caminhos até o WhatsApp
-OK     Todo link da página leva ao formulário  ->  #simulacao, #simulacao, #simulacao
+OK     Navegação do topo: seis links para as seções  ->  #empresa, #telhado, #lei, #caso, #preco, #duvidas
+OK     Fora a navegação de seções, todo link da página leva ao formulário  ->  #empresa, #telhado, #lei, #caso, #preco, #duvidas, #simulacao, #simulacao, #simulacao
+OK     Cada link de seção aponta para uma seção que existe
+OK     Navegação do topo só no computador (some no celular)
+OK     Links da navegação em texto suave, sem cor de ação
 OK     Nenhum link de WhatsApp ou telefone no HTML
 OK     O formulário não tem action (sem JavaScript, nada é enviado)
 OK     O campo da primeira tela, sem JavaScript, só leva ao formulário
