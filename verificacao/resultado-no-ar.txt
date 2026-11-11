@@ -1,4 +1,4 @@
-# Verificação — 2026-11-11 01:18 UTC
+# Verificação — 2026-11-11 01:34 UTC
 Alvo: https://ravena-solar-lp.vercel.app/
 
 ## Layout
@@ -29,7 +29,7 @@ OK     Textura do painel em .hero: #FFFFFF com opacidade 0,06, sem imagem de fun
 OK     Textura do painel em .secao-azul: #FFFFFF com opacidade 0,06, sem imagem de fundo
 OK     Caso de Sorocaba em faixa de ponta a ponta (390px no celular)
 OK     Nenhum texto âmbar fora de fundo azul
-OK     Frase da promessa: 24px no celular e 36px no computador
+OK     Frase da promessa: 24px no celular e 40px no computador
 OK     Intervalo "75% a 90%" monumental: 15vw no celular (58,5px em 390) e 136px em 1440  ->  58.5 / 136
 OK     celular: o maior texto da página é o número (a promessa e os dois valores do caso)  ->  58.5px
 OK     computador: o maior texto da página é o número (a promessa e os dois valores do caso)  ->  136px
