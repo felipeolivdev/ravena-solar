@@ -702,6 +702,11 @@ p { max-width: var(--medida); }
 .perguntas > div { padding-top: var(--e-4); border-top: 1px solid var(--linha); }
 .perguntas dt { font-size: var(--t-h3); line-height: 1.3; font-weight: 700; }
 .perguntas dd { margin-top: var(--e-2); max-width: 46ch; color: var(--texto-suave); }
+.perguntas > .perguntas-saida { /* o bloco que fecha a grade; os 3px a mais do traço saem do espaço de cima */
+  padding-top: calc(var(--e-4) - 3px);
+  border-top: 4px solid var(--ambar);
+}
+.perguntas-saida .botao { margin-top: var(--e-4); }
 
 /* Diagramas: modelos 3D renderizados (assets/3d) com texto em SVG por cima; legenda em HTML */
 .diagrama figcaption { margin-top: var(--e-3); font-size: var(--t-pequeno); line-height: 1.45; color: var(--texto-suave); max-width: var(--medida); }

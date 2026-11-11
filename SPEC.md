@@ -52,6 +52,8 @@ Cada decisão abaixo vem com o seu porquê. Mudou a página, muda aqui antes.
 ### Dúvidas antes do pedido
 
 26. **Cinco dúvidas ficam numa lista logo antes do formulário: mudança de casa, dia nublado e noite, bateria, cidade atendida e se pedir a simulação compromete.** Cada resposta explica o porquê em duas ou três frases, só com fatos do brief. *Por quê:* na versão de uma linha, as respostas soavam secas e deixavam a dúvida no ar, e a pessoa está a um passo do formulário. "Atendem a minha cidade?" e "Pedir me compromete?" entram porque são as hesitações de quem está prestes a pedir: o raio só aparecia no campo Cidade, e o cliente costuma pedir três orçamentos antes de decidir. Manutenção de sistema de terceiros e comércio continuam fora (Parte 2).
+   *Fechamento:* um sexto bloco, "Ficou outra dúvida?", diz que a pessoa pode perguntar na mesma conversa da simulação, pelo WhatsApp, e traz o botão "Pedir simulação". *Por quê:* com cinco perguntas a grade de duas colunas ficava com um buraco. Não sobra outra dúvida do brief que já não esteja na página, então o espaço vira saída para quem ainda hesita, sem inventar pergunta.
+   *Prazo de resposta:* "no mesmo dia útil" vale só para a resposta ao pedido de simulação, como no brief. A página não promete a simulação pronta nesse prazo nem resposta a outras perguntas. *Por quê:* o brief garante só isso, e o Procon da região é ativo.
 
 ### Formulário
 
