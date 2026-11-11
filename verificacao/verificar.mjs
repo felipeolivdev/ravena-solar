@@ -212,7 +212,13 @@ for (const n of numeros) linhas.push(`  ${n.padEnd(7)} ${NUMEROS_DO_BRIEF[n] || 
 titulo('Ação única e caminhos até o WhatsApp');
 await celular.reload();
 const links = await celular.evaluate(() => [...document.querySelectorAll('a')].map(a => a.getAttribute('href')));
-conferir(links.every(h => h === '#simulacao'), 'Todo link da página leva ao formulário', links.join(', '));
+const SECOES = ['#empresa', '#telhado', '#lei', '#caso', '#preco', '#duvidas'];
+const linksNav = await celular.evaluate(() => [...document.querySelectorAll('.navegacao a')].map(a => a.getAttribute('href')));
+conferir(JSON.stringify(linksNav) === JSON.stringify(SECOES), 'Navegação do topo: seis links para as seções', linksNav.join(', '));
+conferir(links.filter(h => !SECOES.includes(h)).every(h => h === '#simulacao'), 'Fora a navegação de seções, todo link da página leva ao formulário', links.join(', '));
+conferir(await celular.evaluate((ids) => ids.every(id => document.querySelector(id)), SECOES), 'Cada link de seção aponta para uma seção que existe');
+conferir(!(await celular.locator('.navegacao').isVisible()) && await computador.locator('.navegacao').isVisible(), 'Navegação do topo só no computador (some no celular)');
+conferir(await estilo(computador, '.navegacao a', 'color') === 'rgba(18, 58, 85, 0.76)', 'Links da navegação em texto suave, sem cor de ação');
 const html = await celular.content();
 conferir(!/wa\.me|whatsapp\.com|tel:/i.test(html), 'Nenhum link de WhatsApp ou telefone no HTML');
 conferir(await celular.locator('#form-simulacao').getAttribute('action') === null, 'O formulário não tem action (sem JavaScript, nada é enviado)');

@@ -20,7 +20,8 @@ Cada decisão abaixo vem com o seu porquê. Mudou a página, muda aqui antes.
 
 ### Ação
 
-8. **A página tem uma ação só.** Todos os botões levam ao formulário, e não há menu nem chamada concorrente. *Por quê:* duas chamadas com o mesmo peso dividem a atenção.
+8. **A página tem uma ação só.** Todos os botões levam ao formulário, e não há chamada concorrente. *Por quê:* duas chamadas com o mesmo peso dividem a atenção.
+   *Navegação:* no computador, o topo traz links de texto para as seções (A empresa, Telhado, Lei 14.300, Caso, Preço, Dúvidas). Eles só rolam a página: não são botão, não têm cor de ação e nenhum leva para fora dela. No celular não há menu. *Por quê:* pedido do cliente. A página é longa, e quem chega com uma objeção específica quer ir direto a ela. Como texto pequeno e sem laranja, os links não competem com "Pedir simulação".
 9. **O botão está sempre à mão.** No computador ele fica no topo fixo. No celular fica numa barra no pé da tela, que aparece quando o botão da primeira tela sai de vista e some no formulário e no rodapé. *Por quê:* a página é longa, e a ação não pode depender de rolar de volta.
 10. **Nenhum botão leva direto ao WhatsApp.** *Por quê:* qualquer atalho pularia o filtro dos R$ 450.
 

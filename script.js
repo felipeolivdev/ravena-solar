@@ -265,4 +265,26 @@
     barra.classList.toggle('ativa', aVista.size === 0);
   });
   escondemBarra.forEach(function (el) { vigiaBarra.observe(el); });
+
+  // Navegação do topo: marca o link da seção que cruza a faixa do meio da tela.
+  var linksSecao = {};
+  document.querySelectorAll('.navegacao a').forEach(function (a) {
+    linksSecao[a.getAttribute('href').slice(1)] = a;
+  });
+  function marcarSecao(id) {
+    Object.keys(linksSecao).forEach(function (chave) {
+      if (chave === id) linksSecao[chave].setAttribute('aria-current', 'location');
+      else linksSecao[chave].removeAttribute('aria-current');
+    });
+  }
+  var vigiaSecoes = new IntersectionObserver(function (entradas) {
+    entradas.forEach(function (entrada) {
+      if (entrada.isIntersecting) marcarSecao(entrada.target.id);
+      else if (linksSecao[entrada.target.id] && linksSecao[entrada.target.id].hasAttribute('aria-current')) marcarSecao(null);
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  Object.keys(linksSecao).forEach(function (id) {
+    var secao = document.getElementById(id);
+    if (secao) vigiaSecoes.observe(secao);
+  });
 })();

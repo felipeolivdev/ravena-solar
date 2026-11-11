@@ -15,6 +15,17 @@
   <header class="topo" id="topo">
     <div class="wrap topo-linha">
       <img class="logo" src="assets/logo.svg" alt="Ravena Solar" width="960" height="256">
+      <!-- Links de seção (só no computador). Rolam a página; a ação continua sendo o botão. -->
+      <nav class="navegacao" aria-label="Seções da página">
+        <ul>
+          <li><a href="#empresa">A empresa</a></li>
+          <li><a href="#telhado">Telhado</a></li>
+          <li><a href="#lei">Lei 14.300</a></li>
+          <li><a href="#caso">Caso</a></li>
+          <li><a href="#preco">Preço</a></li>
+          <li><a href="#duvidas">Dúvidas</a></li>
+        </ul>
+      </nav>
       <a class="botao botao-topo" href="#simulacao">Pedir simulação</a>
     </div>
   </header>
@@ -82,7 +93,7 @@
     </div>
 
     <!-- 2. Objeção 1: a empresa vai sumir? -->
-    <section class="secao folha">
+    <section id="empresa" class="secao folha">
       <div class="wrap">
         <header class="cabeca">
           <p class="rotulo">A pergunta que mais ouvimos</p>
@@ -131,7 +142,7 @@
     </section>
 
     <!-- 3. Objeção 2: telhado -->
-    <section class="secao secao-suave folha">
+    <section id="telhado" class="secao secao-suave folha">
       <div class="wrap">
         <header class="cabeca">
           <p class="rotulo">Sobre o telhado</p>
@@ -164,7 +175,7 @@
     </section>
 
     <!-- 4. Objeção 3: Lei 14.300 + caso -->
-    <section class="secao folha">
+    <section id="lei" class="secao folha">
       <div class="wrap">
         <header class="cabeca">
           <p class="rotulo">Sobre a Lei 14.300</p>
@@ -203,7 +214,7 @@
     </section>
 
     <!-- Caso de Sorocaba: faixa azul de ponta a ponta, com os maiores números da página -->
-    <section class="caso" aria-label="Um caso com números conferidos">
+    <section id="caso" class="caso" aria-label="Um caso com números conferidos">
       <div class="wrap">
         <div class="caso-conteudo" data-revelar>
           <p class="caso-rotulo">Um caso com números conferidos, já com a cobrança em vigor</p>
@@ -233,7 +244,7 @@
     </section>
 
     <!-- 5. Preço, prazo, financiamento -->
-    <section class="secao secao-suave folha">
+    <section id="preco" class="secao secao-suave folha">
       <div class="wrap">
         <p class="rotulo">Preço, prazo e pagamento</p>
         <h2>Quanto custa, quanto demora e como se paga</h2>
@@ -282,7 +293,7 @@
     </section>
 
     <!-- 6. Perguntas curtas -->
-    <section class="secao folha">
+    <section id="duvidas" class="secao folha">
       <div class="wrap">
         <p class="rotulo">Para fechar</p>
         <h2>Antes de pedir, três dúvidas rápidas</h2>

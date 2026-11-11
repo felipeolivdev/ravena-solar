@@ -160,6 +160,33 @@ p { max-width: var(--medida); }
 }
 .logo { display: block; width: 150px; height: auto; }
 
+/* Navegação do topo: links de texto, só a partir de 1024px. Não são ação: nada de laranja. */
+.navegacao { display: none; }
+@media (min-width: 1024px) {
+  .navegacao { display: block; margin-left: auto; margin-right: var(--e-5); }
+  .navegacao ul { display: flex; gap: var(--e-4); }
+  .navegacao a {
+    position: relative;
+    display: block;
+    padding-block: var(--e-2);
+    font-size: var(--t-pequeno);
+    color: var(--texto-suave);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .navegacao a:hover { color: var(--azul); }
+  .navegacao a[aria-current] { color: var(--azul); } /* sem negrito: o link não muda de largura */
+  .navegacao a[aria-current]::after { /* âmbar como forma, sob a seção que está na tela */
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: var(--ambar);
+  }
+}
+
 /* Botão: o único laranja preenchido da página */
 .botao {
   display: flex;
