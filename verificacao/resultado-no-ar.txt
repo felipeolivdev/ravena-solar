@@ -1,10 +1,10 @@
-# Verificação — 2026-11-10 21:10 UTC
+# Verificação — 2026-11-11 01:18 UTC
 Alvo: https://ravena-solar-lp.vercel.app/
 
 ## Layout
 OK     Em 390px não há rolagem horizontal  ->  largura do documento: 390px
 OK     Em 390px nenhum elemento passa da borda direita
-OK     Em 390x844 o botão aparece sem rolar  ->  base do botão em 663px
+OK     Em 390x844 o botão aparece sem rolar  ->  base do botão em 647px
 OK     Em 1440px não há rolagem horizontal  ->  largura do documento: 1440px
 
 ## Design (valores renderizados x DESIGN.md)
@@ -14,10 +14,11 @@ OK     Texto da página é #123A55
 OK     Primeira tela tem fundo #123A55
 OK     Promessa em #FFFFFF sobre o azul
 OK     Intervalo "75% a 90%" em #F2A03D
-OK     Cartão de prova tem fundo #FFFFFF
-OK     Número do cartão de prova é #123A55 (âmbar não é texto sobre branco)
+OK     Painel de prova: célula em branco a 0,10 sobre #123A55
+OK     Linhas do painel de prova em branco a 0,85, como na logo
+OK     Número do painel de prova em #FFFFFF sobre azul
 OK     Valor de depois, no caso, em #F2A03D sobre azul
-OK     Cartão com canto de 12px  ->  12px
+OK     Ficha do formulário com canto de 12px  ->  12px
 OK     Barras do caso na proporção de R$ 118 para R$ 780  ->  53px de 350px
 OK     Barras das garantias na proporção de 25, 10 e 5 anos sobre 25  ->  1.00 / 0.40 / 0.20
 OK     Número de destaque do telhado ("5 anos") em #123A55
@@ -28,8 +29,15 @@ OK     Textura do painel em .hero: #FFFFFF com opacidade 0,06, sem imagem de fun
 OK     Textura do painel em .secao-azul: #FFFFFF com opacidade 0,06, sem imagem de fundo
 OK     Caso de Sorocaba em faixa de ponta a ponta (390px no celular)
 OK     Nenhum texto âmbar fora de fundo azul
-OK     h1 tem 34px no celular  ->  34px
-OK     h1 tem 56px no computador  ->  56px
+OK     Frase da promessa: 24px no celular e 36px no computador
+OK     Intervalo "75% a 90%" monumental: 15vw no celular (58,5px em 390) e 136px em 1440  ->  58.5 / 136
+OK     celular: o maior texto da página é o número (a promessa e os dois valores do caso)  ->  58.5px
+OK     computador: o maior texto da página é o número (a promessa e os dois valores do caso)  ->  136px
+OK     Rótulos em caixa alta com letras espaçadas (0,2em), como "SOLAR" na logo  ->  2.4px
+OK     Seis seções numeradas pelo CSS (o número da folha não entra no texto)  ->  6 folhas
+OK     Formulário: quatro campos numerados pelo CSS
+OK     O sol da logo aparece atrás do painel de prova, em #F2A03D, no celular e no computador
+OK     O sol da primeira tela tem os mesmos raios da logo.svg
 OK     Uma família de fonte só, a da logo  ->  "Helvetica Neue", Helvetica, Arial, sans-serif
 OK     O laranja só aparece nos botões  ->  a.botao botao-topo, button.botao, a.botao, button.botao, a.botao
 
@@ -39,7 +47,6 @@ OK     Celular, meio da página: a barra de ação aparece
 OK     O topo com a logo fica preso no alto ao rolar
 OK     Celular, formulário à vista: a barra de ação some
 OK     Computador: botão no topo fixo, sem barra no pé
-OK     Computador: a marca da logo aparece ampliada na primeira tela
 OK     Com movimento ligado, toda seção termina visível depois de rolar a página  ->  ainda escondidas: 0
 OK     Sem JavaScript, todo o conteúdo nasce visível
 OK     Sem JavaScript, o formulário avisa que precisa dele e não há atalho de envio
@@ -121,6 +128,15 @@ OK     Conta de 200: o aviso dos R$ 450 aparece ao sair do campo, antes de envia
 OK     Corrigindo para 600, o aviso some
 OK     Enter no campo com conta de R$ 200: também bloqueia
 
+## Primeira tela: régua dos R$ 450
+OK     Régua: sem valor digitado, não há ponto
+OK     Régua: 200 e 449 caem à esquerda da marca de R$ 450  ->  0.178 / 0.399
+OK     Régua: 450 cai em cima da marca e 780 à direita  ->  0.400 / 0.693
+OK     Régua: valor alto para na ponta, sem sair da régua  ->  0.980
+OK     Régua: o único número escrito é 450
+OK     Régua: digitar não abre o WhatsApp
+OK     Sem JavaScript, a régua aparece parada, sem o ponto
+
 ## Primeira tela: campo da conta
 OK     Primeira tela, conta "200": avisa ali mesmo, não leva ao formulário e não abre o WhatsApp
 OK     Primeira tela, conta "449,99": avisa ali mesmo, não leva ao formulário e não abre o WhatsApp
@@ -134,9 +150,10 @@ OK     Valor de 780 trazido da primeira tela chega à mensagem do WhatsApp
 OK     Blocos de anos: 25 blocos, 3 âmbar, o quarto âmbar claro, o resto azul
 OK     O caso de Sorocaba termina com o botão que leva ao formulário
 OK     Objeção 1 tem "11 pessoas" como número de destaque
-OK     celular: os três modelos 3D (telhado, crédito de dia e de noite) carregam e aparecem, com legenda e texto alternativo  ->  208 / 216 / 216
-OK     computador: os três modelos 3D (telhado, crédito de dia e de noite) carregam e aparecem, com legenda e texto alternativo  ->  250 / 162 / 162
-OK     Camada de texto dos diagramas só com cores da logo (e sem laranja, que é só da ação)  ->  rgba(18, 58, 85, 0.76) | rgb(18, 58, 85)
+OK     celular: os três modelos 3D (telhado, crédito de dia e de noite) carregam e aparecem, com legenda e texto alternativo  ->  208 / 185 / 185
+OK     computador: os três modelos 3D (telhado, crédito de dia e de noite) carregam e aparecem, com legenda e texto alternativo  ->  350 / 293 / 293
+OK     Crédito: o quadro do dia sobre #FFFFFF e o da noite sobre #123A55
+OK     Camada de texto dos diagramas só com cores da logo (e sem laranja, que é só da ação)  ->  rgba(18, 58, 85, 0.76) | rgb(18, 58, 85) | rgb(255, 255, 255)
 OK     Sem JavaScript, os modelos 3D aparecem
 
 ## Modelos 3D (assets/3d)
