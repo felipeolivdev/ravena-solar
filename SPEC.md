@@ -4,108 +4,85 @@
 
 **Regra:** todo número da página vem do brief. O que só o site de 2021 diz não entra.
 
+Cada decisão abaixo vem com o seu porquê. Mudou a página, muda aqui antes.
+
 ## Parte 1 — O que a página faz e por quê
 
-1. **A promessa usa número e já filtra.**
-   "Na média dos nossos clientes, a conta de luz cai de 75% a 90%. O retorno do investimento tem levado de 3 a 4 anos. Para casas com conta acima de R$ 450 em Sorocaba, Votorantim, Itu e Salto. 412 sistemas instalados por equipe própria."
-   *Por quê:* com esses números, a frase só serve para a Ravena. E quem paga R$ 200 já percebe na primeira tela que não é o público.
-   *Por que "na média" e "tem levado":* é como o brief diz. Sem essas palavras, a média vira promessa individual, e o brief avisa que o Procon da região é ativo.
+### Primeira tela
 
-2. **Tem uma ação só.** Todos os botões levam ao formulário de simulação. A página não tem menu nem chamada concorrente. Desde a quarta versão, a primeira tela pede o valor da conta como primeiro passo desse mesmo formulário (ver item 8); não é uma segunda ação.
-   *Por quê:* duas chamadas com o mesmo peso dividem a atenção.
+1. **A promessa usa número e já filtra.** No alto, as quatro cidades. Depois a frase "Na média dos nossos clientes, a conta de luz cai de 75% a 90%", o retorno de 3 a 4 anos e o aviso de que a simulação é para conta acima de R$ 450. *Por quê:* com esses números a frase só serve para a Ravena, e quem paga R$ 200 percebe na primeira tela que não é o público.
+2. **"Na média" e "tem levado" ficam escritos.** *Por quê:* é como o brief diz, e sem essas palavras a média vira promessa individual num lugar onde o Procon é ativo.
+3. **Os 412 sistemas, a nota 4,8 e os 6 anos são prova, não promessa.** Eles ficam no painel do pé da primeira tela: no celular, logo abaixo da tela inicial; no computador, só a borda de cima aparece. *Por quê:* a promessa responde "quanto eu economizo e isso é para mim?". A prova responde "posso confiar?", e é a primeira coisa que aparece quando a pessoa rola a tela.
+4. **A primeira tela pede o valor da conta.** É o primeiro passo do formulário de simulação, com "R$" fixo e o botão ao lado. Abaixo de R$ 450 o aviso aparece ali mesmo. Com R$ 450 ou mais, a página desce até o formulário com o valor preenchido. *Por quê:* digitar um número é um primeiro passo pequeno, e quem não tem como comprar descobre isso sem preencher nada.
+5. **Esse campo não calcula, não envia e não abre o WhatsApp.** Sem JavaScript, ele é só um link para o formulário. *Por quê:* o cálculo depois da Lei 14.300 é individual, e o filtro só pode existir num caminho.
+6. **Uma régua de R$ 450 fica sob o campo.** O valor digitado aparece como um ponto de um lado ou do outro da única marca escrita. *Por quê:* recusar quem não tem como comprar é o traço mais próprio da Ravena, e a régua mostra isso antes do botão sem escrever outro número.
+7. **A composição repete a logo.** O sol nasce por trás de um painel cujas células trazem os três números de prova, com a grade das células ao fundo. *Por quê:* a tela vira a marca em escala de página, e o azul ganha profundidade sem foto nem gradiente.
 
-3. **As objeções seguem a ordem do brief, e cada uma traz a prova ao lado.**
-   - *"Vocês vão sumir?"* — 6 anos de empresa, equipe com carteira assinada, 412 sistemas, assistência autorizada do inversor, acompanhamento no primeiro ano e as três garantias (25 anos do painel, 10 do inversor, 5 da instalação).
-   - *Telhado* — 5 anos de garantia da instalação, incluindo infiltração causada pela obra.
-   - *Lei 14.300* — explicação honesta e o caso de Sorocaba: conta de R$ 780 virou R$ 118, num sistema ligado em 2025, já com a regra nova. A página também avisa que a conta não zera.
-   - *Mudança de casa, dia nublado e bateria* — perguntas curtas, logo antes do formulário.
+### Ação
 
-   *Por quê:* a primeira objeção é a que mais decide, porque três empresas da região sumiram. A prova convence mais quando aparece onde a dúvida aparece.
-   *Por que as três garantias ficam na primeira objeção:* garantia de 25 anos só vale se a empresa existir; é ali que a pessoa está fazendo essa conta.
+8. **A página tem uma ação só.** Todos os botões levam ao formulário, e não há menu nem chamada concorrente. *Por quê:* duas chamadas com o mesmo peso dividem a atenção.
+9. **O botão está sempre à mão.** No computador ele fica no topo fixo. No celular fica numa barra no pé da tela, que aparece quando o botão da primeira tela sai de vista e some no formulário e no rodapé. *Por quê:* a página é longa, e a ação não pode depender de rolar de volta.
+10. **Nenhum botão leva direto ao WhatsApp.** *Por quê:* qualquer atalho pularia o filtro dos R$ 450.
 
-4. **Preço, prazo e financiamento ficam abertos.** R$ 14 a 19 mil; 45 a 60 dias, com a CPFL como a parte que não depende da Ravena; entrada zero; parcela próxima da conta de luz. As etapas do trabalho ("como trabalhamos", no brief) entram resumidas neste bloco.
-   *Por quê:* o preço é o segundo filtro. E prazo explicado não vira prazo prometido — as etapas mostram onde os 45 a 60 dias são gastos.
+### Objeções, na ordem do brief
 
-5. **O formulário qualifica sozinho.** São quatro campos: nome, WhatsApp, cidade e valor da conta. Com conta abaixo de R$ 450, a página mostra uma mensagem franca e não envia. O envio abre o WhatsApp com os dados preenchidos e a etiqueta "[Simulação site]". Junto do botão ficam a nota 4,8 no Google, "resposta no mesmo dia útil, por WhatsApp" e "visita técnica sem custo e sem compromisso".
-   *Por quê:* esse bloqueio é a metade da meta que uma página só de economia ignora. A etiqueta permite contar quantos pedidos vieram da página. As três frases junto do botão respondem "e depois que eu enviar?" no momento em que a pessoa hesita.
+11. **A pergunta do cliente vira citação grande, na largura toda.** *Por quê:* são as palavras dele, e é por elas que ele se reconhece.
+12. **"Vocês vão sumir?" vem primeiro, com "11 pessoas" em destaque.** Ao lado ficam os fatos: não é revenda, 412 sistemas em 6 anos, assistência autorizada do inversor e acompanhamento no primeiro ano. *Por quê:* é o medo número um, e equipe própria com carteira assinada é a prova mais direta contra ele.
+13. **As três garantias ficam nessa objeção, em barras proporcionais aos anos (25, 10 e 5).** *Por quê:* garantia só vale se a empresa existir, e a barra mostra de relance qual é a mais longa sem cifra nova.
+14. **No telhado, o destaque é "5 anos", ao lado de um corte 3D do telhado.** *Por quê:* é a garantia que cobre infiltração, e o corte mostra onde a obra toca a telha.
+15. **A Lei 14.300 é explicada com franqueza, e a página diz que a conta não zera.** *Por quê:* "taxaram o sol" é dúvida real, e a frase honesta protege a empresa no Procon.
+16. **O crédito aparece em dois quadros: dia sobre branco, noite sobre azul.** De dia a sobra vai para a rede e vira crédito; à noite a casa usa a rede e o crédito compensa. *Por quê:* quase ninguém entende como a cobrança funciona, e a diferença entre os dois momentos é vista antes de ser lida.
+17. **Jargão é explicado na própria frase:** kWp, inversor, homologação e custo do fio. *Por quê:* quem compra tem de 35 a 60 anos e não é técnico.
 
-   Detalhes fechados na construção:
-   - **Limite:** conta de exatamente R$ 450 passa. O brief diz "abaixo disso a conta não fecha"; então só abaixo bloqueia.
-   - **Cidade:** lista com Sorocaba, Votorantim, Itu e Salto, mais "Outra cidade a até 80 km de Sorocaba" com campo para o nome. *Por quê:* o brief atende um raio de 80 km, não só as quatro; a lista deixa o raio explícito sem prometer atendimento fora dele.
-   - **Texto da mensagem** (fixo; o cliente conta os leads pela primeira linha):
-     ```
-     [Simulação site]
-     Nome: …
-     WhatsApp: …
-     Cidade: …
-     Conta média de luz: R$ …
-     ```
-   - **Número do WhatsApp:** pendente com o cliente. Fica numa constante só, vazia e marcada `TODO cliente`. Enquanto estiver vazia, o link é `wa.me/?text=…`, que abre o WhatsApp com a mensagem pronta e sem destinatário. *Por quê:* dá para testar o envio de verdade sem inventar número.
-   - **Caminho único:** só uma função monta o link do WhatsApp, e ela roda depois da validação. Não existe link de WhatsApp no HTML e o formulário não tem `action`; sem JavaScript, nada é enviado.
+### Caso de Sorocaba
 
-6. **O tom e o visual seguem o cliente.** Nada de "energia do futuro", "grátis", promessa acima de 90% ou prazo inventado. As cores vêm da logo e o laranja fica só na ação. Os valores ficam no arquivo de design.
+18. **O caso é uma faixa azul de ponta a ponta, com "R$ 780" e "R$ 118" no maior tamanho da página.** *Por quê:* é a única prova com números conferidos e merece o maior peso visual.
+19. **Duas barras com largura proporcional aos dois valores, e nenhum percentual.** *Por quê:* a barra mostra a queda sem escrever um número que o brief não deu.
+20. **Uma ficha de três campos traz onde, sistema (6,4 kWp) e instalado em (março de 2025), já com a cobrança da lei.** *Por quê:* é o que torna o caso conferível.
+21. **O caso termina com "E a sua conta?" e o botão.** *Por quê:* é o ponto de maior convicção da página.
 
-7. **O acabamento trabalha para a decisão, não para enfeitar.** Quem compra tem de 35 a 60 anos, pede três orçamentos e tem medo de empresa que some. Página crua parece empresa improvisada; por isso a segunda versão ganhou acabamento, sempre dentro do `DESIGN.md`:
-   - **Primeira tela em azul, com a marca da logo ampliada** e os três números de prova num cartão que avança sobre ela *(o cartão virou painel na sétima versão; ver item 11)*. *Por quê:* a promessa e a prova passam a caber no mesmo olhar, e o botão laranja vira o único ponto quente da tela.
-   - **Botão sempre à mão:** no topo fixo (computador) e numa barra no rodapé da tela (celular), que some quando o formulário aparece. Os dois levam ao formulário, nunca ao WhatsApp, então o filtro dos R$ 450 continua valendo. *Por quê:* a página é longa e a ação é uma só; ela não pode depender de rolar de volta.
-   - **O caso de Sorocaba ganhou duas barras**, com a largura proporcional a R$ 780 e R$ 118. *Por quê:* o cliente "gosta de número"; a barra mostra a queda sem a gente escrever um percentual que o brief não deu.
-   - **As etapas viraram linha do tempo.** *Por quê:* deixa visível que os 45 a 60 dias têm oito passos, e que a obra em si são dois dias.
-   - **O formulário responde enquanto a pessoa preenche:** máscara no WhatsApp, "R$" fixo no campo da conta, erro ao sair do campo e o aviso dos R$ 450 já ao sair do campo da conta. *Por quê:* quem tem conta de R$ 200 descobre antes de terminar de preencher, e quem pode comprar não tropeça em formato.
-   - **Entrada suave das seções ao rolar**, desligada para quem pede menos movimento no sistema, e sem esconder nada se o JavaScript falhar.
+### Preço, prazo e pagamento
 
-   Na terceira versão, o meio da página ganhou ritmo. As três objeções tinham o mesmo desenho e o mesmo peso, e a leitura cansava justamente onde a pessoa decide se confia na empresa:
-   - **Cada objeção tem um número de destaque.** No telhado, "5 anos" de garantia da instalação aparece grande, no lugar de uma frase. *Por quê:* a regra do design já é "o maior texto da tela é o número"; antes ela só valia na primeira tela e no caso. São 5 anos, e não os 6 de empresa, porque é a garantia que responde ao medo de infiltração; os 6 anos respondem à objeção 1.
-   - **As três garantias viraram barras proporcionais aos anos** (25, 10 e 5, sobre 25). *Por quê:* é a mesma linguagem das barras do caso — barra é número conferido — e mostra de relance qual garantia é mais longa, sem cifra nova.
-   - **A primeira tela e o formulário têm, ao fundo, a grade das células do painel da logo**, em branco quase transparente. *Por quê:* o azul chapado fica com profundidade sem foto, sem gradiente e sem desenho que não seja da marca.
-   - **O caso de Sorocaba virou uma faixa azul de ponta a ponta.** *Por quê:* é a prova mais forte da página e estava num cartão do mesmo tamanho dos outros blocos; a faixa quebra a sequência de fundos claros bem no meio das objeções.
-   - **Na linha do tempo, a etapa da CPFL tem o ponto vazado e a instalação tem um anel âmbar**, cada uma com uma nota curta. *Por quê:* mostra onde os 45 a 60 dias são gastos e que a obra em si é a parte curta, sem dar prazo por etapa, que o brief não deu.
-   - **As perguntas curtas perderam o cartão** e viraram lista com divisórias. *Por quê:* os cartões ficam só para preço, prazo e financiamento, que são o que a pessoa compara entre três orçamentos.
+22. **Preço, prazo e financiamento ficam abertos, em três colunas de ficha:** R$ 14 mil a R$ 19 mil, 45 a 60 dias, entrada zero possível. *Por quê:* o preço é o segundo filtro, e coluna com fio se compara fácil entre três orçamentos.
+23. **O prazo explica que a CPFL é a parte que não depende da Ravena.** *Por quê:* prazo explicado não vira prazo prometido.
+24. **25 blocos de um ano: 3 em âmbar, o quarto em âmbar claro, o resto em azul.** *Por quê:* mostra que o sistema se paga numa fração da vida dele sem escrever quanto se economiza no total.
+25. **As oito etapas viram linha do tempo, com a CPFL de ponto vazado e a instalação com anel âmbar.** *Por quê:* mostra onde os 45 a 60 dias são gastos e que a obra são dois dias, sem dar prazo por etapa.
 
-8. **Quarta versão: o que aprendemos comparando com outras três páginas para o mesmo brief.** As outras explicavam melhor com imagem e deixavam a pessoa começar na primeira tela, mas calculavam percentuais, inventavam contato ou não bloqueavam a conta baixa. Trouxemos só o que cabe nas regras:
-   - **A primeira tela pergunta a conta.** "Quanto você paga de luz por mês, em média?", com "R$" fixo e o botão ao lado. Abaixo de R$ 450, o aviso franco aparece ali mesmo e nada segue. A partir disso, a página desce até o formulário com o valor já preenchido e o cursor no nome. Em branco, o botão só leva ao formulário, como antes. O campo não calcula economia, não abre o WhatsApp e, sem JavaScript, é só um link para o formulário. *Por quê:* um primeiro passo pequeno (digitar um número) aumenta a chance de a pessoa terminar o pedido, e quem paga R$ 200 descobre isso na primeira tela, sem preencher nada. É a metade da meta que fala de menos pedidos de conta baixa.
-   - **O caso de Sorocaba termina com o botão.** "E a sua conta?" e "Pedir simulação", levando ao formulário. *Por quê:* é o ponto de maior convicção da página, e antes dele a pessoa só podia continuar rolando.
-   - **Retorno contra vida útil, em blocos de um ano.** No bloco de preço, 25 blocos: os 3 primeiros em âmbar, o quarto em âmbar claro (o "3 a 4 anos"), o resto em azul, com "mais de 25 anos" no fim. *Por quê:* mostra de relance que o sistema se paga numa fração da vida dele, só com números do brief, e sem escrever quanto se economiza no total.
-   - **Diagrama do crédito na Lei 14.300.** Dois quadros, de dia e de noite: a sobra vai para a rede da CPFL e vira crédito; à noite a casa usa a rede e o crédito compensa. *Por quê:* a cobrança da lei é sobre essa sobra, e quase ninguém entende como funciona. Imagem com texto se entende mais rápido que parágrafo.
-   - **Corte do telhado.** Painel, estrutura de fixação e telhado, ao lado do "5 anos". *Por quê:* o medo é do que acontece com a telha. O corte mostra onde a obra toca o telhado, e a garantia aparece logo ao lado.
-   - **Raio de 80 km desenhado no formulário** *(retirado na sexta versão; ver item 10)*, com Sorocaba no centro e as outras três cidades em posição aproximada. *Por quê:* responde "vocês atendem aqui?" no momento de escolher a cidade.
-     Na primeira versão o mapa ficou cru: na escala real as quatro cidades cabem em uns 35 km de um raio de 80, então o círculo ficava vazio e Votorantim encostava em Sorocaba. Agora ele tem duas escalas. A visão geral mostra o raio com a área preenchida e a linha "80 km" como escala, e a região das cidades fica marcada. Ao lado, um quadro ampliado mostra as quatro cidades nas mesmas posições relativas. A sede é o sol da logo. *Por quê:* é o recurso clássico de mapa com quadro de detalhe; resolve a leitura sem distorcer distância nenhuma.
-     **O mapa responde ao campo "Cidade":** a cidade escolhida ganha um anel âmbar e o nome em âmbar; "Outra cidade a até 80 km" acende o raio inteiro. *Por quê:* o mapa deixa de ser enfeite e confirma, na hora, que a pessoa está dentro da área atendida.
-     **No celular, o mapa fica no fim do formulário,** depois do botão, só com o quadro ampliado, sobre fundo azul. No computador ele continua na coluna da esquerda, ao lado do campo. *Por quê:* a primeira tentativa pôs o mapa logo abaixo do campo "Cidade", para o destaque aparecer onde a pessoa escolhe. Mas eram cerca de 300px no meio de um formulário de quatro campos, justamente onde a pessoa está preenchendo, e rolagem a mais ali faz gente desistir. Depois do botão, o mapa continua respondendo à escolha sem atrapalhar o preenchimento.
-     Sem JavaScript o mapa aparece inteiro, só sem o destaque. As posições das cidades não vêm do brief: são geografia pública, desenhadas na proporção real e marcadas como "posições aproximadas". O único número escrito no mapa é o raio de 80 km, que é do brief. Ficam de fora: rodovias com número, cidades fora da lista do brief, distância escrita por cidade e animação.
-   - **Jargão explicado em linha:** kWp, inversor, homologação e custo do fio. *Por quê:* quem compra tem de 35 a 60 anos e não é técnico. A página usa as palavras do setor, então precisa dizer o que elas querem dizer.
-   - **"11 pessoas" é o número de destaque da objeção 1.** *Por quê:* "equipe própria, com carteira assinada" é a prova mais direta contra "vão sumir", e as outras duas objeções já tinham número de destaque.
-   - **Uma linha sobre o uso dos dados no formulário ficou pendente.** A frase "Usamos esses dados só para fazer a sua simulação e responder pelo WhatsApp" chegou a entrar, mas é uma promessa que o cliente não fez no brief. Volta quando ele confirmar o texto.
-   - **Os diagramas também preenchem a coluna vazia.** No computador, as seções do telhado e da Lei 14.300 tinham uma coluna quase vazia. O corte do telhado fica sob a pergunta, e o diagrama do crédito fica sob a resposta.
+### Perguntas curtas
 
-   Os diagramas são desenhos técnicos nas cores da logo, sem gente, sem foto e sem efeito. Ficam visíveis sem JavaScript e sem animação.
+26. **Mudança de casa, dia nublado e bateria ficam numa lista curta logo antes do formulário.** *Por quê:* são dúvidas de uma linha e não pedem mais do que isso.
 
-   **Ficou de fora das outras páginas:** percentual de queda e economia calculada ("−85%", "R$ 662 a menos", "R$ 7.020 por ano"), calculadora, estrelas, endereço, telefone e CNPJ inventados, foto de banco de imagens, menu, formulário em janela por cima da página, contadores animados, "até 90%", irradiação solar "ao vivo" e conteúdo escondido até a animação rodar.
+### Formulário
 
-9. **Quinta versão: os diagramas viram modelos 3D.** O corte do telhado, os dois quadros do crédito e o mapa do raio (retirado depois; ver item 10) passam a ser modelos tridimensionais feitos por nós em código (Three.js, pasta `modelos/`) e exportados como imagens prontas. A página não roda 3D: recebe PNG, com os nomes e os destaques num SVG por cima.
-   *Por quê:* no corte plano não dava para ver o ponto que gera o medo, onde o gancho passa por baixo da telha e sobe até o trilho. Em volume, com o corte na frente, esse caminho aparece. A casa e o poste do crédito ficam reconhecíveis de relance, e o mapa ganha leitura de maquete sem perder a escala.
-   *Por que imagem pronta e não 3D girando na página:* 3D ao vivo custaria uns 150 KB de biblioteca, não apareceria sem JavaScript e acrescentaria movimento a uma página que corta movimento de propósito. Quem tem de 35 a 60 anos quer ver a peça, não girá-la.
-   - **Cor sem luz realista.** Cada face recebe uma cor da logo; a face de lado é a mesma cor com o azul da logo transparente por cima. É a regra dos neutros do `DESIGN.md` aplicada ao volume. Luz e sombra realistas criariam tons que a marca não tem.
-   - **O mapa usa projeção oblíqua de planta.** O chão fica visto de cima, na mesma escala da quarta versão (1,5px e 5px por km), e só o que tem altura sobe na tela. *Por quê:* numa perspectiva ou numa isométrica, a distância norte-sul encolhe e Votorantim volta a encostar em Sorocaba. Assim as posições no chão continuam exatamente as mesmas.
-   - **Texto fora da imagem.** Nomes das peças, das cidades, "rede" e "80 km" ficam no SVG por cima, como texto de verdade. O anel âmbar da cidade escolhida e a borda do raio também, para o mapa continuar respondendo ao campo "Cidade". As posições saem do próprio modelo, calculadas no render.
-   - **Fica igual:** barras do caso, garantias e blocos de anos (são número, e perspectiva distorce proporção), a marca da logo na primeira tela, as legendas e o lugar de cada diagrama. Sem JavaScript tudo aparece, só sem o destaque do mapa.
+27. **São quatro campos numerados, sob o cabeçalho "Pedido de simulação": nome, WhatsApp, cidade e valor da conta.** *Por quê:* são os dados que o cliente pediu, e a numeração mostra que são só quatro passos.
+28. **Com conta abaixo de R$ 450, a página mostra uma mensagem franca e não envia.** *Por quê:* é a metade da meta que fala de menos pedidos de conta baixa.
+29. **Conta de exatamente R$ 450 passa.** *Por quê:* o brief diz "abaixo disso a conta não fecha".
+30. **O formulário responde enquanto a pessoa preenche:** máscara no WhatsApp, "R$" fixo, erro ao sair do campo e o aviso dos R$ 450 já ao sair do campo da conta. *Por quê:* quem tem conta baixa descobre antes de terminar, e quem pode comprar não tropeça em formato.
+31. **A cidade é uma lista com as quatro cidades e "Outra cidade a até 80 km de Sorocaba", com campo para o nome.** *Por quê:* deixa o raio explícito sem prometer atendimento fora dele.
+32. **O envio abre o WhatsApp com a mensagem fixa:**
+    ```
+    [Simulação site]
+    Nome: …
+    WhatsApp: …
+    Cidade: …
+    Conta média de luz: R$ …
+    ```
+    *Por quê:* o cliente conta os leads pela primeira linha.
+33. **Só uma função monta o link do WhatsApp, e ela roda depois da validação.** O HTML não tem link de WhatsApp e o formulário não tem `action`. *Por quê:* sem JavaScript nada é enviado, e nenhum caminho pula o filtro.
+34. **O número do WhatsApp fica numa constante vazia marcada `TODO cliente`, e o link sai como `wa.me/?text=…`.** *Por quê:* dá para testar o envio de verdade sem inventar número.
+35. **Junto do botão ficam a nota 4,8 com 137 avaliações, "resposta no mesmo dia útil, por WhatsApp" e "visita técnica sem custo e sem compromisso".** *Por quê:* respondem "e depois que eu enviar?" no momento em que a pessoa hesita.
+36. **A página pede para deixar a conta à mão e enviar a foto na conversa.** *Por quê:* o brief diz que a foto ajuda muito, e o WhatsApp com mensagem pronta não leva anexo.
 
-10. **Sexta versão: o mapa do raio sai da página, por enquanto.** Saem a maquete do formulário (no computador e no celular), o destaque ligado ao campo "Cidade" e a imagem da maquete. O campo continua igual: a lista com as quatro cidades e "Outra cidade a até 80 km de Sorocaba" já diz quem é atendido.
-    *Por quê:* nem em SVG nem em 3D o mapa convenceu. Ele responde com um desenho grande e técnico a uma pergunta de sim ou não ("vocês atendem aqui?"). E, na escala real, as quatro cidades ocupam uns 35 km de um raio de 80, então o desenho é quase todo vazio; as duas escalas e a maquete só remendaram isso. Melhor sem mapa do que com um mapa que não convence.
-    *O que pode voltar:* um conceito novo, não o mesmo desenho. Os caminhos em estudo são o mapa como o próprio campo "Cidade" (as cidades viram as opções, na posição relativa) e o mapa na objeção 1, como prova de que a empresa é local. Volta só com o porquê registrado aqui antes.
+### Forma e visual
 
-11. **Sétima versão: a página como ficha técnica.** A página estava correta, mas anônima: trocando a logo, serviria para qualquer integradora. Toda seção tinha o mesmo molde, os números mal passavam do tamanho dos títulos e a marca só aparecia como enfeite. O brief diz "somos técnicos e gostamos de número"; a personalidade sai daí. A página passa a parecer um memorial de projeto, não um anúncio. Nenhum texto de venda, número, cor ou regra muda: muda a forma.
-    - **Os números mandam.** O intervalo "75% a 90%" e os dois valores do caso passam a ser o maior texto da página, várias vezes o tamanho de antes; "11 pessoas", "5 anos" e os três números de prova sobem junto. *Por quê:* a regra "o maior texto da tela é o número" já existia, mas a diferença era pequena demais para ser vista. É o número que separa a Ravena de quem promete sem dizer quanto.
-    - **A voz da logo entra na tipografia.** A família continua a mesma. Os rótulos passam a usar o peso leve com letras bem espaçadas, que é como a logo escreve "SOLAR"; a frase da promessa fica leve e o número, em negrito. *Por quê:* dá caráter sem baixar fonte e sem sair da logo.
-    - **A primeira tela repete a composição da logo.** Os três números de prova deixam o cartão flutuante e viram as células de um painel, com as linhas brancas da logo, no pé da primeira tela. O sol da logo nasce por trás desse painel. *Por quê:* na logo o sol fica atrás do painel; a tela passa a ser a marca em escala de página, e não a marca colada ao lado do texto.
-    - **Régua dos R$ 450.** Sob o campo da conta, uma régua com uma única marca escrita, "R$ 450". O valor digitado aparece como um ponto, de um lado ou do outro. *Por quê:* recusar quem não tem como comprar é o traço mais próprio da Ravena, e a régua mostra isso antes de a pessoa apertar o botão. Ela não calcula nada, não envia nada e não escreve outro número; o bloqueio continua sendo o do botão e o do formulário. Sem JavaScript aparece parada, sem o ponto.
-    - **Seções numeradas como folhas de projeto**, de 01 a 06, com um fio no topo. *Por quê:* dá ordem de documento técnico e mostra que a página tem fim. A numeração é desenhada pelo CSS: é ordem de folha, não cifra, e não entra no texto.
-    - **A pergunta do cliente vira citação grande, na largura toda,** em vez de título de coluna. *Por quê:* são as palavras dele, e é por elas que ele se reconhece. A coluna presa à esquerda sai, e cada objeção ganha desenho próprio: "11 pessoas" ao lado dos fatos, com as garantias embaixo; o corte do telhado grande, ao lado dos "5 anos"; o crédito num quadro só.
-    - **Crédito: dia sobre branco, noite sobre azul.** Os dois quadros ficam lado a lado num mesmo quadro. O modelo da noite foi renderizado de novo, com contorno branco no poste, no fio e na lua. *Por quê:* a diferença entre os dois momentos passa a ser vista antes de ser lida, só com as cores da logo.
-    - **O caso de Sorocaba é a peça central.** "R$ 780" e "R$ 118" no maior tamanho da página, com as barras, e os dados da casa numa ficha de três campos (onde, sistema, instalado em). *Por quê:* é a única prova com números conferidos; merece o maior peso visual.
-    - **Preço, prazo e financiamento perdem o cartão** e viram três colunas de ficha, com um fio azul grosso no topo. *Por quê:* cartão arredondado é a linguagem de qualquer página de venda; coluna com fio é a de tabela técnica, e continua fácil de comparar entre três orçamentos.
-    - **O formulário vira ficha de pedido.** Os mesmos quatro campos, numerados de 1 a 4, sob o cabeçalho "Pedido de simulação". *Por quê:* mostra de relance que são só quatro passos, sem escrever tempo nem promessa.
-    - **Fica igual:** texto de venda, todos os números, as quatro cores, o laranja só na ação, o filtro dos R$ 450, o caminho único até o WhatsApp, a mensagem com a etiqueta, as barras, os blocos de anos, as etapas, e tudo o que a Parte 2 deixa de fora.
-    - **Correção na evidência:** nas capturas de página inteira os diagramas 3D saíam em branco, porque a captura não esperava a imagem ser decodificada. O script agora espera.
+37. **A página tem cara de memorial de projeto, não de anúncio.** *Por quê:* o brief diz "somos técnicos e gostamos de número", e sem isso a página serviria para qualquer integradora.
+38. **O maior texto de cada tela é o número.** *Por quê:* é o número que separa a Ravena de quem promete sem dizer quanto.
+39. **Rótulos em peso leve com letras espaçadas, como o "SOLAR" da logo.** *Por quê:* dá caráter sem trocar a fonte da logo.
+40. **As seções são numeradas de 01 a 06 como folhas, pelo CSS.** *Por quê:* dá ordem de documento técnico, e a numeração é ordem, não cifra.
+41. **As cores são só as da logo, com o laranja só na ação, e os valores ficam no `DESIGN.md`.** *Por quê:* a marca nunca escreve as cores; elas saem do arquivo.
+42. **Os diagramas (telhado e crédito) são modelos 3D feitos por nós em `modelos/` e entram como PNG, com os nomes num SVG por cima.** *Por quê:* em volume aparece o caminho do gancho sob a telha, e imagem pronta não pesa, não depende de JavaScript nem acrescenta movimento.
+43. **No 3D, cada face recebe uma cor da logo, sem luz realista.** *Por quê:* luz e sombra criariam tons que a marca não tem.
+44. **As seções entram suavemente ao rolar, sem isso para quem pede menos movimento, e nada fica escondido se o JavaScript falhar.** *Por quê:* o movimento não pode atrasar nem esconder o número.
 
 **Sobre o repositório:** o `brief.md` e a pasta `material/` ficam só na máquina, fora do GitHub. *Por quê:* são material do cliente, não da página. A logo que a página usa é uma cópia idêntica em `assets/logo.svg`.
 
@@ -116,21 +93,23 @@
 | "Até 95%", "energia do futuro", "+300 clientes" | Herança de 2021 que o brief contradiz ou proíbe. |
 | Comercial, indústria, rural, manutenção de terceiros | A empresa não faz isso ou não é o público desta página. |
 | Quem somos, missão, visão, valores | É o que a página não pode continuar sendo. Os fatos que importam foram para a objeção 1. |
-| Parceiros, blog, mapa, redes, banner de cookies | Não ajudam a pedir a simulação. |
-| Mapa do raio de atendimento (por enquanto) | Saiu na sexta versão: ocupava muito espaço para uma resposta de sim ou não. A lista de cidades do formulário responde. Ver item 10. |
+| Parceiros, blog, redes, banner de cookies | Não ajudam a pedir a simulação. |
+| Mapa do raio de atendimento | Ocupava muito espaço para uma resposta de sim ou não, e na escala real as quatro cidades deixam o raio quase vazio. A lista de cidades do formulário responde. Só volta como conceito novo, com o porquê registrado aqui. |
 | Menu e botão flutuante de WhatsApp | São saídas, e o botão flutuante pularia o filtro dos R$ 450. |
-| Calculadora de economia | Depois da Lei 14.300 o cálculo é individual. A simulação é o produto. O campo da conta na primeira tela não calcula nada: só aplica o filtro e leva o valor ao formulário. |
-| Percentual de economia do caso de Sorocaba | O brief dá R$ 780 e R$ 118, não o percentual. Número calculado por nós não é número do brief. |
+| Calculadora de economia | Depois da Lei 14.300 o cálculo é individual. A simulação é o produto. |
+| Percentual de economia do caso e economia calculada ("−85%", "R$ 7.020 por ano") | O brief dá R$ 780 e R$ 118, não o percentual. Número calculado por nós não é número do brief. |
 | E-mail, assunto e mensagem no formulário | O cliente pediu só quatro dados. Cada campo a mais perde pedido. |
-| **Anexo da conta** (pedido no brief) | O WhatsApp com mensagem preenchida não leva arquivo. A foto é pedida na própria conversa. |
+| Anexo da conta (pedido no brief) | O WhatsApp com mensagem preenchida não leva arquivo. A foto é pedida na própria conversa. |
 | Fotos e vídeos | Não vieram no material. Entram quando chegarem, sem placeholder. |
-| Endereço completo e CNPJ | Não estão no brief. A página diz "sede em Sorocaba". |
+| Endereço completo, telefone e CNPJ | Não estão no brief. A página diz "sede em Sorocaba". |
 | Link para as avaliações do Google | O endereço não veio. A nota aparece como texto. |
-| Números que "contam" até o valor, carrossel, vídeo de fundo | Movimento que atrasa a leitura do número. O público quer o dado, não o efeito. |
-| Foto de banco de imagens e ilustração de família feliz | Não é obra da Ravena. As imagens são a marca da própria logo e dois diagramas técnicos nas cores dela (crédito e telhado), modelados em 3D por nós desde a quinta versão. |
-| "Leva menos de um minuto" e frases parecidas no formulário | Seria um número que o brief não deu. |
 | Estrelas desenhadas para a nota 4,8 | Cinco estrelas cheias diriam 5,0. A nota aparece como número. |
-| Cortes diagonais entre as seções | A única inclinação da logo é a lateral do painel, com cerca de 56°, íngreme demais para cortar uma seção. Um ângulo mais suave seria forma inventada, não da marca. |
-| Fonte Poppins, gradientes e cards com ícone do site de 2021 | O visual antigo é o da página que "quase não traz cliente". A fonte passa a ser a da própria logo. |
+| Frase sobre o uso dos dados no formulário | É uma promessa que o cliente não fez. Volta quando ele confirmar o texto. |
+| "Leva menos de um minuto" e frases parecidas | Seria um número que o brief não deu. |
+| Números que "contam" até o valor, carrossel, vídeo de fundo, 3D girando | Movimento que atrasa a leitura do número. O público quer o dado, não o efeito. |
+| Formulário em janela por cima da página | Esconde a página e vira uma segunda forma de pedir. |
+| Foto de banco de imagens e ilustração de família feliz | Não é obra da Ravena. As imagens são a marca da logo e os dois diagramas técnicos nas cores dela. |
+| Cortes diagonais entre as seções | A única inclinação da logo é a do painel, íngreme demais para cortar uma seção. Um ângulo mais suave seria forma inventada. |
+| Fonte Poppins, gradientes e cards com ícone do site de 2021 | É o visual da página que "quase não traz cliente". A fonte é a da própria logo. |
 
 **Pendente com o cliente:** WhatsApp real, fotos e vídeos, link do Google, endereço e CNPJ, e o texto sobre o uso dos dados no formulário.
