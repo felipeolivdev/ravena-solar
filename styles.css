@@ -164,6 +164,13 @@ p { max-width: var(--medida); }
 /* Navegação do topo: links de texto, só a partir de 1024px. Não são ação: nada de laranja. */
 .navegacao { display: none; }
 @media (min-width: 1024px) {
+  /* Dúvidas em 3+2: grade de seis colunas, cada pergunta em duas; a segunda linha fica centrada */
+  .perguntas { grid-template-columns: repeat(6, 1fr); } /* o vão é o da regra base, --e-5 */
+  .perguntas > div { grid-column: span 2; }
+  .perguntas > div:nth-child(4) { grid-column: 2 / span 2; }
+  .perguntas > div:nth-child(5) { grid-column: 4 / span 2; }
+  /* A nota tem a largura e o eixo da segunda linha: quatro colunas e três vãos */
+  .perguntas-nota { max-width: calc((100% - 5 * var(--e-5)) * 4 / 6 + 3 * var(--e-5)); margin-inline: auto; }
   .navegacao { display: block; margin-left: auto; margin-right: var(--e-5); }
   .navegacao ul { display: flex; gap: var(--e-4); }
   .navegacao a {
@@ -702,8 +709,6 @@ p { max-width: var(--medida); }
 .perguntas > div { padding-top: var(--e-4); border-top: 1px solid var(--linha); }
 .perguntas dt { font-size: var(--t-h3); line-height: 1.3; font-weight: 700; }
 .perguntas dd { margin-top: var(--e-2); color: var(--texto-suave); }
-/* Dúvidas numa coluna só, centrada no eixo da página */
-.duvidas-coluna { max-width: calc(720px + 2 * var(--margem)); }
 .perguntas-nota {
   margin-top: var(--e-6);
   padding: var(--e-4);
