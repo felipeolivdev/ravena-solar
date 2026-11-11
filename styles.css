@@ -698,15 +698,21 @@ p { max-width: var(--medida); }
 }
 
 /* Perguntas curtas */
-.perguntas { display: grid; gap: var(--e-4); margin-top: var(--e-6); }
+.perguntas { display: grid; gap: var(--e-5); margin-top: var(--e-6); }
 .perguntas > div { padding-top: var(--e-4); border-top: 1px solid var(--linha); }
 .perguntas dt { font-size: var(--t-h3); line-height: 1.3; font-weight: 700; }
-.perguntas dd { margin-top: var(--e-2); max-width: 46ch; color: var(--texto-suave); }
-.perguntas > .perguntas-saida { /* o bloco que fecha a grade; os 3px a mais do traço saem do espaço de cima */
-  padding-top: calc(var(--e-4) - 3px);
-  border-top: 4px solid var(--ambar);
+.perguntas dd { margin-top: var(--e-2); color: var(--texto-suave); }
+/* Dúvidas numa coluna só, centrada no eixo da página */
+.duvidas-coluna { max-width: calc(720px + 2 * var(--margem)); }
+.perguntas-nota {
+  margin-top: var(--e-6);
+  padding: var(--e-4);
+  border-left: 4px solid var(--ambar); /* âmbar como forma: não é o aviso azul de erro */
+  border-radius: 0 var(--raio) var(--raio) 0;
+  background: var(--fundo-suave);
+  color: var(--texto-suave);
 }
-.perguntas-saida .botao { margin-top: var(--e-4); }
+.perguntas-nota strong { color: var(--azul); }
 
 /* Diagramas: modelos 3D renderizados (assets/3d) com texto em SVG por cima; legenda em HTML */
 .diagrama figcaption { margin-top: var(--e-3); font-size: var(--t-pequeno); line-height: 1.45; color: var(--texto-suave); max-width: var(--medida); }
@@ -953,7 +959,6 @@ p { max-width: var(--medida); }
   }
   .etapas li:nth-child(4n)::after { display: none; }
 
-  .perguntas { grid-template-columns: repeat(2, 1fr); gap: var(--e-6) var(--e-7); }
   .credito { grid-template-columns: 1fr 1fr; }
   .credito .diagrama { padding: var(--e-5); }
   .formulario { padding: var(--e-5); }
