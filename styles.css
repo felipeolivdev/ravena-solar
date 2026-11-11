@@ -159,6 +159,7 @@ p { max-width: var(--medida); }
   min-height: var(--topo);
 }
 .logo { display: block; width: 150px; height: auto; }
+.logo-link { display: block; border-radius: var(--raio); } /* a logo leva ao início da página */
 
 /* Navegação do topo: links de texto, só a partir de 1024px. Não são ação: nada de laranja. */
 .navegacao { display: none; }
