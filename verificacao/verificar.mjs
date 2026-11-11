@@ -128,7 +128,7 @@ const ambarEmBranco = await celular.evaluate((cor) => [...document.querySelector
   .map(e => e.tagName.toLowerCase() + '.' + e.className), rgb('#F2A03D'));
 conferir(ambarEmBranco.length === 0, 'Nenhum texto âmbar fora de fundo azul', ambarEmBranco.join(', '));
 const px = async (pagina, s) => parseFloat(await estilo(pagina, s, 'fontSize'));
-conferir(await px(celular, 'h1') === 24 && await px(computador, 'h1') === 36, 'Frase da promessa: 24px no celular e 36px no computador');
+conferir(await px(celular, 'h1') === 24 && await px(computador, 'h1') === 40, 'Frase da promessa: 24px no celular e 40px no computador');
 conferir(Math.abs(await px(celular, '.h1-numero') - 58.5) < 0.1 && await px(computador, '.h1-numero') === 136,
   'Intervalo "75% a 90%" monumental: 15vw no celular (58,5px em 390) e 136px em 1440', `${await px(celular, '.h1-numero')} / ${await px(computador, '.h1-numero')}`);
 for (const [pagina, nome] of [[celular, 'celular'], [computador, 'computador']]) {

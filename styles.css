@@ -53,8 +53,8 @@
   :root {
     --t-monumental: clamp(88px, 12vw, 136px);
     --t-numero: clamp(60px, 8.2vw, 96px);
-    --t-prova: clamp(48px, 6.6vw, 88px);
-    --t-h1: 36px;
+    --t-prova: clamp(48px, 5vw, 64px);
+    --t-h1: 40px;
     --t-h2: clamp(40px, 5vw, 56px);
     --t-h3: 20px;
     --t-corpo: 18px;
@@ -229,6 +229,7 @@ p { max-width: var(--medida); }
   background: var(--azul);
   color: var(--branco);
   padding-top: var(--e-5);
+  padding-bottom: var(--e-5); /* o painel termina no azul, não é cortado pela seção branca */
   overflow: hidden;
 }
 .sobretitulo {
@@ -237,7 +238,7 @@ p { max-width: var(--medida); }
   line-height: 1.5;
   letter-spacing: var(--rastro);
   text-transform: uppercase;
-  color: var(--ambar);
+  color: var(--branco-suave); /* acima da dobra, o âmbar é só do número */
 }
 .destaque-ambar { color: var(--ambar); }
 .hero-texto {
@@ -339,11 +340,13 @@ p { max-width: var(--medida); }
 }
 .arte-sol { fill: var(--ambar); }
 .arte-raios { stroke: var(--ambar); stroke-width: 9; stroke-linecap: round; }
+.arte-raios line { vector-effect: non-scaling-stroke; } /* traço fixo, por maior que o sol fique */
 
 /* Painel de prova: células com as linhas brancas da logo */
 .prova-lista {
   display: grid;
   border-top: 2px solid var(--linha-painel);
+  border-bottom: 2px solid var(--linha-painel);
   background: var(--azul); /* tampa o sol; cada célula põe --painel por cima */
 }
 .prova-lista li {
@@ -357,7 +360,7 @@ p { max-width: var(--medida); }
   font-size: var(--t-prova);
 }
 .prova-lista li:first-child { border-top: 0; }
-.prova-lista span { color: var(--branco-suave); font-size: var(--t-pequeno); line-height: 1.4; }
+.prova-lista span { max-width: 24ch; color: var(--branco-suave); font-size: 16px; line-height: 1.4; }
 .prova .numero { color: var(--branco); font-size: 1em; white-space: nowrap; }
 
 .numero {
@@ -836,16 +839,28 @@ p { max-width: var(--medida); }
   .formulario .botao { width: 100%; display: flex; }
   .barra-fixa { display: none; }
 
-  .hero { padding-top: var(--e-7); }
-  .hero-conteudo { max-width: 600px; }
-  .hero-texto { margin-top: var(--e-5); }
-  .hero-conta { margin-top: var(--e-5); }
+  .hero { padding-top: var(--e-7); padding-bottom: var(--e-6); }
+  /* A dobra cai na linha de cima do painel: o conteúdo ocupa a janela menos o topo,
+     o respiro de cima, a margem do painel e uma fresta de 24px onde o painel aparece. */
+  .hero-conteudo {
+    max-width: 720px;
+    min-height: calc(100svh - var(--topo) - var(--e-7) - var(--e-7) - var(--e-4));
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* em janela alta, a sobra se divide em cima e embaixo */
+  }
+  .sobretitulo { white-space: nowrap; }
+  h1 { line-height: 1.15; }
+  /* A frase quebra depois de "clientes,": "nossos clientes" não se separa */
+  .h1-frase { max-width: 14em; text-wrap: wrap; }
+  .hero-texto { margin-top: var(--e-5); max-width: 600px; }
+  .hero-conta { margin-top: var(--e-6); }
   .hero-conta-linha { grid-template-columns: 1fr auto; }
   .regua-legenda { font-size: var(--t-pequeno); }
 
   .prova { margin-top: var(--e-7); }
-  /* O sol ocupa o que sobra à direita do texto (600px), para nunca passar por trás da régua */
-  .sol { width: clamp(140px, calc(min(100vw - 2 * var(--margem), var(--largura)) - 624px), 520px); }
+  /* O sol ocupa o que sobra à direita da coluna de texto (720px), para nunca passar por trás da régua */
+  .sol { width: clamp(140px, calc(min(100vw - 2 * var(--margem), var(--largura)) - 744px), 360px); }
   .prova-lista { grid-template-columns: repeat(3, 1fr); }
   .prova-lista li {
     grid-template-columns: 1fr;
@@ -856,7 +871,7 @@ p { max-width: var(--medida); }
     border-left: 2px solid var(--linha-painel);
   }
   .prova-lista li:first-child { border-left: 0; }
-  .prova-lista span { font-size: 16px; }
+  .prova-lista span { font-size: 18px; }
 
   .cabeca { margin-bottom: var(--e-7); }
   .apoio { font-size: 20px; }
