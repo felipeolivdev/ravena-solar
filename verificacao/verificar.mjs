@@ -93,10 +93,10 @@ conferir(await estilo(celular, 'body', 'color') === rgb('#123A55'), 'Texto da p�
 conferir(await estilo(celular, '.hero', 'backgroundColor') === rgb('#123A55'), 'Primeira tela tem fundo #123A55');
 conferir(await estilo(celular, 'h1', 'color') === rgb('#FFFFFF'), 'Promessa em #FFFFFF sobre o azul');
 conferir(await estilo(celular, '.destaque-ambar', 'color') === rgb('#F2A03D'), 'Intervalo "75% a 90%" em #F2A03D');
-conferir(await estilo(celular, '.prova-lista', 'backgroundColor') === rgb('#123A55') && await estilo(celular, '.prova-lista li', 'backgroundColor') === 'rgba(255, 255, 255, 0.1)',
-  'Painel de prova: célula em branco a 0,10 sobre #123A55');
-conferir(await estilo(celular, '.prova-lista', 'borderTopColor') === 'rgba(255, 255, 255, 0.85)', 'Linhas do painel de prova em branco a 0,85, como na logo');
-conferir(await estilo(celular, '.prova .numero', 'color') === rgb('#FFFFFF'), 'Número do painel de prova em #FFFFFF sobre azul');
+conferir(await estilo(celular, '.prova-lista', 'backgroundColor') === rgb('#FFFFFF') && await estilo(celular, '.prova-lista', 'borderTopLeftRadius') === '12px',
+  'Cartão de prova: #FFFFFF com canto de 12px');
+conferir(await estilo(celular, '.prova-lista', 'borderTopColor') === rgb('#F2A03D') && await estilo(celular, '.prova-lista', 'borderTopWidth') === '4px', 'Cartão de prova com traço de 4px em #F2A03D no topo');
+conferir(await estilo(celular, '.prova .numero', 'color') === rgb('#123A55'), 'Número do cartão de prova em #123A55 sobre branco');
 conferir(await estilo(celular, '.caso .numero:not(.numero-branco)', 'color') === rgb('#F2A03D'), 'Valor de depois, no caso, em #F2A03D sobre azul');
 conferir(await estilo(celular, '.formulario', 'borderTopLeftRadius') === '12px', 'Ficha do formulário com canto de 12px', await estilo(celular, '.formulario', 'borderTopLeftRadius'));
 const trilho = await celular.locator('.barra-antes').boundingBox();
@@ -144,7 +144,7 @@ const folhas = await celular.evaluate(() => [...document.querySelectorAll('.folh
 conferir(folhas.length === 6 && folhas.every(c => /counter\(folha/.test(c)), 'Seis seções numeradas pelo CSS (o número da folha não entra no texto)', `${folhas.length} folhas`);
 conferir(await celular.locator('.formulario .campo-numerado').count() === 4, 'Formulário: quatro campos numerados pelo CSS');
 conferir(await celular.locator('.prova .sol').isVisible() && await computador.locator('.prova .sol').isVisible()
-  && await estilo(celular, '.arte-sol', 'fill') === rgb('#F2A03D'), 'O sol da logo aparece atrás do painel de prova, em #F2A03D, no celular e no computador');
+  && await estilo(celular, '.arte-sol', 'fill') === rgb('#F2A03D'), 'O sol da logo aparece atrás do cartão de prova, em #F2A03D, no celular e no computador');
 const raios = (svg) => (svg.match(/<line[^>]+>/g) || []).slice(0, 5).map(l => ['x1', 'y1', 'x2', 'y2'].map(a => l.match(new RegExp(a + '="([^"]+)"'))[1]).join()).join(';');
 conferir(raios(readFileSync(path.join(raiz, 'assets/logo.svg'), 'utf8')) === raios(await celular.locator('.sol').evaluate(e => e.outerHTML)),
   'O sol da primeira tela tem os mesmos raios da logo.svg');

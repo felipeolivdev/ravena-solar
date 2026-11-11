@@ -22,15 +22,13 @@ Neutros: não são cores novas, são o azul e o branco da logo com transparênci
 | `--fundo-suave` | `rgb(18 58 85 / 0.05)` | Fundo de seção alternada |
 | `--branco-suave` | `rgb(255 255 255 / 0.80)` | Texto de apoio sobre azul |
 | `--linha-clara` | `rgb(255 255 255 / 0.24)` | Divisórias e trilhos sobre azul |
-| `--linha-painel` | `rgb(255 255 255 / 0.85)` | Linhas do painel de prova. É o branco com a opacidade que as linhas do painel têm na logo (`opacity="0.85"`) |
-| `--painel` | `rgb(255 255 255 / 0.10)` | Fundo de cada célula do painel de prova, sobre o azul |
-| `--sombra` | `0 10px 30px rgb(18 58 85 / 0.14)` | Topo fixo, barra do celular e botão ao passar o mouse |
+| `--sombra` | `0 10px 30px rgb(18 58 85 / 0.14)` | Topo fixo, barra do celular, cartão de prova e botão ao passar o mouse |
 | `--textura` | `0.06` | Opacidade da textura do painel sobre azul |
 
 Regras:
 
 - O laranja não aparece em título, ícone, borda decorativa nem fundo de seção. Se algo é laranja, é clicável ou está em foco. A logo é a exceção.
-- O âmbar nunca é texto sobre branco (contraste de 2,1:1). Como texto, só sobre azul (5,6:1). Sobre branco ele aparece só como forma: o traço dos rótulos, os blocos de anos e o topo da ficha do formulário.
+- O âmbar nunca é texto sobre branco (contraste de 2,1:1). Como texto, só sobre azul (5,6:1). Sobre branco ele aparece só como forma: o traço dos rótulos, os blocos de anos, o topo do cartão de prova e o topo da ficha do formulário.
 - Texto do botão é azul sobre laranja (3,9:1), não branco (3,1:1). Por isso o rótulo do botão é sempre negrito e com 17px ou mais.
 - Sem gradiente. Sem vermelho para erro: erro e bloqueio usam o azul, com borda grossa à esquerda.
 - Não entram `#1d8f7e`, `#0d2c42` nem `#155a7a`, que são do site de 2021 e não da marca.
@@ -48,7 +46,7 @@ A voz vem da própria logo, que escreve "RAVENA" em negrito e "SOLAR" leve, com 
 |---|---|---|---|
 | `--t-monumental` | 15vw, entre 46 e 60px (58,5px em 390) / 0,95 | 12vw, entre 88 e 136px / 0,95 | "75% a 90%" e os dois valores do caso. O maior texto da página |
 | `--t-numero` | 56px / 0,95 | 8,2vw, entre 60 e 96px / 0,95 | Número de destaque da objeção ("11 pessoas", "5 anos") |
-| `--t-prova` | 44px / 0,95 | 5vw, entre 48 e 64px / 0,95 | Os três números do painel de prova. Teto de 64px: a 88px o número ficava mais de cinco vezes maior que a legenda e o painel pesava como um bloco bruto; a prova não deve competir com "75% a 90%" |
+| `--t-prova` | 36px / 0,95 | 5vw, entre 48 e 64px / 0,95 | Os três números do cartão de prova, em `--azul`. Teto de 64px: a 88px o número ficava mais de cinco vezes maior que a legenda e a prova competia com "75% a 90%" |
 | `--t-h2` | 30px / 1,08 | 5vw, entre 40 e 56px / 1,08 | A pergunta de cada seção |
 | `--t-h1` | 24px / 1,2 | 40px / 1,15 | A frase da promessa, em peso leve, acima do número. No computador tem até 14em por linha, para quebrar depois de "clientes," (antes, "nossos / clientes" ficava separado) |
 | `--t-h3` | 19px / 1,3 | 20px / 1,3 | Título de item |
@@ -65,7 +63,7 @@ Hierarquia: o maior texto da página é sempre um número (`--t-monumental`), e 
 - Largura do conteúdo: 1080px no máximo (`--largura`). Margem lateral: 20px no celular, 32px a partir de 760px (`--margem`).
 - Linha de texto: 62 caracteres no máximo (`--medida`).
 - Quebra única: 760px. Abaixo disso tudo é uma coluna.
-- Canto: 6px em botão e campo (`--raio`), 12px na ficha do formulário e no quadro do crédito (`--raio-cartao`), 2px em barras e blocos. O painel de prova e as colunas de preço não têm canto arredondado.
+- Canto: 6px em botão e campo (`--raio`), 12px no cartão de prova, na ficha do formulário e no quadro do crédito (`--raio-cartao`), 2px em barras e blocos. As colunas de preço não têm canto arredondado.
 - Topo fixo: 64px de altura no celular, 76px a partir de 760px (`--topo`).
 - Botão: 56px de altura mínima, largura total no celular (44px na versão do topo). Campo de formulário: 52px.
 - Foco: contorno de 3px em `--laranja`, afastado 2px.
@@ -75,12 +73,12 @@ Hierarquia: o maior texto da página é sempre um número (`--t-monumental`), e 
 - **Botão de ação:** fundo `--laranja`, texto `--azul` em negrito. É o único elemento laranja preenchido da página. O rótulo é sempre "Pedir simulação" (no formulário, "Pedir simulação pelo WhatsApp"). Ao passar o mouse sobe 1px e ganha `--sombra`.
 - **Topo fixo:** fundo `--branco`, logo à esquerda. No computador traz o botão à direita. Ganha `--sombra` quando a página rola.
 - **Barra de ação do celular:** fundo `--branco`, presa ao pé da tela, com o botão. Aparece depois que o botão da primeira tela sai de vista e some quando o formulário ou o rodapé aparecem.
-- **Primeira tela:** fundo `--azul`. A promessa tem duas partes: a frase em `--t-h1`, peso leve e `--branco`; e o intervalo "75% a 90%" em `--t-monumental`, negrito e `--ambar`, numa linha só. Ao fundo, a textura do painel. Depois vêm o campo da conta e a régua (abaixo). O pé da tela repete a composição da logo: o sol atrás, o painel na frente.
+- **Primeira tela:** fundo `--azul`. A promessa tem duas partes: a frase em `--t-h1`, peso leve e `--branco`; e o intervalo "75% a 90%" em `--t-monumental`, negrito e `--ambar`, numa linha só. Ao fundo, a textura do painel. Depois vêm o campo da conta e a régua (abaixo). O pé da tela repete a composição da logo: o sol nasce por trás do cartão de prova.
   - **Escala da primeira tela:** só cinco tamanhos acima da dobra: rótulo (`--t-rotulo`), pequeno (`--t-pequeno`, na régua e na nota), corpo (`--t-corpo`, no texto e no rótulo do campo), frase (`--t-h1`) e número (`--t-monumental`). O sobretítulo fica em `--branco-suave`, numa linha só no computador, porque o âmbar acima da dobra é só do número. *Por quê:* a primeira tela tinha nove tamanhos e um sobretítulo âmbar em duas linhas disputando com "75% a 90%", o que deixava a dobra com aspecto desarrumado.
-  - **Ritmo:** 24px do sobretítulo à frase, 8px da frase ao número, 32px do número ao texto, 48px do texto ao campo, 16px entre a régua e a nota.
-  - **Coluna e dobra (computador):** o texto ocupa até 720px. A primeira tela tem pelo menos a altura da janela, e o painel de prova é empurrado para o pé dela: na dobra aparece a linha de cima do painel com o sol nascendo, e os três números entram inteiros logo na primeira rolagem. Em janela alta, o bloco de texto fica centrado na altura que sobra, para não abrir uma faixa vazia acima do painel. *Por quê:* antes o painel começava a cerca de 140px do fim da tela, e os números apareciam cortados pela metade (SPEC, item 3).
-- **Sol:** o sol da logo (círculo e cinco raios, mesma geometria de `assets/logo.svg`), em `--ambar`, encostado à direita. Fica atrás do painel de prova, que cobre 30% da altura dele. Largura de 168px no celular; no computador, o que sobra à direita da coluna de texto (720px), até 360px. Os raios têm traço fixo de 9px na tela (`vector-effect: non-scaling-stroke`), seja qual for o tamanho do sol. *Por quê:* com 520px e o traço escalando junto, os raios passavam de 20px de espessura e, cortados pelo painel, pareciam pílulas soltas, não raios.
-- **Painel de prova:** as células do painel da logo, com os três números de prova. Fundo `--azul` com `--painel` por cima; linhas de 2px em `--linha-painel` no topo e entre as células; sem canto e sem sombra. Números em `--t-prova` e `--branco`, legenda em `--branco-suave` (16px no celular, 18px no computador, até 24ch por linha). Três colunas no computador, três linhas no celular. Abaixo do painel fica uma faixa de azul (`--e-5` no celular, `--e-6` no computador) antes da seção branca, com a linha `--linha-painel` fechando o painel embaixo. *Por quê:* encostado no fim da primeira tela, o painel parecia cortado pela seção seguinte, não terminado.
+  - **Ritmo:** o da sexta versão. 16px do sobretítulo à frase, 8px da frase ao número, 24px do número ao texto, 32px do texto ao campo, 16px entre a régua e a nota. Respiro de 32px em cima no celular e 72px no computador. Embaixo, 96px no celular (a altura do sol que aparece acima do cartão) e 72px no computador, mais os 56px em que o cartão avança.
+  - **Coluna (computador):** o texto ocupa até 720px. A primeira tela tem a altura do conteúdo, não a da janela. *Por quê:* na oitava versão a tela ganhou a altura da janela para a dobra cair na borda do painel, e o espaço vazio entre o formulário e a prova ficou grande demais. Voltou o espaçamento compacto da sexta versão.
+- **Sol:** o sol da logo (círculo e cinco raios, mesma geometria de `assets/logo.svg`), em `--ambar`, encostado à direita. Fica atrás do cartão de prova, que cobre 30% da altura dele. Largura de 168px no celular; no computador, o que sobra à direita da coluna de texto (720px), até 360px. Os raios têm traço fixo de 9px na tela (`vector-effect: non-scaling-stroke`), seja qual for o tamanho do sol. *Por quê:* com 520px e o traço escalando junto, os raios passavam de 20px de espessura e pareciam pílulas soltas, não raios.
+- **Cartão de prova:** como na sexta versão. Cartão `--branco` com `--raio-cartao`, `--sombra` e traço de 4px em `--ambar` no topo; avança 56px (`--avanco`) da primeira tela sobre a seção branca. Divisórias de 1px em `--linha` entre as três células. Números em `--t-prova` e `--azul`, legenda em `--texto-suave` (16px no celular, 18px no computador, até 24ch por linha). Três colunas no computador, três linhas no celular. *Por quê:* o painel azul de linhas brancas (sétima e oitava versões) ficou pesado e bruto. O cartão branco separa a prova da promessa, e o sol continua nascendo por trás da borda de cima dele.
 - **Régua dos R$ 450:** sob o campo da conta. Trilho de 8px: à esquerda da marca, `--linha-clara`; à direita, `--branco`. A marca fica a 40% da largura (`--limite`), com 2px e 20px de altura, e é o único número escrito: "R$ 450". Legendas em 13px (15px no computador): "não fecha" e "fazemos a simulação". O valor digitado é um ponto de 18px em `--ambar` com contorno `--azul`, na posição `valor / 450 x 40%`, parando nas pontas. Nada é laranja: a régua não é ação.
 - **Textura do painel:** a grade das células do painel da logo (células de 72x48px, linha de 1px), em `--branco` com opacidade `--textura` (0,06). Só sobre `--azul`: primeira tela e seção do formulário. É desenhada por máscara SVG, não por gradiente, e fica atrás do conteúdo.
 - **Rótulo de seção:** fio de 1px em `--linha` de ponta a ponta do conteúdo, com um traço de 40x4px em `--ambar` no começo. Abaixo, o número da folha (01 a 06, em negrito e `--azul`) e o rótulo em caixa alta. O número é desenhado pelo CSS (`counter`): é ordem, não cifra, e não entra no texto da página.

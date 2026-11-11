@@ -10,8 +10,6 @@
   --fundo-suave: rgb(18 58 85 / 0.05);
   --branco-suave: rgb(255 255 255 / 0.80);
   --linha-clara: rgb(255 255 255 / 0.24);
-  --linha-painel: rgb(255 255 255 / 0.85); /* as linhas do painel, com a opacidade que têm na logo */
-  --painel: rgb(255 255 255 / 0.10);       /* a célula do painel sobre o azul */
   --sombra: 0 10px 30px rgb(18 58 85 / 0.14);
   --textura: 0.06;
 
@@ -21,7 +19,7 @@
 
   --t-monumental: clamp(46px, 15vw, 60px);
   --t-numero: 56px;
-  --t-prova: 44px;
+  --t-prova: 36px;
   --t-h1: 24px;
   --t-h2: 30px;
   --t-h3: 19px;
@@ -46,6 +44,7 @@
   --raio: 6px;
   --raio-cartao: 12px;
   --topo: 64px;
+  --avanco: 56px; /* quanto o cartão de prova avança da primeira tela sobre a seção branca */
   --limite: 40%; /* onde a marca de R$ 450 fica na régua */
 }
 
@@ -229,11 +228,12 @@ p { max-width: var(--medida); }
   background: var(--azul);
   color: var(--branco);
   padding-top: var(--e-5);
-  padding-bottom: var(--e-5); /* o painel termina no azul, não é cortado pela seção branca */
+  /* 96px de azul abaixo da nota, onde o sol nasce, mais o trecho em que o cartão avança */
+  padding-bottom: calc(var(--e-8) + var(--avanco));
   overflow: hidden;
 }
 .sobretitulo {
-  margin-bottom: var(--e-4);
+  margin-bottom: var(--e-3);
   font-size: var(--t-rotulo);
   line-height: 1.5;
   letter-spacing: var(--rastro);
@@ -327,8 +327,13 @@ p { max-width: var(--medida); }
   white-space: nowrap;
 }
 
-/* O pé da primeira tela repete a logo: o sol nasce por trás do painel */
-.prova { position: relative; margin-top: 104px; }
+/* O sol da logo nasce por trás do cartão de prova, que avança sobre a seção branca */
+.prova {
+  position: relative;
+  z-index: 1;
+  isolation: isolate; /* o sol fica sobre o azul da primeira tela e atrás do cartão */
+  margin-top: calc(-1 * var(--avanco));
+}
 .sol {
   position: absolute;
   z-index: -1;
@@ -342,26 +347,26 @@ p { max-width: var(--medida); }
 .arte-raios { stroke: var(--ambar); stroke-width: 9; stroke-linecap: round; }
 .arte-raios line { vector-effect: non-scaling-stroke; } /* traço fixo, por maior que o sol fique */
 
-/* Painel de prova: células com as linhas brancas da logo */
+/* Cartão de prova */
 .prova-lista {
   display: grid;
-  border-top: 2px solid var(--linha-painel);
-  border-bottom: 2px solid var(--linha-painel);
-  background: var(--azul); /* tampa o sol; cada célula põe --painel por cima */
+  border-top: 4px solid var(--ambar);
+  border-radius: var(--raio-cartao);
+  background: var(--branco);
+  box-shadow: var(--sombra);
 }
 .prova-lista li {
   display: grid;
   grid-template-columns: 4.1em 1fr;
   gap: var(--e-3);
   align-items: center;
-  padding: var(--e-4) var(--e-3);
-  border-top: 2px solid var(--linha-painel);
-  background: var(--painel);
+  padding: var(--e-4);
+  border-top: 1px solid var(--linha);
   font-size: var(--t-prova);
 }
 .prova-lista li:first-child { border-top: 0; }
-.prova-lista span { max-width: 24ch; color: var(--branco-suave); font-size: 16px; line-height: 1.4; }
-.prova .numero { color: var(--branco); font-size: 1em; white-space: nowrap; }
+.prova-lista span { max-width: 24ch; color: var(--texto-suave); font-size: 16px; line-height: 1.4; }
+.prova .numero { color: var(--azul); font-size: 1em; white-space: nowrap; }
 
 .numero {
   display: block;
@@ -839,26 +844,17 @@ p { max-width: var(--medida); }
   .formulario .botao { width: 100%; display: flex; }
   .barra-fixa { display: none; }
 
-  .hero { padding-top: var(--e-7); padding-bottom: var(--e-6); }
-  /* A dobra cai na linha de cima do painel: o conteúdo ocupa a janela menos o topo,
-     o respiro de cima, a margem do painel e uma fresta de 24px onde o painel aparece. */
-  .hero-conteudo {
-    max-width: 720px;
-    min-height: calc(100svh - var(--topo) - var(--e-7) - var(--e-7) - var(--e-4));
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* em janela alta, a sobra se divide em cima e embaixo */
-  }
+  .hero { padding-top: var(--e-7); padding-bottom: calc(var(--e-7) + var(--avanco)); }
+  .hero-conteudo { max-width: 720px; }
   .sobretitulo { white-space: nowrap; }
   h1 { line-height: 1.15; }
   /* A frase quebra depois de "clientes,": "nossos clientes" não se separa */
   .h1-frase { max-width: 14em; text-wrap: wrap; }
-  .hero-texto { margin-top: var(--e-5); max-width: 600px; }
-  .hero-conta { margin-top: var(--e-6); }
+  .hero-texto { margin-top: var(--e-4); max-width: 600px; }
+  .hero-conta { margin-top: var(--e-5); }
   .hero-conta-linha { grid-template-columns: 1fr auto; }
   .regua-legenda { font-size: var(--t-pequeno); }
 
-  .prova { margin-top: var(--e-7); }
   /* O sol ocupa o que sobra à direita da coluna de texto (720px), para nunca passar por trás da régua */
   .sol { width: clamp(140px, calc(min(100vw - 2 * var(--margem), var(--largura)) - 744px), 360px); }
   .prova-lista { grid-template-columns: repeat(3, 1fr); }
@@ -866,9 +862,9 @@ p { max-width: var(--medida); }
     grid-template-columns: 1fr;
     gap: var(--e-3);
     align-content: start;
-    padding: var(--e-5) var(--e-4) var(--e-6);
+    padding: var(--e-5);
     border-top: 0;
-    border-left: 2px solid var(--linha-painel);
+    border-left: 1px solid var(--linha);
   }
   .prova-lista li:first-child { border-left: 0; }
   .prova-lista span { font-size: 18px; }
