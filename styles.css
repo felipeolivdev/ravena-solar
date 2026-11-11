@@ -636,6 +636,11 @@ p { max-width: var(--medida); }
   background: var(--azul);
 }
 .amostra-paga { background: var(--ambar); }
+/* Legenda das etapas: as amostras repetem as marcas da linha do tempo */
+.etapas-legenda { margin-top: var(--e-5); }
+.amostra-cpfl, .amostra-obra { border-radius: 50%; }
+.amostra-cpfl { background: var(--branco); box-shadow: inset 0 0 0 2px var(--azul); }
+.amostra-obra { box-shadow: 0 0 0 2px var(--ambar); }
 .retorno .ajuda { margin-top: var(--e-2); }
 
 /* Etapas: linha do tempo */

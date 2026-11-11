@@ -48,6 +48,7 @@ Cada decisão abaixo vem com o seu porquê. Mudou a página, muda aqui antes.
 23. **O prazo explica que a CPFL é a parte que não depende da Ravena.** *Por quê:* prazo explicado não vira prazo prometido.
 24. **25 blocos de um ano: 3 em âmbar, o quarto em âmbar claro, o resto em azul.** *Por quê:* mostra que o sistema se paga numa fração da vida dele sem escrever quanto se economiza no total.
 25. **As oito etapas viram linha do tempo, com a CPFL de ponto vazado e a instalação com anel âmbar.** *Por quê:* mostra onde os 45 a 60 dias são gastos e que a obra são dois dias, sem dar prazo por etapa.
+   *Legenda:* abaixo da linha do tempo, uma legenda com as duas marcas explica o que cada uma quer dizer. *Por quê:* sem ela o ponto vazado podia ser lido como "etapa pendente", e a diferença só se explicava pelas notas pequenas de cada etapa.
 
 ### Dúvidas antes do pedido
 
